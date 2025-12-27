@@ -6,7 +6,15 @@ import lombok.Getter;
 import jakarta.persistence.Id;
 
 @Entity
-@Table
+@Table(
+        name = "cities",
+        indexes = {
+                @Index(
+                        name = "idx_city_region",
+                        columnList = "region_id"
+                )
+        }
+)
 @AllArgsConstructor
 @Getter
 public class City {

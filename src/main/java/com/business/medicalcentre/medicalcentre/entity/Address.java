@@ -7,7 +7,19 @@ import lombok.Getter;
 import java.math.BigDecimal;
 
 @Entity
-@Table
+@Table(
+        name = "medical_centre_addresses",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "uk_city_street_number",
+                        columnNames = {"city_id", "name", "number"}
+                ),
+                @UniqueConstraint(
+                        name = "uk_address_coordinates",
+                        columnNames = {"latitude", "longitude"}
+                )
+        }
+)
 @AllArgsConstructor
 @Getter
 public class Address {
@@ -29,6 +41,6 @@ public class Address {
 
     private String notes;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private City city;
 }

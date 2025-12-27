@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 @Entity
 @Getter
 @AllArgsConstructor
-@Table
+@Table(name = "regions")
 public class Region {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

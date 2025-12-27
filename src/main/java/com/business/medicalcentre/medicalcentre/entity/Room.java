@@ -1,16 +1,20 @@
 package com.business.medicalcentre.medicalcentre.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.hibernate.annotations.Immutable;
-import jakarta.persistence.Id;
 
 @Entity
-@Table
+@Table(
+        name = "medical_centre_floor_rooms",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "uk_floor_room",
+                        columnNames = {"floor_id", "number"}
+                )
+        }
+)
 @AllArgsConstructor
 @Getter
 @Immutable
@@ -19,7 +23,9 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private Integer number;
 
+    @ManyToOne(optional = false)
     private Floor floor;
 }

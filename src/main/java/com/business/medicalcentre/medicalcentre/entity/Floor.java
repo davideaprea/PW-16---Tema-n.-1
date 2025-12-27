@@ -7,7 +7,15 @@ import org.hibernate.annotations.Immutable;
 import jakarta.persistence.Id;
 
 @Entity
-@Table
+@Table(
+        name = "medical_centre_floors",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "uk_medical_centre_floor",
+                        columnNames = {"medical_centre_id", "number"}
+                )
+        }
+)
 @Getter
 @AllArgsConstructor
 @Immutable

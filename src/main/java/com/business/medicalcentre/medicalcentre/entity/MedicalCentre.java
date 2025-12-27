@@ -6,7 +6,7 @@ import lombok.Getter;
 import jakarta.persistence.Id;
 
 @Entity
-@Table
+@Table(name = "medical_centres")
 @AllArgsConstructor
 @Getter
 public class MedicalCentre {
