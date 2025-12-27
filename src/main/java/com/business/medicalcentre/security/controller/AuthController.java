@@ -3,7 +3,7 @@ package com.business.medicalcentre.security.controller;
 import com.business.medicalcentre.security.doc.AuthControllerDocs;
 import com.business.medicalcentre.security.dto.RegisterResponse;
 import com.business.medicalcentre.security.entity.User;
-import com.business.medicalcentre.core.enumeration.Routes;
+import com.business.medicalcentre.shared.enumeration.Routes;
 import com.business.medicalcentre.security.dto.LoginDto;
 import com.business.medicalcentre.security.dto.RegisterDto;
 import com.business.medicalcentre.security.service.AuthService;

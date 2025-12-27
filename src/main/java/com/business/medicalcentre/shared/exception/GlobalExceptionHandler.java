@@ -1,4 +1,4 @@
-package com.business.medicalcentre.core.exception;
+package com.business.medicalcentre.shared.exception;
 
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;

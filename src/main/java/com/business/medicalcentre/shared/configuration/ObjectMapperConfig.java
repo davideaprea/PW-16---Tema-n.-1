@@ -1,4 +1,4 @@
-package com.business.medicalcentre.core.configuration;
+package com.business.medicalcentre.shared.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;

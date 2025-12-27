@@ -1,4 +1,4 @@
-package com.business.medicalcentre.core.enumeration;
+package com.business.medicalcentre.shared.enumeration;
 
 public class Routes {
     public static final String AUTH = "/auth";

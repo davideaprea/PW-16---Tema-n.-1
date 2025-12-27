@@ -1,6 +1,6 @@
 package com.business.medicalcentre.security.config;
 
-import com.business.medicalcentre.core.enumeration.Routes;
+import com.business.medicalcentre.shared.enumeration.Routes;
 import com.business.medicalcentre.security.enumeration.Roles;
 import com.business.medicalcentre.security.filter.JWTFilter;
 import com.business.medicalcentre.security.service.AuthUserDetailsService;
