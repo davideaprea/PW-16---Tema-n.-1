@@ -14,7 +14,12 @@ public class MedicalCentre {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(optional = false, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(
+            optional = false,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY
+    )
     private Address address;
 
     @Column(nullable = false)

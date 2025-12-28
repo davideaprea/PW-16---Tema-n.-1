@@ -39,8 +39,12 @@ public class Address {
     @Column(precision = 9, scale = 6, nullable = false)
     private BigDecimal longitude;
 
+    @Column(length = 500)
     private String notes;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private City city;
+
+    @OneToOne(mappedBy = "address", fetch = FetchType.LAZY)
+    private MedicalCentre medicalCentre;
 }

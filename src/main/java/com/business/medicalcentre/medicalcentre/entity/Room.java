@@ -26,6 +26,6 @@ public class Room {
     @Column(nullable = false)
     private Integer number;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Floor floor;
 }

@@ -24,7 +24,7 @@ public class Floor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private MedicalCentre medicalCentre;
 
     @Column(nullable = false)
