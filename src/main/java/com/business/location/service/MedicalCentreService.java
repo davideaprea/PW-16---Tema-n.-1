@@ -1,9 +1,9 @@
-package com.business.location.medicalcentre.service;
+package com.business.location.service;
 
-import com.business.location.medicalcentre.dao.MedicalCentreDAO;
-import com.business.location.medicalcentre.dto.MedicalCentreDTO;
-import com.business.location.medicalcentre.entity.MedicalCentre;
-import com.business.location.medicalcentre.mapper.MedicalCentreMapper;
+import com.business.location.dao.MedicalCentreDAO;
+import com.business.location.dto.MedicalCentreDTO;
+import com.business.location.entity.MedicalCentre;
+import com.business.location.mapper.MedicalCentreMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

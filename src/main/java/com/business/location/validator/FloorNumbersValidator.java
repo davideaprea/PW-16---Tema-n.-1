@@ -1,7 +1,7 @@
-package com.business.location.medicalcentre.validator;
+package com.business.location.validator;
 
-import com.business.location.medicalcentre.annotation.Contiguous;
-import com.business.location.medicalcentre.dto.FloorDTO;
+import com.business.location.annotation.Contiguous;
+import com.business.location.dto.FloorDTO;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 

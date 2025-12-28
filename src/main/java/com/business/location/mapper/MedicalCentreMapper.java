@@ -1,10 +1,10 @@
-package com.business.location.medicalcentre.mapper;
+package com.business.location.mapper;
 
-import com.business.location.medicalcentre.dto.FloorDTO;
-import com.business.location.medicalcentre.dto.MedicalCentreDTO;
-import com.business.location.medicalcentre.entity.Floor;
-import com.business.location.medicalcentre.entity.MedicalCentre;
-import com.business.location.medicalcentre.entity.Room;
+import com.business.location.dto.FloorDTO;
+import com.business.location.dto.MedicalCentreDTO;
+import com.business.location.entity.Floor;
+import com.business.location.entity.MedicalCentre;
+import com.business.location.entity.Room;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

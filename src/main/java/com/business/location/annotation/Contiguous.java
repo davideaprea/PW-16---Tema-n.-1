@@ -1,6 +1,6 @@
-package com.business.location.medicalcentre.annotation;
+package com.business.location.annotation;
 
-import com.business.location.medicalcentre.validator.FloorNumbersValidator;
+import com.business.location.validator.FloorNumbersValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 import java.lang.annotation.*;

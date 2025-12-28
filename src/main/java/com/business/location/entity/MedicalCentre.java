@@ -1,4 +1,4 @@
-package com.business.location.medicalcentre.entity;
+package com.business.location.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

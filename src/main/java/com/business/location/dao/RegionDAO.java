@@ -1,6 +1,6 @@
-package com.business.location.medicalcentre.dao;
+package com.business.location.dao;
 
-import com.business.location.medicalcentre.entity.Region;
+import com.business.location.entity.Region;
 import org.springframework.data.repository.CrudRepository;
 
 public interface RegionDAO extends CrudRepository<Region, Long> {

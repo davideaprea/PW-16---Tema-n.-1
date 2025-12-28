@@ -1,4 +1,4 @@
-package com.business.location.medicalcentre.dto;
+package com.business.location.dto;
 
 import jakarta.validation.constraints.*;
 

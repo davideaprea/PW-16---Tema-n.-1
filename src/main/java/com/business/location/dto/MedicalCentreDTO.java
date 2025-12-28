@@ -1,6 +1,6 @@
-package com.business.location.medicalcentre.dto;
+package com.business.location.dto;
 
-import com.business.location.medicalcentre.annotation.Contiguous;
+import com.business.location.annotation.Contiguous;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 
