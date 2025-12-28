@@ -2,7 +2,7 @@ package com.business.location.medicalcentre.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
@@ -21,7 +21,7 @@ import java.math.BigDecimal;
         }
 )
 @AllArgsConstructor
-@Getter
+@NoArgsConstructor
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -2,13 +2,13 @@ package com.business.location.medicalcentre.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import jakarta.persistence.Id;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Getter
 @AllArgsConstructor
 @Table(name = "regions")
+@NoArgsConstructor
 public class Region {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -3,7 +3,7 @@ package com.business.location.medicalcentre.dto;
 import jakarta.validation.constraints.Positive;
 
 public record FloorDTO(
-        long number,
+        int number,
 
         @Positive
         long roomsNumber

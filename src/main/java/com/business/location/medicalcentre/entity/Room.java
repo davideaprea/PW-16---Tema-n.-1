@@ -2,7 +2,7 @@ package com.business.location.medicalcentre.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Immutable;
 
 @Entity
@@ -16,8 +16,8 @@ import org.hibernate.annotations.Immutable;
         }
 )
 @AllArgsConstructor
-@Getter
 @Immutable
+@NoArgsConstructor
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,4 +28,16 @@ public class Room {
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Floor floor;
+
+    public void setFloor(Floor floor) {
+        if (id == null && this.floor == null) {
+            this.floor = floor;
+        }
+    }
+
+    public void setNumber(int number) {
+        if (id == null && this.number == null) {
+            this.number = number;
+        }
+    }
 }

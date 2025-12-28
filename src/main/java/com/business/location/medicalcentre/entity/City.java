@@ -2,8 +2,8 @@ package com.business.location.medicalcentre.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import jakarta.persistence.Id;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(
@@ -16,7 +16,7 @@ import jakarta.persistence.Id;
         }
 )
 @AllArgsConstructor
-@Getter
+@NoArgsConstructor
 public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
