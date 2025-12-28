@@ -25,6 +25,6 @@ public class MedicalCentre {
     @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 16)
     private String phone;
 }

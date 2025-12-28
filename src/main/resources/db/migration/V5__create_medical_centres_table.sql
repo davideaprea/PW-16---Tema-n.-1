@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS medical_centres (
     address_id BIGINT NOT NULL,
 
     email VARCHAR(255) NOT NULL,
-    phone VARCHAR(50) NOT NULL,
+    phone VARCHAR(16) NOT NULL,
 
     CONSTRAINT fk_medical_centre_address
         FOREIGN KEY (address_id)
