@@ -1,7 +1,6 @@
 package com.business.location.mapper;
 
-import com.business.location.dto.FloorDTO;
-import com.business.location.dto.MedicalCentreDTO;
+import com.business.location.dto.request.MedicalCentreCreateRequest;
 import com.business.location.entity.Floor;
 import com.business.location.entity.MedicalCentre;
 import com.business.location.entity.Room;
@@ -18,14 +17,14 @@ import java.util.List;
 public interface MedicalCentreMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "floors", source = "floors")
-    MedicalCentre toMedicalCentre(MedicalCentreDTO medicalCentre);
+    MedicalCentre toMedicalCentre(MedicalCentreCreateRequest medicalCentre);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "medicalCentre", ignore = true)
     @Mapping(target = "rooms", expression = "java(createRooms(dto))")
-    Floor toFloor(FloorDTO dto);
+    Floor toFloor(MedicalCentreCreateRequest.FloorDTO dto);
 
-    default List<Room> createRooms(FloorDTO dto) {
+    default List<Room> createRooms(MedicalCentreCreateRequest.FloorDTO dto) {
         List<Room> rooms = new ArrayList<>();
 
         for (int i = 1; i <= dto.roomsNumber(); i++) {
