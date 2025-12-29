@@ -3,10 +3,13 @@ package com.business.location.service;
 import com.business.location.dao.MedicalCentreDAO;
 import com.business.location.dto.request.MedicalCentreCreateRequest;
 import com.business.location.dto.response.MedicalCentreCreateResponse;
+import com.business.location.dto.response.MedicalCentreGetPageResponse;
 import com.business.location.entity.MedicalCentre;
 import com.business.location.mapper.MedicalCentreRequestMapper;
 import com.business.location.mapper.MedicalCentreResponseMapper;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -26,5 +29,15 @@ public class MedicalCentreService {
                 .findByIdWithRelations(savedMedicalCentre.getId())
                 .map(medicalCentreResponseMapper::toResponse)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR));
+    }
+
+    public Page<MedicalCentreGetPageResponse> findByRegionAndCity(
+            long regionId,
+            String cityName,
+            Pageable pageable
+    ) {
+        return medicalCentreDAO
+                .findByRegionAndCity(regionId, cityName, pageable)
+                .map(medicalCentreResponseMapper::toPageResponse);
     }
 }
