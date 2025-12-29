@@ -14,7 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface MedicalCentreMapper {
+public interface MedicalCentreRequestMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "floors", source = "floors")
     MedicalCentre toMedicalCentre(MedicalCentreCreateRequest medicalCentre);

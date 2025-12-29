@@ -3,6 +3,7 @@ package com.business.location.entity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import jakarta.persistence.Id;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.List;
 @Table(name = "medical_centres")
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 public class MedicalCentre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

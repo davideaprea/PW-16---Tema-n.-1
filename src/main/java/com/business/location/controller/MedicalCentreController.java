@@ -1,7 +1,7 @@
 package com.business.location.controller;
 
 import com.business.location.dto.request.MedicalCentreCreateRequest;
-import com.business.location.entity.MedicalCentre;
+import com.business.location.dto.response.MedicalCentreCreateResponse;
 import com.business.location.service.MedicalCentreService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -19,7 +19,7 @@ public class MedicalCentreController {
     private final MedicalCentreService medicalCentreService;
 
     @PostMapping
-    public ResponseEntity<MedicalCentre> create(@Valid @RequestBody MedicalCentreCreateRequest dto) {
+    public ResponseEntity<MedicalCentreCreateResponse> create(@Valid @RequestBody MedicalCentreCreateRequest dto) {
         return new ResponseEntity<>(
                 medicalCentreService.create(dto),
                 HttpStatus.CREATED
