@@ -1,6 +1,6 @@
 package com.business.group.security.config;
 
-import com.business.group.location.shared.enumeration.Routes;
+import com.business.group.shared.enumeration.Routes;
 import com.business.group.security.enumeration.Roles;
 import com.business.group.security.filter.JWTFilter;
 import com.business.group.security.service.AuthUserDetailsService;

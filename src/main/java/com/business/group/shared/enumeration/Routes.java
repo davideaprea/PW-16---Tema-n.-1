@@ -1,4 +1,4 @@
-package com.business.group.location.shared.enumeration;
+package com.business.group.shared.enumeration;
 
 public class Routes {
     public static final String AUTH = "/auth";

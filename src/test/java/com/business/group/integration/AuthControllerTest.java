@@ -3,7 +3,7 @@ package com.business.group.integration;
 import com.business.group.config.DBManager;
 import com.business.group.config.TestcontainersConfig;
 import com.business.group.security.entity.User;
-import com.business.group.location.shared.enumeration.Routes;
+import com.business.group.shared.enumeration.Routes;
 import com.business.group.security.dto.LoginDto;
 import com.business.group.security.dto.RegisterDto;
 import com.business.group.security.repository.UserDao;

@@ -3,7 +3,7 @@ package com.business.group.security.controller;
 import com.business.group.security.doc.AuthControllerDocs;
 import com.business.group.security.dto.RegisterResponse;
 import com.business.group.security.entity.User;
-import com.business.group.location.shared.enumeration.Routes;
+import com.business.group.shared.enumeration.Routes;
 import com.business.group.security.dto.LoginDto;
 import com.business.group.security.dto.RegisterDto;
 import com.business.group.security.service.AuthService;

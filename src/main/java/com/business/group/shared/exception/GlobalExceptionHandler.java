@@ -1,4 +1,4 @@
-package com.business.group.location.shared.exception;
+package com.business.group.shared.exception;
 
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
