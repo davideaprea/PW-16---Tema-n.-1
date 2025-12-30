@@ -29,7 +29,7 @@ public class MedicalCentreController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<MedicalCentreGetPageResponse>> search(
+    public ResponseEntity<Page<MedicalCentreGetPageResponse>> findByRegionAndCity(
             @RequestParam
             long regionId,
 
