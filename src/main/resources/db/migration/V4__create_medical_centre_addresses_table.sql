@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS medical_centre_addresses (
         REFERENCES cities (id),
 
     CONSTRAINT uk_city_street_number
-        UNIQUE (city_id, street_name, street_number),
+        UNIQUE (city_id, name, number),
 
     CONSTRAINT uk_address_coordinates
         UNIQUE (latitude, longitude)
