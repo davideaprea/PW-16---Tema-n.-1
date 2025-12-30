@@ -1,13 +1,10 @@
 package com.business.group.location.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.Immutable;
 import jakarta.persistence.Id;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @Entity
@@ -23,6 +20,8 @@ import java.util.List;
 @AllArgsConstructor
 @Immutable
 @NoArgsConstructor
+@Getter
+@Setter
 public class Floor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,16 +40,4 @@ public class Floor {
             orphanRemoval = true
     )
     private List<Room> rooms;
-
-    public void setMedicalCentre(MedicalCentre medicalCentre) {
-        if (id == null && this.medicalCentre == null) {
-            this.medicalCentre = medicalCentre;
-        }
-    }
-
-    public Iterator<Room> getRoomsIterator() {
-        if (rooms == null) rooms = new ArrayList<>();
-
-        return rooms.iterator();
-    }
 }

@@ -20,4 +20,8 @@ public interface MedicalCentreResponseMapper {
     MedicalCentreGetPageResponse.AddressDTO toPageAddressDto(Address address);
 
     MedicalCentreGetPageResponse.AddressDTO.CityDTO toPageCityDto(City city);
+
+    default String map(City province) {
+        return province != null ? province.getName() : "";
+    }
 }

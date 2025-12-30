@@ -1,13 +1,9 @@
 package com.business.group.location.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @Entity
@@ -15,6 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 public class MedicalCentre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,10 +38,4 @@ public class MedicalCentre {
             mappedBy = "medicalCentre"
     )
     private List<Floor> floors;
-
-    public Iterator<Floor> getFloorsIterator() {
-        if (floors == null) floors = new ArrayList<>();
-
-        return floors.iterator();
-    }
 }

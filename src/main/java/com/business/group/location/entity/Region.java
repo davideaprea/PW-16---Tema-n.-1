@@ -1,21 +1,25 @@
 package com.business.group.location.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Entity
 @AllArgsConstructor
 @Table(name = "regions")
 @NoArgsConstructor
 @Getter
+@Setter
 public class Region {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true, length = 30)
+    @Column(
+            nullable = false,
+            unique = true,
+            length = 30,
+            name = "name"
+    )
     private String name;
 }

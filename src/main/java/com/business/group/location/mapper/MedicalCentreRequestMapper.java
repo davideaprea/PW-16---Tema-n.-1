@@ -4,13 +4,9 @@ import com.business.group.location.dto.request.MedicalCentreCreateRequest;
 import com.business.group.location.entity.Floor;
 import com.business.group.location.entity.MedicalCentre;
 import com.business.group.location.entity.Room;
-import org.mapstruct.AfterMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
+import org.mapstruct.*;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
@@ -20,40 +16,23 @@ public interface MedicalCentreRequestMapper {
     MedicalCentre toMedicalCentre(MedicalCentreCreateRequest medicalCentre);
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "medicalCentre", ignore = true)
-    @Mapping(target = "rooms", expression = "java(createRooms(dto))")
-    Floor toFloor(MedicalCentreCreateRequest.FloorDTO dto);
+    @Mapping(target = "medicalCentre", expression = "java(centre)")
+    @Mapping(target = "rooms", expression = "java(createRooms(dto, floor))")
+    Floor toFloor(
+            MedicalCentreCreateRequest.FloorDTO dto,
+            @Context MedicalCentre centre
+    );
 
-    default List<Room> createRooms(MedicalCentreCreateRequest.FloorDTO dto) {
+    default List<Room> createRooms(
+            MedicalCentreCreateRequest.FloorDTO dto,
+            Floor floor
+    ) {
         List<Room> rooms = new ArrayList<>();
 
         for (int i = 1; i <= dto.roomsNumber(); i++) {
-            Room room = new Room();
-
-            room.setNumber(i);
-
-            rooms.add(room);
+            rooms.add(new Room(null, i, floor));
         }
 
         return rooms;
-    }
-
-    @AfterMapping
-    default void linkRelations(@MappingTarget MedicalCentre centre) {
-        final Iterator<Floor> floorIterator = centre.getFloorsIterator();
-
-        while (floorIterator.hasNext()) {
-            final Floor floor = floorIterator.next();
-
-            floor.setMedicalCentre(centre);
-
-            final Iterator<Room> roomsIterator = floor.getRoomsIterator();
-
-            while (roomsIterator.hasNext()) {
-                final Room room = roomsIterator.next();
-
-                room.setFloor(floor);
-            }
-        }
     }
 }

@@ -1,8 +1,7 @@
 package com.business.group.location.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 
@@ -22,6 +21,8 @@ import java.math.BigDecimal;
 )
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
