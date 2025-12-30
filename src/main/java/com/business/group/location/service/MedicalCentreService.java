@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 @AllArgsConstructor
@@ -21,6 +22,7 @@ public class MedicalCentreService {
     private final MedicalCentreRequestMapper medicalCentreRequestMapper;
     private final MedicalCentreResponseMapper medicalCentreResponseMapper;
 
+    @Transactional
     public MedicalCentreCreateResponse create(MedicalCentreCreateRequest dto) {
         MedicalCentre medicalCentreToSave = medicalCentreRequestMapper.toMedicalCentre(dto);
         MedicalCentre savedMedicalCentre = medicalCentreDAO.save(medicalCentreToSave);
