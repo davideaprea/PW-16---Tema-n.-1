@@ -1,7 +1,7 @@
 package com.business.group.security.config;
 
 import com.business.group.shared.enumeration.Routes;
-import com.business.group.security.filter.JWTFilter;
+import com.business.group.security.filter.UserAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,7 +13,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 public class SecurityFilterChainConfig {
     @Bean
-    public SecurityFilterChain configFilterChain(HttpSecurity http, JWTFilter jwtFilter) throws Exception {
+    public SecurityFilterChain configFilterChain(HttpSecurity http, UserAuthenticationFilter userAuthenticationFilter) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(reqMatcher -> reqMatcher
@@ -22,7 +22,7 @@ public class SecurityFilterChainConfig {
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(userAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 }

@@ -19,7 +19,7 @@ import java.util.Optional;
 
 @AllArgsConstructor
 @Component
-public class JWTFilter extends OncePerRequestFilter {
+public class UserAuthenticationFilter extends OncePerRequestFilter {
     private final JWTValidator jwtValidator;
     private final AuthUserDetailsService authUserDetailsService;
 
