@@ -28,9 +28,16 @@ public class JWTFilter extends OncePerRequestFilter {
         Optional
                 .ofNullable(request.getHeader("Authorization"))
                 .filter(header -> header.startsWith("Bearer "))
-                .ifPresent(header -> {
+                .map(header -> {
                     String headerValue = header.substring(7);
-                    String email = jwtValidator.extractSubject(headerValue);
+
+                    try {
+                        return jwtValidator.extractSubject(headerValue);
+                    } catch (Throwable e) {
+                        return null;
+                    }
+                })
+                .ifPresent(email -> {
                     UserDetails userDetails = authUserDetailsService.loadUserByUsername(email);
                     UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 
