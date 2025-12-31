@@ -11,8 +11,8 @@ import java.time.Duration;
 @Getter
 @Setter
 @Entity
-@Table(name = "medical_services")
-public class MedicalService {
+@Table(name = "medical_care")
+public class MedicalCare {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

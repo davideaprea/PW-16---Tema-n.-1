@@ -2,7 +2,7 @@ package com.business.group.healthcare.dto;
 
 import java.time.Duration;
 
-public record MedicalServiceGetResponse(
+public record MedicalCareGetResponse(
         long id,
         String name,
         String description,
