@@ -3,7 +3,7 @@ package com.business.group.security.dto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
-public record LoginDto (
+public record UserCreateRequest(
     @Email
     @NotBlank
     String email,

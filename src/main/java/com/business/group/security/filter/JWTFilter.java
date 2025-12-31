@@ -1,7 +1,7 @@
 package com.business.group.security.filter;
 
+import com.business.group.security.component.JWTValidator;
 import com.business.group.security.service.AuthUserDetailsService;
-import com.business.group.security.component.JWTManager;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,7 +19,7 @@ import java.io.IOException;
 @AllArgsConstructor
 @Component
 public class JWTFilter extends OncePerRequestFilter {
-    private final JWTManager jwtManager;
+    private final JWTValidator jwtValidator;
     private final AuthUserDetailsService authUserDetailsService;
 
     @Override
@@ -29,7 +29,7 @@ public class JWTFilter extends OncePerRequestFilter {
 
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String jwt = authHeader.substring(7);
-            email = jwtManager.validateToken(jwt);
+            email = jwtValidator.extractSubject(jwt);
         }
 
         if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {

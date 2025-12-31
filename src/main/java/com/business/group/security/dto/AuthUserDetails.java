@@ -1,4 +1,4 @@
-package com.business.group.security.pojo;
+package com.business.group.security.dto;
 
 import com.business.group.security.entity.User;
 import lombok.AllArgsConstructor;

@@ -1,11 +1,11 @@
 package com.business.group.security.controller;
 
 import com.business.group.security.doc.AuthControllerDocs;
-import com.business.group.security.dto.RegisterResponse;
+import com.business.group.security.dto.UserCreateResponse;
 import com.business.group.security.entity.User;
 import com.business.group.shared.enumeration.Routes;
-import com.business.group.security.dto.LoginDto;
-import com.business.group.security.dto.RegisterDto;
+import com.business.group.security.dto.LoginCreateRequest;
+import com.business.group.security.dto.UserCreateRequest;
 import com.business.group.security.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -24,10 +24,10 @@ public class AuthController implements AuthControllerDocs {
     private final AuthService authService;
 
     @PostMapping(Routes.REGISTER)
-    public ResponseEntity<RegisterResponse> register(@RequestBody @Valid RegisterDto dto) {
+    public ResponseEntity<UserCreateResponse> register(@RequestBody @Valid UserCreateRequest dto) {
         User newUser = authService.register(dto);
 
-        RegisterResponse res = new RegisterResponse(
+        UserCreateResponse res = new UserCreateResponse(
                 newUser.getId(),
                 newUser.getEmail()
         );
@@ -36,7 +36,7 @@ public class AuthController implements AuthControllerDocs {
     }
 
     @PostMapping(Routes.LOGIN)
-    public ResponseEntity<Void> login(@RequestBody @Valid LoginDto dto) {
+    public ResponseEntity<Void> login(@RequestBody @Valid LoginCreateRequest dto) {
         String token = authService.login(dto);
 
         HttpHeaders headers = new HttpHeaders();

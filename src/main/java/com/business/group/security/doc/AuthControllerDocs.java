@@ -1,8 +1,8 @@
 package com.business.group.security.doc;
 
-import com.business.group.security.dto.LoginDto;
-import com.business.group.security.dto.RegisterDto;
-import com.business.group.security.dto.RegisterResponse;
+import com.business.group.security.dto.LoginCreateRequest;
+import com.business.group.security.dto.UserCreateRequest;
+import com.business.group.security.dto.UserCreateResponse;
 import io.swagger.v3.oas.annotations.headers.Header;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -17,7 +17,7 @@ public interface AuthControllerDocs {
                     description = "User registered successfully.",
                     content = @Content(
                             mediaType = "application/json",
-                            schema = @Schema(implementation = RegisterResponse.class)
+                            schema = @Schema(implementation = UserCreateResponse.class)
                     )
             ),
             @ApiResponse(
@@ -30,7 +30,7 @@ public interface AuthControllerDocs {
                     content = @Content
             )
     })
-    ResponseEntity<RegisterResponse> register(RegisterDto dto);
+    ResponseEntity<UserCreateResponse> register(UserCreateRequest dto);
 
     @ApiResponses(value = {
             @ApiResponse(
@@ -53,5 +53,5 @@ public interface AuthControllerDocs {
                     content = @Content
             )
     })
-    ResponseEntity<Void> login(LoginDto dto);
+    ResponseEntity<Void> login(LoginCreateRequest dto);
 }
