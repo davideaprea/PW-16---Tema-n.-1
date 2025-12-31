@@ -4,6 +4,7 @@ import com.business.group.location.dto.request.MedicalCentreCreateRequest;
 import com.business.group.location.dto.response.MedicalCentreCreateResponse;
 import com.business.group.location.dto.response.MedicalCentreGetPageResponse;
 import com.business.group.location.service.MedicalCentreService;
+import com.business.group.shared.enumeration.Routes;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/medical-centres")
+@RequestMapping(Routes.MEDICAL_CENTRES)
 public class MedicalCentreController {
     private final MedicalCentreService medicalCentreService;
 
