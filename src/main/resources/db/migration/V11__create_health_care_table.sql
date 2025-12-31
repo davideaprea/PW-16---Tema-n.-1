@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS medical_care (
     id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     name VARCHAR(255) NOT NULL UNIQUE,
     description VARCHAR(255) NOT NULL,
-    duration_in_seconds NOT NULL,
+    duration_in_seconds BIGINT NOT NULL,
     department_id BIGINT NOT NULL,
 
     CONSTRAINT fk_department

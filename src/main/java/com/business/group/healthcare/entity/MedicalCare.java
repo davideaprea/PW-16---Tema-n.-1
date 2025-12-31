@@ -1,5 +1,6 @@
 package com.business.group.healthcare.entity;
 
+import com.business.group.shared.converter.DurationConverter;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,7 @@ public class MedicalCare {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Department department;
 
+    @Convert(converter = DurationConverter.class)
     @Column(nullable = false, name = "duration_in_seconds")
     private Duration duration;
 }
