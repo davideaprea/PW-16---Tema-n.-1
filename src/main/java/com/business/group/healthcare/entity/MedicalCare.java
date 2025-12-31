@@ -26,6 +26,6 @@ public class MedicalCare {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Department department;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "duration_in_seconds")
     private Duration duration;
 }
