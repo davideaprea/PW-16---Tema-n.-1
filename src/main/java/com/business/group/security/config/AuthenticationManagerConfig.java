@@ -22,10 +22,9 @@ public class AuthenticationManagerConfig {
             AuthUserDetailsService authUserDetailsService,
             PasswordEncoder passwordEncoder
     ) {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider(authUserDetailsService);
 
         provider.setPasswordEncoder(passwordEncoder);
-        provider.setUserDetailsService(authUserDetailsService);
 
         return provider;
     }

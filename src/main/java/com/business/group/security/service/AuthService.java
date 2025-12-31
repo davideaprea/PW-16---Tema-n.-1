@@ -1,5 +1,6 @@
 package com.business.group.security.service;
 
+import com.business.group.security.component.JWTCreator;
 import com.business.group.security.entity.User;
 import com.business.group.security.dto.LoginCreateRequest;
 import com.business.group.security.dto.UserCreateRequest;
@@ -16,7 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Service
 public class AuthService {
     private final UserDAO userDao;
-    private final JWTManager jwtManager;
+    private final JWTCreator jwtCreator;
     private final AuthenticationManager authManager;
     private final PasswordEncoder encoder;
 
@@ -37,6 +38,6 @@ public class AuthService {
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
-        return jwtManager.generateToken(userDetails.getUsername());
+        return jwtCreator.withSubject(userDetails.getUsername());
     }
 }
