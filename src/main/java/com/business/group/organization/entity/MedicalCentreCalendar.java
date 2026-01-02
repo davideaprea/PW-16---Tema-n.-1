@@ -6,15 +6,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Immutable;
 
-import java.time.DayOfWeek;
+import java.time.Year;
 
 @Entity
 @Table(
-        name = "centre_opening_days",
+        name = "centre_calendars",
         uniqueConstraints = {
                 @UniqueConstraint(
-                        name = "uk_calendar_day_of_week",
-                        columnNames = {"calendar_id", "day_of_week"}
+                        name = "uk_medical_centre_year",
+                        columnNames = {"medical_centre_id", "year"}
                 )
         }
 )
@@ -22,15 +22,14 @@ import java.time.DayOfWeek;
 @Getter
 @Setter
 @Immutable
-public class OpeningDay {
+public class MedicalCentreCalendar {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private DayOfWeek dayOfWeek;
+    private Long medicalCentreId;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private MedicalCentreCalendar calendar;
+    @Column(nullable = false)
+    private Year year;
 }
