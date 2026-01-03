@@ -39,7 +39,7 @@ public class MedicalCentreCalendarService {
             ) -> DateUtil.compare(first.start(), second.start()));
 
             day.timeSlots().forEach(slot -> {
-                if (!DateUtil.isBefore(slot.start(), slot.end())) {
+                if (DateUtil.isAfter(slot.start(), slot.end())) {
                     throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
                 }
             });
@@ -48,7 +48,7 @@ public class MedicalCentreCalendarService {
                 final TimeSlotDTO prev = day.timeSlots().get(i - 1);
                 final TimeSlotDTO curr = day.timeSlots().get(i);
 
-                if(!DateUtil.isBefore(curr.start(), prev.end())) {
+                if(DateUtil.isAfter(curr.start(), prev.end())) {
                     throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
                 }
             }
