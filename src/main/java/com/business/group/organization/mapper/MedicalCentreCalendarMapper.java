@@ -1,19 +1,34 @@
 package com.business.group.organization.mapper;
 
 import com.business.group.organization.dto.MedicalCentreCalendarCreateRequest;
-import com.business.group.organization.entity.ClosingPeriod;
 import com.business.group.organization.entity.MedicalCentreCalendar;
-import com.business.group.organization.entity.OpeningDay;
-import com.business.group.organization.entity.TimeSlot;
+import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
-@Mapper(componentModel = "spring")
+
+@Mapper(
+        componentModel = "spring",
+        uses = {
+                OpeningDayMapper.class,
+                ClosingPeriodMapper.class
+        }
+)
 public interface MedicalCentreCalendarMapper {
-    MedicalCentreCalendar toMedicalCentreCalendar(MedicalCentreCalendarCreateRequest dto);
+    @Mapping(target = "id", ignore = true)
+    MedicalCentreCalendar toEntity(MedicalCentreCalendarCreateRequest request);
 
-    OpeningDay toOpeningDay(MedicalCentreCalendarCreateRequest.OpeningDayDTO dto);
+    @AfterMapping
+    default void linkChildren(@MappingTarget MedicalCentreCalendar calendar) {
+        if (calendar.getOpeningDays() != null) {
+            calendar.getOpeningDays()
+                    .forEach(od -> od.setCalendar(calendar));
+        }
 
-    TimeSlot toTimeSlot(MedicalCentreCalendarCreateRequest.OpeningDayDTO.TimeSlotDTO dto);
-
-    ClosingPeriod toClosingPeriod(MedicalCentreCalendarCreateRequest.ClosingPeriodDTO dto);
+        if (calendar.getClosingPeriods() != null) {
+            calendar.getClosingPeriods()
+                    .forEach(cp -> cp.setCalendar(calendar));
+        }
+    }
 }

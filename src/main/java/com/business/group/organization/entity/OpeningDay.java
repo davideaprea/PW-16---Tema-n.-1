@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.hibernate.annotations.Immutable;
 
 import java.time.DayOfWeek;
+import java.util.List;
 
 @Entity
 @Table(
@@ -33,4 +34,12 @@ public class OpeningDay {
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private MedicalCentreCalendar calendar;
+
+    @OneToMany(
+            mappedBy = "openingDay",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<TimeSlot> timeSlots;
 }
