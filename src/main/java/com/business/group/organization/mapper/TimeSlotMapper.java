@@ -9,5 +9,5 @@ import org.mapstruct.Mapping;
 public interface TimeSlotMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "openingDay", ignore = true)
-    TimeSlot toEntity(MedicalCentreCalendarCreateRequest.OpeningDayDTO.TimeSlotDTO dto);
+    TimeSlot toEntity(MedicalCentreCalendarCreateRequest.OpeningDayDTO.SlotDTO dto);
 }

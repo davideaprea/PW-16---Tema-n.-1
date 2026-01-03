@@ -18,10 +18,10 @@ public class TimeSlot {
     private Long id;
 
     @Column(nullable = false)
-    private LocalTime start;
+    private LocalTime from;
 
     @Column(nullable = false)
-    private LocalTime end;
+    private LocalTime to;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private OpeningDay openingDay;
