@@ -12,9 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.DayOfWeek;
-import java.util.Comparator;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -34,21 +32,11 @@ public class MedicalCentreCalendarService {
 
             selectedDaysOfWeek.add(day.dayOfWeek());
 
-            checkForOverlappingTimeRanges(day.timeSlots());
+            Range.checkForOverlappingRanges(day.timeSlots());
         });
 
-        checkForOverlappingTimeRanges(dto.closingPeriods());
+        Range.checkForOverlappingRanges(dto.closingPeriods());
 
         MedicalCentreCalendar savedCalendar = calendarDAO.save(calendarMapper.toEntity(dto));
-    }
-
-    private <T extends Comparable<? super T>> void checkForOverlappingTimeRanges(List<? extends Range<T>> ranges) {
-        ranges.sort(Comparator.comparing(Range::from));
-
-        for (int i = 1; i < ranges.size(); i++) {
-            if (ranges.get(i).overlapsWith(ranges.get(i - 1))) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ranges overlap");
-            }
-        }
     }
 }
