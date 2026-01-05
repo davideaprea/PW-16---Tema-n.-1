@@ -3,6 +3,7 @@ package com.business.group.schedule.controller;
 import com.business.group.schedule.dto.MedicalCentreCalendarCreateRequest;
 import com.business.group.schedule.dto.MedicalCentreCalendarCreateResponse;
 import com.business.group.schedule.service.MedicalCentreCalendarService;
+import com.business.group.shared.enumeration.Routes;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/medical-centres-calendars")
+@RequestMapping(Routes.MedicalCentresCalendars.BASE)
 public class MedicalCentreCalendarController {
     private final MedicalCentreCalendarService calendarService;
 

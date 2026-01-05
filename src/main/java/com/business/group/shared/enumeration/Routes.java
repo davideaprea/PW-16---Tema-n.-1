@@ -14,4 +14,12 @@ public class Routes {
     public static final class MedicalCentres {
         public static final String BASE = "/medical-centres";
     }
+
+    public static final class MedicalCentresCalendars {
+        public static final String BASE = "/medical-centres-calendars";
+    }
+
+    public static final class MedicSchedules {
+        public static final String BASE = "/medic-schedules";
+    }
 }

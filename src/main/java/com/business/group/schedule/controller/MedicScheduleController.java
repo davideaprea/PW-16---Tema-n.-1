@@ -3,6 +3,7 @@ package com.business.group.schedule.controller;
 import com.business.group.schedule.dto.MedicScheduleCreateRequest;
 import com.business.group.schedule.dto.MedicScheduleCreateResponse;
 import com.business.group.schedule.service.MedicScheduleService;
+import com.business.group.shared.enumeration.Routes;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/medic-schedules")
+@RequestMapping(Routes.MedicSchedules.BASE)
 public class MedicScheduleController {
     private final MedicScheduleService medicScheduleService;
 
