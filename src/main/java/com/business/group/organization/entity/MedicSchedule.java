@@ -1,5 +1,6 @@
 package com.business.group.organization.entity;
 
+import com.business.group.shared.time.Range;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,8 +14,13 @@ import java.time.LocalTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "medic_schedules")
-public class MedicSchedule {
+@Table(
+        name = "medic_schedules",
+        indexes = {
+                @Index(name = "idx_room_id", columnList = "room_id")
+        }
+)
+public class MedicSchedule implements Range<LocalTime> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,4 +36,14 @@ public class MedicSchedule {
 
     @Column(nullable = false)
     private LocalTime to;
+
+    @Override
+    public LocalTime from() {
+        return from;
+    }
+
+    @Override
+    public LocalTime to() {
+        return to;
+    }
 }
