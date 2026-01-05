@@ -1,6 +1,7 @@
 package com.business.group.organization.mapper;
 
 import com.business.group.organization.dto.MedicalCentreCalendarCreateRequest;
+import com.business.group.organization.dto.MedicalCentreCalendarCreateResponse;
 import com.business.group.organization.entity.OpeningDay;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
@@ -20,4 +21,6 @@ public interface OpeningDayMapper {
                     .forEach(ts -> ts.setOpeningDay(openingDay));
         }
     }
+
+    MedicalCentreCalendarCreateResponse.OpeningDayDTO toResponse(OpeningDay openingDay);
 }

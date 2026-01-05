@@ -1,6 +1,7 @@
 package com.business.group.organization.mapper;
 
 import com.business.group.organization.dto.MedicalCentreCalendarCreateRequest;
+import com.business.group.organization.dto.MedicalCentreCalendarCreateResponse;
 import com.business.group.organization.entity.TimeSlot;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -10,4 +11,6 @@ public interface TimeSlotMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "openingDay", ignore = true)
     TimeSlot toEntity(MedicalCentreCalendarCreateRequest.OpeningDayDTO.SlotDTO dto);
+
+    MedicalCentreCalendarCreateResponse.OpeningDayDTO.TimeSlotDTO toResponse(TimeSlot timeSlot);
 }

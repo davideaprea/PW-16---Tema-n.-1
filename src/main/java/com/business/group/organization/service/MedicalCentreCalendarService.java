@@ -2,6 +2,7 @@ package com.business.group.organization.service;
 
 import com.business.group.organization.dao.MedicalCentreCalendarDAO;
 import com.business.group.organization.dto.MedicalCentreCalendarCreateRequest;
+import com.business.group.organization.dto.MedicalCentreCalendarCreateResponse;
 import com.business.group.organization.entity.MedicalCentreCalendar;
 import com.business.group.organization.mapper.MedicalCentreCalendarMapper;
 import com.business.group.shared.time.Range;
@@ -22,7 +23,7 @@ public class MedicalCentreCalendarService {
     private final MedicalCentreCalendarMapper calendarMapper;
 
     @Transactional
-    public void create(MedicalCentreCalendarCreateRequest dto) {
+    public MedicalCentreCalendarCreateResponse create(MedicalCentreCalendarCreateRequest dto) {
         Set<DayOfWeek> selectedDaysOfWeek = new HashSet<>();
 
         dto.openingDays().forEach(day -> {
@@ -38,5 +39,7 @@ public class MedicalCentreCalendarService {
         Range.checkForOverlappingRanges(dto.closingPeriods());
 
         MedicalCentreCalendar savedCalendar = calendarDAO.save(calendarMapper.toEntity(dto));
+
+        return calendarMapper.toResponse(savedCalendar);
     }
 }

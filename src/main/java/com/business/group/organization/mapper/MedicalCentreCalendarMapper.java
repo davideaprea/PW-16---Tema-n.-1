@@ -1,6 +1,7 @@
 package com.business.group.organization.mapper;
 
 import com.business.group.organization.dto.MedicalCentreCalendarCreateRequest;
+import com.business.group.organization.dto.MedicalCentreCalendarCreateResponse;
 import com.business.group.organization.entity.MedicalCentreCalendar;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
@@ -31,4 +32,6 @@ public interface MedicalCentreCalendarMapper {
                     .forEach(cp -> cp.setCalendar(calendar));
         }
     }
+
+    MedicalCentreCalendarCreateResponse toResponse(MedicalCentreCalendar calendar);
 }
