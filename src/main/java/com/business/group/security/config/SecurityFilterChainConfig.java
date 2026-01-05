@@ -20,11 +20,11 @@ public class SecurityFilterChainConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(reqMatcher -> reqMatcher
-                        .requestMatchers(Routes.AUTH + Routes.REGISTER).permitAll()
-                        .requestMatchers(Routes.AUTH + Routes.LOGIN).permitAll()
-                        .requestMatchers(Routes.REGIONS).permitAll()
-                        .requestMatchers(Routes.MEDICAL_CENTRES).permitAll()
-                        .requestMatchers(POST, Routes.MEDICAL_CENTRES).hasRole(Roles.ADMIN.toString())
+                        .requestMatchers(Routes.Auth.BASE + Routes.Auth.REGISTER).permitAll()
+                        .requestMatchers(Routes.Auth.BASE + Routes.Auth.LOGIN).permitAll()
+                        .requestMatchers(Routes.Regions.BASE).permitAll()
+                        .requestMatchers(Routes.MedicalCentres.BASE).permitAll()
+                        .requestMatchers(POST, Routes.MedicalCentres.BASE).hasRole(Roles.ADMIN.toString())
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

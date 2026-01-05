@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping(Routes.REGIONS)
+@RequestMapping(Routes.Regions.BASE)
 public class RegionController {
     private final RegionService regionService;
 

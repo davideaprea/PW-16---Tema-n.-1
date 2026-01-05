@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping(Routes.MEDICAL_CENTRES)
+@RequestMapping(Routes.MedicalCentres.BASE)
 public class MedicalCentreController {
     private final MedicalCentreService medicalCentreService;
 

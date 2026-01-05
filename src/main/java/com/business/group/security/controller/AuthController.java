@@ -19,11 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping(Routes.AUTH)
+@RequestMapping(Routes.Auth.BASE)
 public class AuthController implements AuthControllerDocs {
     private final AuthService authService;
 
-    @PostMapping(Routes.REGISTER)
+    @PostMapping(Routes.Auth.REGISTER)
     public ResponseEntity<UserCreateResponse> register(@RequestBody @Valid UserCreateRequest dto) {
         User newUser = authService.register(dto);
 
@@ -35,7 +35,7 @@ public class AuthController implements AuthControllerDocs {
         return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
-    @PostMapping(Routes.LOGIN)
+    @PostMapping(Routes.Auth.LOGIN)
     public ResponseEntity<Void> login(@RequestBody @Valid LoginCreateRequest dto) {
         String token = authService.login(dto);
 
