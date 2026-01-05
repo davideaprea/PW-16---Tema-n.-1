@@ -1,4 +1,4 @@
-package com.business.group.organization.entity;
+package com.business.group.schedule.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

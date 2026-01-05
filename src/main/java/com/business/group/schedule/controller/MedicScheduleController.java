@@ -1,8 +1,8 @@
-package com.business.group.organization.controller;
+package com.business.group.schedule.controller;
 
-import com.business.group.organization.dto.MedicScheduleCreateRequest;
-import com.business.group.organization.dto.MedicScheduleCreateResponse;
-import com.business.group.organization.service.MedicScheduleService;
+import com.business.group.schedule.dto.MedicScheduleCreateRequest;
+import com.business.group.schedule.dto.MedicScheduleCreateResponse;
+import com.business.group.schedule.service.MedicScheduleService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

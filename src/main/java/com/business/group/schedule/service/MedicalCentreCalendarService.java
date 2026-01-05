@@ -1,10 +1,10 @@
-package com.business.group.organization.service;
+package com.business.group.schedule.service;
 
-import com.business.group.organization.dao.MedicalCentreCalendarDAO;
-import com.business.group.organization.dto.MedicalCentreCalendarCreateRequest;
-import com.business.group.organization.dto.MedicalCentreCalendarCreateResponse;
-import com.business.group.organization.entity.MedicalCentreCalendar;
-import com.business.group.organization.mapper.MedicalCentreCalendarMapper;
+import com.business.group.schedule.dao.MedicalCentreCalendarDAO;
+import com.business.group.schedule.dto.MedicalCentreCalendarCreateRequest;
+import com.business.group.schedule.dto.MedicalCentreCalendarCreateResponse;
+import com.business.group.schedule.entity.MedicalCentreCalendar;
+import com.business.group.schedule.mapper.MedicalCentreCalendarMapper;
 import com.business.group.shared.time.Range;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

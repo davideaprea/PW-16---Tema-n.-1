@@ -1,4 +1,4 @@
-package com.business.group.organization.dto;
+package com.business.group.schedule.dto;
 
 import com.business.group.shared.annotation.ValidRange;
 import com.business.group.shared.time.Range;

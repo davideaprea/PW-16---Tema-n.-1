@@ -1,10 +1,10 @@
-package com.business.group.organization.service;
+package com.business.group.schedule.service;
 
-import com.business.group.organization.dao.MedicScheduleDAO;
-import com.business.group.organization.dto.MedicScheduleCreateRequest;
-import com.business.group.organization.dto.MedicScheduleCreateResponse;
-import com.business.group.organization.entity.MedicSchedule;
-import com.business.group.organization.mapper.MedicScheduleMapper;
+import com.business.group.schedule.dao.MedicScheduleDAO;
+import com.business.group.schedule.dto.MedicScheduleCreateRequest;
+import com.business.group.schedule.dto.MedicScheduleCreateResponse;
+import com.business.group.schedule.entity.MedicSchedule;
+import com.business.group.schedule.mapper.MedicScheduleMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

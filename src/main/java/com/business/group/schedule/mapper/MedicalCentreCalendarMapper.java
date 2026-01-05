@@ -1,8 +1,8 @@
-package com.business.group.organization.mapper;
+package com.business.group.schedule.mapper;
 
-import com.business.group.organization.dto.MedicalCentreCalendarCreateRequest;
-import com.business.group.organization.dto.MedicalCentreCalendarCreateResponse;
-import com.business.group.organization.entity.MedicalCentreCalendar;
+import com.business.group.schedule.dto.MedicalCentreCalendarCreateRequest;
+import com.business.group.schedule.dto.MedicalCentreCalendarCreateResponse;
+import com.business.group.schedule.entity.MedicalCentreCalendar;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
