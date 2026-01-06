@@ -1,7 +1,5 @@
 package com.business.group.schedule.dto;
 
-import com.business.group.shared.annotation.ValidRange;
-import com.business.group.shared.time.TimeRange;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
@@ -29,23 +27,16 @@ public record MedicCalendarCreateRequest(
         @Size(min = 1)
         List<@Valid TimeSlotDTO> timeSlots
 ) {
-    @ValidRange
     public record TimeSlotDTO(
+            @Valid
             @NotNull
-            LocalTime from,
-
-            @NotNull
-            LocalTime to,
+            Range<LocalTime> range,
 
             @NotNull
             DayOfWeek dayOfWeek,
 
             @Positive
             long roomId
-    ) implements TimeRange {
-        @Override
-        public boolean isValid() {
-            return from.isBefore(to);
-        }
+    ) {
     }
 }

@@ -1,17 +1,17 @@
 package com.business.group.shared.validator;
 
+import com.business.group.schedule.dto.Range;
 import com.business.group.shared.annotation.ValidRange;
-import com.business.group.shared.time.TimeRange;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RangeValidator implements ConstraintValidator<ValidRange, TimeRange> {
+public class RangeValidator<T extends Comparable<? super T>> implements ConstraintValidator<ValidRange, Range<T>> {
     @Override
-    public boolean isValid(TimeRange value, ConstraintValidatorContext context) {
+    public boolean isValid(Range<T> value, ConstraintValidatorContext context) {
         if (value == null) return true;
 
-        return value.isValid();
+        return value.from().compareTo(value.to()) > 0;
     }
 }
