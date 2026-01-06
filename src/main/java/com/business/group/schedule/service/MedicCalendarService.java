@@ -7,12 +7,15 @@ import com.business.group.schedule.dto.MedicCalendarCreateResponse;
 import com.business.group.schedule.entity.MedicCalendar;
 import com.business.group.schedule.entity.MedicTimeSlot;
 import com.business.group.schedule.mapper.MedicCalendarMapper;
+import com.business.group.shared.time.Range;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Comparator;
+import java.time.DayOfWeek;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -23,22 +26,14 @@ public class MedicCalendarService {
 
     @Transactional
     public MedicCalendarCreateResponse create(MedicCalendarCreateRequest dto) {
-        dto.timeSlots().sort(Comparator
-                .comparing(MedicCalendarCreateRequest.TimeSlotDTO::dayOfWeek)
-                .thenComparing(MedicCalendarCreateRequest.TimeSlotDTO::from)
-        );
+        Map<DayOfWeek, List<MedicCalendarCreateRequest.TimeSlotDTO>> slotsGroupedByDay = dto
+                .timeSlots()
+                .stream()
+                .collect(Collectors.groupingBy(MedicCalendarCreateRequest.TimeSlotDTO::dayOfWeek));
 
-        for (int i = 1; i < dto.timeSlots().size(); i++) {
-            final MedicCalendarCreateRequest.TimeSlotDTO curr = dto.timeSlots().get(i);
-            final MedicCalendarCreateRequest.TimeSlotDTO prev = dto.timeSlots().get(i - 1);
-
-            if (
-                    curr.dayOfWeek().equals(prev.dayOfWeek()) &&
-                    curr.from().isBefore(prev.to())
-            ) {
-                //throw
-            }
-        }
+        slotsGroupedByDay.forEach((_, timeSlotDTOs) -> {
+            Range.checkForOverlappingRanges(timeSlotDTOs);
+        });
 
         dto.timeSlots().forEach(timeSlotDTO -> {
             List<MedicTimeSlot> conflictingSlots = medicTimeSlotDAO.findByRoomAndTime(

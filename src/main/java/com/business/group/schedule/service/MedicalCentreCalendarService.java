@@ -7,14 +7,13 @@ import com.business.group.schedule.entity.CentreCalendar;
 import com.business.group.schedule.mapper.CentreCalendarMapper;
 import com.business.group.shared.time.Range;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.time.DayOfWeek;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
@@ -24,16 +23,13 @@ public class MedicalCentreCalendarService {
 
     @Transactional
     public CentreCalendarCreateResponse create(CentreCalendarCreateRequest dto) {
-        Set<DayOfWeek> selectedDaysOfWeek = new HashSet<>();
+        Map<DayOfWeek, List<CentreCalendarCreateRequest.TimeSlotDTO>> slotsGroupedByDay = dto
+                .timeSlots()
+                .stream()
+                .collect(Collectors.groupingBy(CentreCalendarCreateRequest.TimeSlotDTO::dayOfWeek));
 
-        dto.openingDays().forEach(day -> {
-            if (selectedDaysOfWeek.contains(day.dayOfWeek())) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-            }
-
-            selectedDaysOfWeek.add(day.dayOfWeek());
-
-            Range.checkForOverlappingRanges(day.timeSlots());
+        slotsGroupedByDay.forEach((_, timeSlot) -> {
+            Range.checkForOverlappingRanges(timeSlot);
         });
 
         Range.checkForOverlappingRanges(dto.closingPeriods());

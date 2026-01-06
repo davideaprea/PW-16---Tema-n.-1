@@ -15,34 +15,31 @@ import java.util.List;
 public record CentreCalendarCreateRequest(
         @NotNull
         @FutureOrPresent
-        Year year,
+        LocalDateTime validFrom,
 
         @Positive
-        long medicalCentreId,
+        long ownerId,
+
+        @Length(max = 500)
+        String notes,
 
         @NotNull
         @Size(min = 1, max = 7)
-        List<@Valid OpeningDayDTO> openingDays,
+        List<@Valid TimeSlotDTO> timeSlots,
 
         List<@Valid ClosingPeriodDTO> closingPeriods
 ) {
-    public record OpeningDayDTO(
+    @ValidRange
+    public record TimeSlotDTO(
             @NotNull
-            DayOfWeek dayOfWeek,
+            LocalTime from,
 
             @NotNull
-            @Size(min = 1)
-            List<@Valid SlotDTO> timeSlots
-    ) {
-        @ValidRange
-        public record SlotDTO(
-                @NotNull
-                LocalTime from,
+            LocalTime to,
 
-                @NotNull
-                LocalTime to
-        ) implements Range<LocalTime> {
-        }
+            @NotNull
+            DayOfWeek dayOfWeek
+    ) implements Range<LocalTime> {
     }
 
     @ValidRange

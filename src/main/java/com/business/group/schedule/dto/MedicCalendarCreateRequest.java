@@ -2,6 +2,7 @@ package com.business.group.schedule.dto;
 
 import com.business.group.shared.annotation.ValidRange;
 import com.business.group.shared.time.Range;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -26,7 +27,7 @@ public record MedicCalendarCreateRequest(
 
         @NotNull
         @Size(min = 1)
-        List<TimeSlotDTO> timeSlots
+        List<@Valid TimeSlotDTO> timeSlots
 ) {
     @ValidRange
     public record TimeSlotDTO(
