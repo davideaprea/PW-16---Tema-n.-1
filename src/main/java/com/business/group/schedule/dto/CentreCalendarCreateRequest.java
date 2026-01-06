@@ -12,7 +12,7 @@ import org.hibernate.validator.constraints.Length;
 import java.time.*;
 import java.util.List;
 
-public record MedicalCentreCalendarCreateRequest(
+public record CentreCalendarCreateRequest(
         @NotNull
         @FutureOrPresent
         Year year,

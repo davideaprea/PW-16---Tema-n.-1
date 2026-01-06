@@ -4,13 +4,23 @@ import com.business.group.schedule.entity.MedicTimeSlot;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.time.DayOfWeek;
+import java.time.LocalTime;
 import java.util.List;
 
 public interface MedicTimeSlotDAO extends JpaRepository<MedicTimeSlot, Long> {
     @Query("""
-            SELECT s
             FROM MedicTimeSlot s
-            WHERE s.roomId IN :roomsId AND s.workingDay.calendar.validTo IS NULL
+            WHERE s.roomId = :roomId
+              AND s.dayOfWeek = :dayOfWeek
+              AND s.from < :to
+              AND s.to > :from
+              AND s.calendar.validTo IS NULL
             """)
-    List<MedicTimeSlot> findAllInActiveCalendarsRooms(List<Long> roomsId);
+    List<MedicTimeSlot> findByRoomAndTime(
+            long roomId,
+            DayOfWeek dayOfWeek,
+            LocalTime from,
+            LocalTime to
+    );
 }

@@ -2,7 +2,7 @@ package com.business.group.schedule.dto;
 
 import java.time.LocalTime;
 
-public record MedicScheduleCreateResponse(
+public record MedicCalendarCreateResponse(
         long id,
         long medicId,
         long roomId,

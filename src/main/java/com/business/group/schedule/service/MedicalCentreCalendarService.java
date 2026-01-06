@@ -1,10 +1,10 @@
 package com.business.group.schedule.service;
 
 import com.business.group.schedule.dao.MedicalCentreCalendarDAO;
-import com.business.group.schedule.dto.MedicalCentreCalendarCreateRequest;
-import com.business.group.schedule.dto.MedicalCentreCalendarCreateResponse;
+import com.business.group.schedule.dto.CentreCalendarCreateRequest;
+import com.business.group.schedule.dto.CentreCalendarCreateResponse;
 import com.business.group.schedule.entity.CentreCalendar;
-import com.business.group.schedule.mapper.MedicalCentreCalendarMapper;
+import com.business.group.schedule.mapper.CentreCalendarMapper;
 import com.business.group.shared.time.Range;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,10 +20,10 @@ import java.util.Set;
 @Service
 public class MedicalCentreCalendarService {
     private final MedicalCentreCalendarDAO calendarDAO;
-    private final MedicalCentreCalendarMapper calendarMapper;
+    private final CentreCalendarMapper calendarMapper;
 
     @Transactional
-    public MedicalCentreCalendarCreateResponse create(MedicalCentreCalendarCreateRequest dto) {
+    public CentreCalendarCreateResponse create(CentreCalendarCreateRequest dto) {
         Set<DayOfWeek> selectedDaysOfWeek = new HashSet<>();
 
         dto.openingDays().forEach(day -> {

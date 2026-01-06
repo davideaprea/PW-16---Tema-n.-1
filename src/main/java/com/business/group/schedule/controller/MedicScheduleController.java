@@ -1,8 +1,8 @@
 package com.business.group.schedule.controller;
 
-import com.business.group.schedule.dto.MedicScheduleCreateRequest;
-import com.business.group.schedule.dto.MedicScheduleCreateResponse;
-import com.business.group.schedule.service.MedicScheduleService;
+import com.business.group.schedule.dto.MedicCalendarCreateRequest;
+import com.business.group.schedule.dto.MedicCalendarCreateResponse;
+import com.business.group.schedule.service.MedicCalendarService;
 import com.business.group.shared.enumeration.Routes;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(Routes.MedicSchedules.BASE)
 public class MedicScheduleController {
-    private final MedicScheduleService medicScheduleService;
+    private final MedicCalendarService medicCalendarService;
 
     @PostMapping
-    public ResponseEntity<MedicScheduleCreateResponse> create(@Valid @RequestBody MedicScheduleCreateRequest dto) {
-        return new ResponseEntity<>(medicScheduleService.create(dto), HttpStatus.CREATED);
+    public ResponseEntity<MedicCalendarCreateResponse> create(@Valid @RequestBody MedicCalendarCreateRequest dto) {
+        return new ResponseEntity<>(medicCalendarService.create(dto), HttpStatus.CREATED);
     }
 }

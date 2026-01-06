@@ -6,7 +6,7 @@ import java.time.LocalTime;
 import java.time.Year;
 import java.util.List;
 
-public record MedicalCentreCalendarCreateResponse(
+public record CentreCalendarCreateResponse(
         long id,
         Year year,
         List<OpeningDayDTO> openingDays,

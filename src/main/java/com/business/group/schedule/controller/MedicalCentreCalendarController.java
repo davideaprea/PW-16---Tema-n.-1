@@ -1,7 +1,7 @@
 package com.business.group.schedule.controller;
 
-import com.business.group.schedule.dto.MedicalCentreCalendarCreateRequest;
-import com.business.group.schedule.dto.MedicalCentreCalendarCreateResponse;
+import com.business.group.schedule.dto.CentreCalendarCreateRequest;
+import com.business.group.schedule.dto.CentreCalendarCreateResponse;
 import com.business.group.schedule.service.MedicalCentreCalendarService;
 import com.business.group.shared.enumeration.Routes;
 import jakarta.validation.Valid;
@@ -20,7 +20,7 @@ public class MedicalCentreCalendarController {
     private final MedicalCentreCalendarService calendarService;
 
     @PostMapping
-    public ResponseEntity<MedicalCentreCalendarCreateResponse> create(@RequestBody @Valid MedicalCentreCalendarCreateRequest dto) {
+    public ResponseEntity<CentreCalendarCreateResponse> create(@RequestBody @Valid CentreCalendarCreateRequest dto) {
         return new ResponseEntity<>(calendarService.create(dto), HttpStatus.CREATED);
     }
 }
