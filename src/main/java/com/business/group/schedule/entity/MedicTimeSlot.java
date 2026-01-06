@@ -1,9 +1,6 @@
 package com.business.group.schedule.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,11 +15,9 @@ import org.hibernate.annotations.Immutable;
 @Immutable
 @AllArgsConstructor
 public class MedicTimeSlot extends TimeSlot {
-    @ManyToOne(
-            optional = false,
-            fetch = FetchType.LAZY
-    )
-    private MedicWorkingDay workingDay;
-
+    @Column(nullable = false)
     private Long roomId;
+
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private MedicCalendar medicCalendar;
 }

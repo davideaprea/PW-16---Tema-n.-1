@@ -23,7 +23,7 @@ public class CentreCalendar extends Calendar {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<CentreWorkingDay> centreWorkingDays;
+    private List<CentreTimeSlot> timeSlots;
 
     @OneToMany(
             mappedBy = "calendar",

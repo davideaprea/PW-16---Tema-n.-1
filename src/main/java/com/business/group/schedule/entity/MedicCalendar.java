@@ -24,5 +24,5 @@ public class MedicCalendar extends Calendar {
             fetch = FetchType.LAZY,
             cascade = CascadeType.PERSIST
     )
-    private List<MedicWorkingDay> workingDays;
+    private List<MedicTimeSlot> timeSlots;
 }

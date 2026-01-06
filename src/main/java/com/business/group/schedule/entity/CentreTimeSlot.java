@@ -14,5 +14,5 @@ import org.hibernate.annotations.Immutable;
 @Immutable
 public class CentreTimeSlot extends TimeSlot {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private CentreWorkingDay centreWorkingDay;
+    private CentreCalendar calendar;
 }

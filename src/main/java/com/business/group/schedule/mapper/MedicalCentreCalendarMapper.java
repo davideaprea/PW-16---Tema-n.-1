@@ -10,23 +10,16 @@ import org.mapstruct.MappingTarget;
 
 @Mapper(
         componentModel = "spring",
-        uses = {
-                OpeningDayMapper.class,
-                ClosingPeriodMapper.class
-        }
+        uses = {ClosingPeriodMapper.class}
 )
 public interface MedicalCentreCalendarMapper {
     CentreCalendar toEntity(MedicalCentreCalendarCreateRequest request);
 
     @AfterMapping
     default void linkChildren(@MappingTarget CentreCalendar calendar) {
-        if (calendar.getCentreWorkingDays() != null) {
-            calendar.getCentreWorkingDays()
-                    .forEach(od -> od.setCalendar(calendar));
-        }
-
         if (calendar.getCentreClosingPeriods() != null) {
-            calendar.getCentreClosingPeriods()
+            calendar
+                    .getCentreClosingPeriods()
                     .forEach(cp -> cp.setCalendar(calendar));
         }
     }

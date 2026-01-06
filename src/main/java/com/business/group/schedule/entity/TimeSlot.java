@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.DayOfWeek;
 import java.time.LocalTime;
 
 @Setter
@@ -19,4 +20,7 @@ public abstract class TimeSlot {
 
     @Column(nullable = false)
     protected LocalTime to;
+
+    @Column(nullable = false)
+    protected DayOfWeek dayOfWeek;
 }
