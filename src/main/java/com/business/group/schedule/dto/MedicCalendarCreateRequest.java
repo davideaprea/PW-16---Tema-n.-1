@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
-@ValidRange
 public record MedicCalendarCreateRequest(
         @Positive
         long ownerId,
