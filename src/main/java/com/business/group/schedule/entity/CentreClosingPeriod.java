@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Immutable
-public class ClosingPeriod {
+public class CentreClosingPeriod {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,5 +28,5 @@ public class ClosingPeriod {
     private String cause;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private MedicalCentreCalendar calendar;
+    private CentreCalendar calendar;
 }

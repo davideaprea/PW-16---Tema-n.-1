@@ -6,12 +6,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Immutable;
 
-import java.time.DayOfWeek;
 import java.util.List;
 
 @Entity
 @Table(
-        name = "centre_opening_days",
+        name = "centre_working_days",
         uniqueConstraints = {
                 @UniqueConstraint(
                         name = "uk_calendar_day_of_week",
@@ -23,17 +22,9 @@ import java.util.List;
 @Getter
 @Setter
 @Immutable
-public class OpeningDay {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private DayOfWeek dayOfWeek;
-
+public class CentreWorkingDay extends WorkingDay {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private MedicalCentreCalendar calendar;
+    private CentreCalendar calendar;
 
     @OneToMany(
             mappedBy = "openingDay",
@@ -41,5 +32,5 @@ public class OpeningDay {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<TimeSlot> timeSlots;
+    private List<CentreTimeSlot> centreTimeSlots;
 }

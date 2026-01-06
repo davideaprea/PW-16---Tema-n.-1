@@ -3,7 +3,7 @@ package com.business.group.schedule.service;
 import com.business.group.schedule.dao.MedicalCentreCalendarDAO;
 import com.business.group.schedule.dto.MedicalCentreCalendarCreateRequest;
 import com.business.group.schedule.dto.MedicalCentreCalendarCreateResponse;
-import com.business.group.schedule.entity.MedicalCentreCalendar;
+import com.business.group.schedule.entity.CentreCalendar;
 import com.business.group.schedule.mapper.MedicalCentreCalendarMapper;
 import com.business.group.shared.time.Range;
 import lombok.AllArgsConstructor;
@@ -38,7 +38,7 @@ public class MedicalCentreCalendarService {
 
         Range.checkForOverlappingRanges(dto.closingPeriods());
 
-        MedicalCentreCalendar savedCalendar = calendarDAO.save(calendarMapper.toEntity(dto));
+        CentreCalendar savedCalendar = calendarDAO.save(calendarMapper.toEntity(dto));
 
         return calendarMapper.toResponse(savedCalendar);
     }

@@ -4,19 +4,17 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalTime;
+import java.time.DayOfWeek;
 
 @Setter
 @Getter
 @MappedSuperclass
-public abstract class TimeSlot {
+public abstract class WorkingDay {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
     @Column(nullable = false)
-    protected LocalTime from;
-
-    @Column(nullable = false)
-    protected LocalTime to;
+    @Enumerated(EnumType.STRING)
+    protected DayOfWeek dayOfWeek;
 }

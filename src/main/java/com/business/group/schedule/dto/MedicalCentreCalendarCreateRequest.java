@@ -42,10 +42,6 @@ public record MedicalCentreCalendarCreateRequest(
                 @NotNull
                 LocalTime to
         ) implements Range<LocalTime> {
-            @Override
-            public boolean isValid() {
-                return from.isBefore(to);
-            }
         }
     }
 
@@ -62,9 +58,5 @@ public record MedicalCentreCalendarCreateRequest(
             @Length(max = 300)
             String cause
     ) implements Range<LocalDateTime> {
-        @Override
-        public boolean isValid() {
-            return from.isBefore(to);
-        }
     }
 }
