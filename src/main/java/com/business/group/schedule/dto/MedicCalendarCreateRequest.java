@@ -1,7 +1,7 @@
 package com.business.group.schedule.dto;
 
 import com.business.group.shared.annotation.ValidRange;
-import com.business.group.shared.time.Range;
+import com.business.group.shared.time.TimeRange;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
@@ -42,6 +42,10 @@ public record MedicCalendarCreateRequest(
 
             @Positive
             long roomId
-    ) implements Range<LocalTime> {
+    ) implements TimeRange {
+        @Override
+        public boolean isValid() {
+            return from.isBefore(to);
+        }
     }
 }

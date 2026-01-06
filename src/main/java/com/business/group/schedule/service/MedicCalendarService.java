@@ -7,7 +7,7 @@ import com.business.group.schedule.dto.MedicCalendarCreateResponse;
 import com.business.group.schedule.entity.MedicCalendar;
 import com.business.group.schedule.entity.MedicTimeSlot;
 import com.business.group.schedule.mapper.MedicCalendarMapper;
-import com.business.group.shared.time.Range;
+import com.business.group.shared.time.TimeRange;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,7 +32,7 @@ public class MedicCalendarService {
                 .collect(Collectors.groupingBy(MedicCalendarCreateRequest.TimeSlotDTO::dayOfWeek));
 
         slotsGroupedByDay.forEach((_, timeSlotDTOs) -> {
-            Range.checkForOverlappingRanges(timeSlotDTOs);
+            TimeRange.checkForOverlappingRanges(timeSlotDTOs);
         });
 
         dto.timeSlots().forEach(timeSlotDTO -> {

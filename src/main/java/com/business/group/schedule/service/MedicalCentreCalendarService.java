@@ -5,7 +5,7 @@ import com.business.group.schedule.dto.CentreCalendarCreateRequest;
 import com.business.group.schedule.dto.CentreCalendarCreateResponse;
 import com.business.group.schedule.entity.CentreCalendar;
 import com.business.group.schedule.mapper.CentreCalendarMapper;
-import com.business.group.shared.time.Range;
+import com.business.group.shared.time.TimeRange;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,10 +29,10 @@ public class MedicalCentreCalendarService {
                 .collect(Collectors.groupingBy(CentreCalendarCreateRequest.TimeSlotDTO::dayOfWeek));
 
         slotsGroupedByDay.forEach((_, timeSlot) -> {
-            Range.checkForOverlappingRanges(timeSlot);
+            TimeRange.checkForOverlappingRanges(timeSlot);
         });
 
-        Range.checkForOverlappingRanges(dto.closingPeriods());
+        TimeRange.checkForOverlappingRanges(dto.closingPeriods());
 
         CentreCalendar savedCalendar = calendarDAO.save(calendarMapper.toEntity(dto));
 

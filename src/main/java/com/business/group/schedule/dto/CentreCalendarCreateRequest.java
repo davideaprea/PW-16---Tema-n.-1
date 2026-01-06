@@ -1,7 +1,7 @@
 package com.business.group.schedule.dto;
 
 import com.business.group.shared.annotation.ValidRange;
-import com.business.group.shared.time.Range;
+import com.business.group.shared.time.TimeRange;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
@@ -39,7 +39,11 @@ public record CentreCalendarCreateRequest(
 
             @NotNull
             DayOfWeek dayOfWeek
-    ) implements Range<LocalTime> {
+    ) implements TimeRange {
+        @Override
+        public boolean isValid() {
+            return from.isBefore(to);
+        }
     }
 
     @ValidRange
@@ -54,6 +58,10 @@ public record CentreCalendarCreateRequest(
 
             @Length(max = 300)
             String cause
-    ) implements Range<LocalDateTime> {
+    ) implements TimeRange {
+        @Override
+        public boolean isValid() {
+            return from.isBefore(to);
+        }
     }
 }
