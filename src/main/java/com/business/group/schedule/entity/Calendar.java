@@ -25,6 +25,8 @@ public abstract class Calendar {
     @Column(nullable = false)
     protected LocalDateTime validFrom;
 
+    protected LocalDateTime validTo;
+
     @Column(length = 500)
     protected String notes;
 }
