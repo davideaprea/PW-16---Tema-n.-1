@@ -27,6 +27,8 @@ public class MedicCalendarService {
         timeSlotValidator.checkForOverlappingSlots(dto.timeSlots());
 
         dto.timeSlots().forEach(timeSlotDTO -> {
+            timeSlotValidator.checkValidity(timeSlotDTO);
+
             List<MedicTimeSlot> conflictingSlots = medicTimeSlotDAO.findByRoomAndTime(
                     timeSlotDTO.roomId(),
                     timeSlotDTO.dayOfWeek(),

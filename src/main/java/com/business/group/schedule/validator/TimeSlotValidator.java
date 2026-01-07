@@ -8,6 +8,12 @@ import java.util.List;
 
 @Component
 public class TimeSlotValidator {
+    public void checkValidity(DailyTimeSlot dailyTimeSlot) {
+        if(dailyTimeSlot.from().isAfter(dailyTimeSlot.to())) {
+            //throw
+        }
+    }
+
     public void checkForOverlappingSlots(List<? extends DailyTimeSlot> dailyTimeSlots) {
         dailyTimeSlots.sort(Comparator
                 .comparing(DailyTimeSlot::dayOfWeek)

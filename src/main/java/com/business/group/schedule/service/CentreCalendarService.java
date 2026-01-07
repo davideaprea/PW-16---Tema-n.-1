@@ -19,6 +19,7 @@ public class CentreCalendarService {
 
     @Transactional
     public CentreCalendarCreateResponse create(CentreCalendarCreateRequest dto) {
+        dto.timeSlots().forEach(timeSlotValidator::checkValidity);
         timeSlotValidator.checkForOverlappingSlots(dto.timeSlots());
 
         CentreCalendar savedCalendar = calendarDAO.save(calendarMapper.toEntity(dto));
