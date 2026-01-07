@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @AllArgsConstructor
 @Service
-public class MedicalCentreCalendarService {
+public class CentreCalendarService {
     private final MedicalCentreCalendarDAO calendarDAO;
     private final CentreCalendarMapper calendarMapper;
     private final TimeSlotValidator timeSlotValidator;
