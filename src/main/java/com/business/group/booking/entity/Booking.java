@@ -1,7 +1,6 @@
 package com.business.group.booking.entity;
 
 import com.business.group.booking.enumeration.BookingStatus;
-import com.business.group.booking.enumeration.PaymentStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
