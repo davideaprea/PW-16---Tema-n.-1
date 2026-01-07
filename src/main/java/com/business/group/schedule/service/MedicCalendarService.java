@@ -38,7 +38,7 @@ public class MedicCalendarService {
                 //throw
             }
         });
-
+        //TODO: controllare che i centri siano aperti
         MedicCalendar calendar = medicCalendarDAO.save(calendarMapper.toEntity(dto));
 
         return calendarMapper.toResponse(calendar);
