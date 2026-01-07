@@ -1,0 +1,49 @@
+package com.business.group.booking.entity;
+
+import com.business.group.booking.enumeration.BookingStatus;
+import com.business.group.booking.enumeration.PaymentStatus;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+
+import java.time.LocalDateTime;
+
+@NoArgsConstructor
+@Getter
+@Setter
+@Entity
+@Table(name = "bookings")
+public class Booking {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, updatable = false)
+    private Long patientId;
+
+    @Column(nullable = false)
+    private LocalDateTime expectedStartTime;
+
+    @Column(nullable = false)
+    private LocalDateTime estimatedEndTime;
+
+    @Column(nullable = false)
+    private Long roomServiceId;
+
+    @Column(nullable = false)
+    private Long roomId;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus paymentStatus;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private BookingStatus bookingStatus;
+
+    @CreatedDate
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+}
