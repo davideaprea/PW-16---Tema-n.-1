@@ -1,6 +1,7 @@
 package com.business.group.booking.entity;
 
 import com.business.group.booking.enumeration.BookingStatus;
+import com.business.group.booking.enumeration.PaymentStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,7 +37,7 @@ public class Booking {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private BookingStatus status;
+    private BookingStatus bookingStatus;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)
@@ -46,5 +47,5 @@ public class Booking {
             cascade = CascadeType.PERSIST,
             fetch = FetchType.LAZY
     )
-    private Payment payment;
+    private PaymentStatus paymentStatus;
 }
