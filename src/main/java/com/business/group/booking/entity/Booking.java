@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -30,7 +31,7 @@ public class Booking {
     private LocalDateTime estimatedEndTime;
 
     @Column(nullable = false)
-    private Long roomServiceId;
+    private Long medicalCareId;
 
     @Column(nullable = false)
     private Long roomId;
@@ -48,4 +49,7 @@ public class Booking {
             fetch = FetchType.LAZY
     )
     private PaymentStatus paymentStatus;
+
+    @Column(nullable = false)
+    private BigDecimal totalPrice;
 }
