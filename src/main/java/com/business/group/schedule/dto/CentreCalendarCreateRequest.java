@@ -23,27 +23,17 @@ public record CentreCalendarCreateRequest(
 
         @NotNull
         @Size(min = 1, max = 7)
-        List<@Valid TimeSlotDTO> timeSlots,
-
-        List<@Valid ClosingPeriodDTO> closingPeriods
+        List<@Valid TimeSlotDTO> timeSlots
 ) {
     public record TimeSlotDTO(
-            @Valid
             @NotNull
-            Range<LocalTime> range,
+            LocalTime from,
+
+            @NotNull
+            LocalTime to,
 
             @NotNull
             DayOfWeek dayOfWeek
-    ) {
-    }
-
-    public record ClosingPeriodDTO(
-            @Valid
-            @NotNull
-            Range<LocalDateTime> range,
-
-            @Length(max = 300)
-            String cause
-    ) {
+    ) implements DailyTimeSlot {
     }
 }

@@ -24,12 +24,4 @@ public class CentreCalendar extends Calendar {
             orphanRemoval = true
     )
     private List<CentreTimeSlot> timeSlots;
-
-    @OneToMany(
-            mappedBy = "calendar",
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private List<CentreClosingPeriod> centreClosingPeriods;
 }

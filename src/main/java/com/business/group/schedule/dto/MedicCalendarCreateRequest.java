@@ -28,15 +28,17 @@ public record MedicCalendarCreateRequest(
         List<@Valid TimeSlotDTO> timeSlots
 ) {
     public record TimeSlotDTO(
-            @Valid
             @NotNull
-            Range<LocalTime> range,
+            LocalTime from,
+
+            @NotNull
+            LocalTime to,
 
             @NotNull
             DayOfWeek dayOfWeek,
 
             @Positive
             long roomId
-    ) {
+    ) implements DailyTimeSlot {
     }
 }
