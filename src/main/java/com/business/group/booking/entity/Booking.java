@@ -34,7 +34,7 @@ public class Booking {
     private Long medicalCareId;
 
     @Column(nullable = false)
-    private Long roomId;
+    private Long medicTimeSlotId;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -44,10 +44,8 @@ public class Booking {
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    @OneToOne(
-            cascade = CascadeType.PERSIST,
-            fetch = FetchType.LAZY
-    )
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private PaymentStatus paymentStatus;
 
     @Column(nullable = false)

@@ -13,7 +13,7 @@ public record BookingCreateRequest(
         LocalDateTime expectedStartTime,
 
         @Positive
-        long roomId,
+        long medicTimeSlotId,
 
         @Positive
         long medicalCareId

@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 
 public interface MedicTimeSlotDAO extends JpaRepository<MedicTimeSlot, Long> {
     @Query("""
@@ -23,4 +24,11 @@ public interface MedicTimeSlotDAO extends JpaRepository<MedicTimeSlot, Long> {
             LocalTime from,
             LocalTime to
     );
+
+    @Query("""
+            SELECT s
+            FROM MedicTimeSlot s
+            WHERE s.id = :id AND s.calendar.validTo IS NULL
+            """)
+    Optional<MedicTimeSlot> getActiveById(long id);
 }
