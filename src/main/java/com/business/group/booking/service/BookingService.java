@@ -26,10 +26,11 @@ public class BookingService {
     public BookingCreateResponse create(BookingCreateRequest createRequest) {
         MedicTimeSlotGetResponse medicTimeSlot = medicCalendarService.getTimeSlotById(createRequest.medicTimeSlotId());
         RoomMedicalCareGetResponse roomService = roomMedicalCareService.getByMedicalCareIdAndRoomId(createRequest.medicalCareId(), medicTimeSlot.roomId());
-        LocalDateTime estimatedEndTime = createRequest.expectedStartTime().plus(roomService.medicalCare().duration());
+        LocalDateTime expectedStartTime = createRequest.expectedStartTime();
+        LocalDateTime estimatedEndTime = expectedStartTime.plus(roomService.medicalCare().duration());
         List<Booking> slotBookings = bookingDAO.findAllBetweenDateRange(
                 createRequest.medicTimeSlotId(),
-                createRequest.expectedStartTime(),
+                expectedStartTime,
                 estimatedEndTime
         );
 
@@ -39,8 +40,8 @@ public class BookingService {
 
 
         if (
-                !createRequest.expectedStartTime().getDayOfWeek().equals(medicTimeSlot.dayOfWeek()) ||
-                createRequest.expectedStartTime().toLocalTime().isBefore(medicTimeSlot.from()) ||
+                !expectedStartTime.getDayOfWeek().equals(medicTimeSlot.dayOfWeek()) ||
+                expectedStartTime.toLocalTime().isBefore(medicTimeSlot.from()) ||
                 estimatedEndTime.toLocalTime().isAfter(medicTimeSlot.to())
         ) {
             //throw
