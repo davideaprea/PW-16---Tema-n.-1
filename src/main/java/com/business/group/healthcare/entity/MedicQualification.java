@@ -12,7 +12,7 @@ import org.hibernate.annotations.Immutable;
 @Entity
 @Table(name = "medics_services")
 @Immutable
-public class MedicService {
+public class MedicQualification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

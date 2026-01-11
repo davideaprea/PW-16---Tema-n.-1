@@ -1,6 +1,6 @@
 package com.business.group.healthcare.dto;
 
-public record MedicServiceCreateResponse(
+public record MedicQualificationCreateResponse(
         long id,
         long medicId,
         long medicalCareId
