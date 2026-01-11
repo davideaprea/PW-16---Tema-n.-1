@@ -1,6 +1,5 @@
 package com.business.group.location.dto.request;
 
-import com.business.group.location.annotation.Contiguous;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 
@@ -20,7 +19,6 @@ public record MedicalCentreCreateRequest(
         @Valid
         AddressDTO address,
 
-        @Contiguous
         @NotEmpty
         List<@Valid FloorDTO> floors
 ) {

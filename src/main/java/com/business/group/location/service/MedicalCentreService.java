@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @AllArgsConstructor
 @Service
 public class MedicalCentreService {
@@ -24,6 +26,8 @@ public class MedicalCentreService {
 
     @Transactional
     public MedicalCentreCreateResponse create(MedicalCentreCreateRequest dto) {
+        areFloorsContiguous(dto.floors());
+
         MedicalCentre medicalCentreToSave = medicalCentreRequestMapper.toMedicalCentre(dto);
         MedicalCentre savedMedicalCentre = medicalCentreDAO.save(medicalCentreToSave);
 
@@ -31,6 +35,19 @@ public class MedicalCentreService {
                 .findByIdWithRelations(savedMedicalCentre.getId())
                 .map(medicalCentreResponseMapper::toResponse)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR));
+    }
+
+    private void areFloorsContiguous(List<MedicalCentreCreateRequest.FloorDTO> floors) {
+        List<Integer> sorted = floors.stream()
+                .map(MedicalCentreCreateRequest.FloorDTO::number)
+                .sorted()
+                .toList();
+
+        for (int i = 1; i < sorted.size(); i++) {
+            if(sorted.get(i) - sorted.get(i - 1) != 1) {
+                //throw
+            }
+        }
     }
 
     public Page<MedicalCentreGetPageResponse> findByRegionAndCity(
