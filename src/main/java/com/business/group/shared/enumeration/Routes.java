@@ -22,4 +22,8 @@ public class Routes {
     public static final class MedicSchedules {
         public static final String BASE = "/medic-schedules";
     }
+
+    public static final class Bookings {
+        public static final String BASE = "/bookings";
+    }
 }

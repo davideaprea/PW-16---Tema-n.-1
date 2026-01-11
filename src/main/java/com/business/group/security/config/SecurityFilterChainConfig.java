@@ -27,6 +27,7 @@ public class SecurityFilterChainConfig {
                         .requestMatchers(GET, Routes.MedicalCentres.BASE).permitAll()
                         .requestMatchers(Routes.MedicalCentresCalendars.BASE).hasRole(Roles.ADMIN.toString())
                         .requestMatchers(Routes.MedicSchedules.BASE).hasRole(Roles.ADMIN.toString())
+                        .requestMatchers(Routes.Bookings.BASE).hasAnyRole(Roles.ADMIN.toString(), Roles.OPERATOR.toString())
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
