@@ -2,7 +2,7 @@ package com.business.group.booking.service;
 
 import com.business.group.booking.dao.BookingDAO;
 import com.business.group.booking.dto.BookingCreateRequest;
-import com.business.group.booking.dto.BookingCreateResponse;
+import com.business.group.booking.dto.BookingDTO;
 import com.business.group.booking.entity.Booking;
 import com.business.group.booking.mapper.BookingMapper;
 import com.business.group.healthcare.dto.RoomMedicalCareGetResponse;
@@ -23,7 +23,7 @@ public class BookingService {
     private final RoomMedicalCareService roomMedicalCareService;
     private final BookingMapper bookingMapper;
 
-    public BookingCreateResponse create(BookingCreateRequest createRequest) {
+    public BookingDTO create(BookingCreateRequest createRequest) {
         MedicTimeSlotDTO medicTimeSlot = medicCalendarService.getTimeSlotById(createRequest.medicTimeSlotId());
         RoomMedicalCareGetResponse roomService = roomMedicalCareService.getByMedicalCareIdAndRoomId(createRequest.medicalCareId(), medicTimeSlot.roomId());
         LocalDateTime expectedStartTime = createRequest.expectedStartTime();
@@ -35,7 +35,10 @@ public class BookingService {
         );
 
         if (!slotBookings.isEmpty()) {
-            //throw
+            /*throw new ConflictingBookingException(
+                    createRequest,
+                    slotBookings.stream().map(bookingMapper::toDTO).toList()
+            );*/
         }
 
 
@@ -47,7 +50,7 @@ public class BookingService {
             //throw
         }
 
-        return bookingMapper.toCreateResponse(bookingDAO.save(bookingMapper.toEntity(
+        return bookingMapper.toDTO(bookingDAO.save(bookingMapper.toEntity(
                 createRequest,
                 estimatedEndTime,
                 roomService.price()

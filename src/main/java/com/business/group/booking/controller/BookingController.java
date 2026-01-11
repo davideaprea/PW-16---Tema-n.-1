@@ -1,7 +1,7 @@
 package com.business.group.booking.controller;
 
 import com.business.group.booking.dto.BookingCreateRequest;
-import com.business.group.booking.dto.BookingCreateResponse;
+import com.business.group.booking.dto.BookingDTO;
 import com.business.group.booking.service.BookingService;
 import com.business.group.shared.enumeration.Routes;
 import jakarta.validation.Valid;
@@ -20,7 +20,7 @@ public class BookingController {
     private final BookingService bookingService;
 
     @PostMapping
-    public ResponseEntity<BookingCreateResponse> create(
+    public ResponseEntity<BookingDTO> create(
             @RequestBody
             @Valid
             BookingCreateRequest createRequest

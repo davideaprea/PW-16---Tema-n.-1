@@ -6,7 +6,7 @@ import com.business.group.booking.enumeration.PaymentStatus;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public record BookingCreateResponse(
+public record BookingDTO(
         long id,
         long patientId,
         LocalDateTime expectedStartTime,
