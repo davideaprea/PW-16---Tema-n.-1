@@ -7,7 +7,7 @@ import com.business.group.booking.entity.Booking;
 import com.business.group.booking.mapper.BookingMapper;
 import com.business.group.healthcare.dto.RoomMedicalCareGetResponse;
 import com.business.group.healthcare.service.RoomMedicalCareService;
-import com.business.group.schedule.dto.MedicTimeSlotGetResponse;
+import com.business.group.schedule.dto.MedicTimeSlotDTO;
 import com.business.group.schedule.service.MedicCalendarService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,7 @@ public class BookingService {
     private final BookingMapper bookingMapper;
 
     public BookingCreateResponse create(BookingCreateRequest createRequest) {
-        MedicTimeSlotGetResponse medicTimeSlot = medicCalendarService.getTimeSlotById(createRequest.medicTimeSlotId());
+        MedicTimeSlotDTO medicTimeSlot = medicCalendarService.getTimeSlotById(createRequest.medicTimeSlotId());
         RoomMedicalCareGetResponse roomService = roomMedicalCareService.getByMedicalCareIdAndRoomId(createRequest.medicalCareId(), medicTimeSlot.roomId());
         LocalDateTime expectedStartTime = createRequest.expectedStartTime();
         LocalDateTime estimatedEndTime = expectedStartTime.plus(roomService.medicalCare().duration());

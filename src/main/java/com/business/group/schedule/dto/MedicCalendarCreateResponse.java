@@ -11,14 +11,6 @@ public record MedicCalendarCreateResponse(
         LocalDateTime createdAt,
         LocalDateTime validFrom,
         String notes,
-        List<TimeSlotDTO> timeSlots
+        List<MedicTimeSlotDTO> timeSlots
 ) {
-    public record TimeSlotDTO(
-            long id,
-            long roomId,
-            LocalTime from,
-            LocalTime to,
-            DayOfWeek dayOfWeek
-    ) {
-    }
 }
