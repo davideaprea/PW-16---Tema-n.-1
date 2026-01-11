@@ -2,6 +2,7 @@ package com.business.group.booking.service;
 
 import com.business.group.booking.dao.BookingDAO;
 import com.business.group.booking.dto.BookingCreateRequest;
+import com.business.group.booking.dto.BookingCreateResponse;
 import com.business.group.booking.entity.Booking;
 import com.business.group.booking.mapper.BookingMapper;
 import com.business.group.healthcare.dto.RoomServiceGetResponse;
@@ -22,7 +23,7 @@ public class BookingService {
     private final CentreServiceService centreServiceService;
     private final BookingMapper bookingMapper;
 
-    public void create(BookingCreateRequest createRequest) {
+    public BookingCreateResponse create(BookingCreateRequest createRequest) {
         MedicTimeSlotGetResponse medicTimeSlot = medicCalendarService.getTimeSlotById(createRequest.medicTimeSlotId());
         RoomServiceGetResponse roomService = centreServiceService.getByMedicalCareIdAndRoomId(createRequest.medicalCareId(), medicTimeSlot.roomId());
         LocalDateTime estimatedEndTime = createRequest.expectedStartTime().plus(roomService.medicalCare().duration());
@@ -45,10 +46,10 @@ public class BookingService {
             //throw
         }
 
-        Booking booking = bookingDAO.save(bookingMapper.toEntity(
+        return bookingMapper.toCreateResponse(bookingDAO.save(bookingMapper.toEntity(
                 createRequest,
                 estimatedEndTime,
                 roomService.price()
-        ));
+        )));
     }
 }

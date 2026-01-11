@@ -1,6 +1,7 @@
 package com.business.group.booking.mapper;
 
 import com.business.group.booking.dto.BookingCreateRequest;
+import com.business.group.booking.dto.BookingCreateResponse;
 import com.business.group.booking.entity.Booking;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -17,4 +18,6 @@ public interface BookingMapper {
             LocalDateTime estimatedEndTime,
             BigDecimal totalPrice
     );
+
+    BookingCreateResponse toCreateResponse(Booking booking);
 }
