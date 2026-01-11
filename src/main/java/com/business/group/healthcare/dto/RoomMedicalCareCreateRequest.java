@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Positive;
 
 import java.math.BigDecimal;
 
-public record CentreServiceCreateRequest(
+public record RoomMedicalCareCreateRequest(
         @Positive
         long medicalCareId,
 

@@ -5,8 +5,8 @@ import com.business.group.booking.dto.BookingCreateRequest;
 import com.business.group.booking.dto.BookingCreateResponse;
 import com.business.group.booking.entity.Booking;
 import com.business.group.booking.mapper.BookingMapper;
-import com.business.group.healthcare.dto.RoomServiceGetResponse;
-import com.business.group.healthcare.service.CentreServiceService;
+import com.business.group.healthcare.dto.RoomMedicalCareGetResponse;
+import com.business.group.healthcare.service.RoomMedicalCareService;
 import com.business.group.schedule.dto.MedicTimeSlotGetResponse;
 import com.business.group.schedule.service.MedicCalendarService;
 import lombok.AllArgsConstructor;
@@ -20,12 +20,12 @@ import java.util.List;
 public class BookingService {
     private final BookingDAO bookingDAO;
     private final MedicCalendarService medicCalendarService;
-    private final CentreServiceService centreServiceService;
+    private final RoomMedicalCareService roomMedicalCareService;
     private final BookingMapper bookingMapper;
 
     public BookingCreateResponse create(BookingCreateRequest createRequest) {
         MedicTimeSlotGetResponse medicTimeSlot = medicCalendarService.getTimeSlotById(createRequest.medicTimeSlotId());
-        RoomServiceGetResponse roomService = centreServiceService.getByMedicalCareIdAndRoomId(createRequest.medicalCareId(), medicTimeSlot.roomId());
+        RoomMedicalCareGetResponse roomService = roomMedicalCareService.getByMedicalCareIdAndRoomId(createRequest.medicalCareId(), medicTimeSlot.roomId());
         LocalDateTime estimatedEndTime = createRequest.expectedStartTime().plus(roomService.medicalCare().duration());
         List<Booking> slotBookings = bookingDAO.findAllBetweenDateRange(
                 createRequest.medicTimeSlotId(),

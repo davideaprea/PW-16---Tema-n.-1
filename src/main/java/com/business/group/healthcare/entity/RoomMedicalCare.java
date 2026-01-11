@@ -20,7 +20,7 @@ import java.math.BigDecimal;
                 )
         }
 )
-public class CentreService {
+public class RoomMedicalCare {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
