@@ -1,5 +1,6 @@
 package com.business.group.booking.exception;
 
+import com.business.group.booking.dto.BookingCreateRequest;
 import com.business.group.booking.dto.BookingDTO;
 import lombok.Getter;
 
@@ -9,11 +10,11 @@ import java.util.List;
 public class ConflictingBookingException extends RuntimeException {
     private final static String messageTemplate = "The inserted booking %s is conflicting with these existing bookings: %s";
 
-    private final BookingDTO conflictingBooking;
+    private final BookingCreateRequest conflictingBooking;
     private final List<BookingDTO> existingBookings;
 
     public ConflictingBookingException(
-            BookingDTO conflictingBooking,
+            BookingCreateRequest conflictingBooking,
             List<BookingDTO> existingBookings
     ) {
         super(messageTemplate.formatted(conflictingBooking, existingBookings));

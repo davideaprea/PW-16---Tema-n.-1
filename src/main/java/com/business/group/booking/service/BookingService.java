@@ -4,6 +4,7 @@ import com.business.group.booking.dao.BookingDAO;
 import com.business.group.booking.dto.BookingCreateRequest;
 import com.business.group.booking.dto.BookingDTO;
 import com.business.group.booking.entity.Booking;
+import com.business.group.booking.exception.ConflictingBookingException;
 import com.business.group.booking.mapper.BookingMapper;
 import com.business.group.healthcare.dto.RoomMedicalCareGetResponse;
 import com.business.group.healthcare.service.RoomMedicalCareService;
@@ -35,10 +36,10 @@ public class BookingService {
         );
 
         if (!slotBookings.isEmpty()) {
-            /*throw new ConflictingBookingException(
+            throw new ConflictingBookingException(
                     createRequest,
                     slotBookings.stream().map(bookingMapper::toDTO).toList()
-            );*/
+            );
         }
 
 
