@@ -2,6 +2,7 @@ package com.business.group.schedule.validator;
 
 import com.business.group.schedule.dto.DailyTimeSlot;
 import com.business.group.schedule.exception.InvalidTimeRangeException;
+import com.business.group.schedule.exception.OverlappingRangesException;
 import org.springframework.stereotype.Component;
 
 import java.util.Comparator;
@@ -29,7 +30,10 @@ public class TimeSlotValidator {
                     curr.dayOfWeek().equals(prev.dayOfWeek()) &&
                     curr.from().isBefore(prev.to())
             ) {
-                //throw
+                throw new OverlappingRangesException(List.of(
+                        curr,
+                        prev
+                ));
             }
         }
     }
