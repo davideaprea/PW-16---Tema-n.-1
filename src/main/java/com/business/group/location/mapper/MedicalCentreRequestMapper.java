@@ -1,9 +1,9 @@
 package com.business.group.location.mapper;
 
-import com.business.group.location.dto.request.MedicalCentreCreateRequest;
-import com.business.group.location.entity.Floor;
-import com.business.group.location.entity.MedicalCentre;
-import com.business.group.location.entity.Room;
+import com.business.group.location.http.request.MedicalCentreCreateRequest;
+import com.business.group.location.domain.entity.Floor;
+import com.business.group.location.domain.entity.MedicalCentre;
+import com.business.group.location.domain.entity.Room;
 import org.mapstruct.*;
 
 import java.util.ArrayList;

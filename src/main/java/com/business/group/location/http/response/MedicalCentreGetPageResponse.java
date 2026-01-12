@@ -1,4 +1,4 @@
-package com.business.group.location.dto.response;
+package com.business.group.location.http.response;
 
 public record MedicalCentreGetPageResponse(
         long id,

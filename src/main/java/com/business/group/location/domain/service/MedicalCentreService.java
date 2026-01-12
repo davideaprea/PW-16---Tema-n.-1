@@ -1,11 +1,11 @@
-package com.business.group.location.service;
+package com.business.group.location.domain.service;
 
 import com.business.group.location.dao.MedicalCentreDAO;
-import com.business.group.location.dto.request.MedicalCentreCreateRequest;
-import com.business.group.location.dto.response.MedicalCentreCreateResponse;
-import com.business.group.location.dto.response.MedicalCentreGetPageResponse;
-import com.business.group.location.entity.MedicalCentre;
-import com.business.group.location.exception.NonContiguousFloorsException;
+import com.business.group.location.http.request.MedicalCentreCreateRequest;
+import com.business.group.location.http.response.MedicalCentreCreateResponse;
+import com.business.group.location.http.response.MedicalCentreGetPageResponse;
+import com.business.group.location.domain.entity.MedicalCentre;
+import com.business.group.location.domain.exception.NonContiguousFloorsException;
 import com.business.group.location.mapper.MedicalCentreRequestMapper;
 import com.business.group.location.mapper.MedicalCentreResponseMapper;
 import lombok.AllArgsConstructor;

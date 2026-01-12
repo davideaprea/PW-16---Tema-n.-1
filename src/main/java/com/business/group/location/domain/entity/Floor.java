@@ -1,4 +1,4 @@
-package com.business.group.location.entity;
+package com.business.group.location.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

@@ -1,7 +1,7 @@
-package com.business.group.location.controller;
+package com.business.group.location.http.controller;
 
-import com.business.group.location.dto.response.RegionGetResponse;
-import com.business.group.location.service.RegionService;
+import com.business.group.location.http.response.RegionGetResponse;
+import com.business.group.location.domain.service.RegionService;
 import com.business.group.shared.enumeration.Routes;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;

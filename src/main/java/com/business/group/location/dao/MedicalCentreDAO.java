@@ -1,6 +1,6 @@
 package com.business.group.location.dao;
 
-import com.business.group.location.entity.MedicalCentre;
+import com.business.group.location.domain.entity.MedicalCentre;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

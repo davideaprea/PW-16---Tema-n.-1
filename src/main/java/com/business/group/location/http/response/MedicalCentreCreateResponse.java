@@ -1,4 +1,4 @@
-package com.business.group.location.dto.response;
+package com.business.group.location.http.response;
 
 import java.math.BigDecimal;
 import java.util.List;

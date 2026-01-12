@@ -1,8 +1,8 @@
 package com.business.group.location.mapper;
 
-import com.business.group.location.dto.response.MedicalCentreCreateResponse;
-import com.business.group.location.dto.response.MedicalCentreGetPageResponse;
-import com.business.group.location.entity.*;
+import com.business.group.location.http.response.MedicalCentreCreateResponse;
+import com.business.group.location.http.response.MedicalCentreGetPageResponse;
+import com.business.group.location.domain.entity.*;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

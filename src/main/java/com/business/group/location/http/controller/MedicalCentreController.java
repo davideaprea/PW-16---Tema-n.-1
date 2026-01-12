@@ -1,9 +1,9 @@
-package com.business.group.location.controller;
+package com.business.group.location.http.controller;
 
-import com.business.group.location.dto.request.MedicalCentreCreateRequest;
-import com.business.group.location.dto.response.MedicalCentreCreateResponse;
-import com.business.group.location.dto.response.MedicalCentreGetPageResponse;
-import com.business.group.location.service.MedicalCentreService;
+import com.business.group.location.http.request.MedicalCentreCreateRequest;
+import com.business.group.location.http.response.MedicalCentreCreateResponse;
+import com.business.group.location.http.response.MedicalCentreGetPageResponse;
+import com.business.group.location.domain.service.MedicalCentreService;
 import com.business.group.shared.enumeration.Routes;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;

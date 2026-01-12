@@ -1,4 +1,4 @@
-package com.business.group.location.dto.request;
+package com.business.group.location.http.request;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;

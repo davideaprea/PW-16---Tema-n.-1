@@ -1,4 +1,4 @@
-package com.business.group.location.exception;
+package com.business.group.location.domain.exception;
 
 import lombok.Getter;
 

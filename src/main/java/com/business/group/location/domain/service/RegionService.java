@@ -1,7 +1,7 @@
-package com.business.group.location.service;
+package com.business.group.location.domain.service;
 
 import com.business.group.location.dao.RegionDAO;
-import com.business.group.location.dto.response.RegionGetResponse;
+import com.business.group.location.http.response.RegionGetResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
