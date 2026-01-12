@@ -1,6 +1,7 @@
 package com.business.group.schedule.validator;
 
 import com.business.group.schedule.dto.DailyTimeSlot;
+import com.business.group.schedule.exception.InvalidTimeRangeException;
 import org.springframework.stereotype.Component;
 
 import java.util.Comparator;
@@ -10,7 +11,7 @@ import java.util.List;
 public class TimeSlotValidator {
     public void checkValidity(DailyTimeSlot dailyTimeSlot) {
         if(dailyTimeSlot.from().isAfter(dailyTimeSlot.to())) {
-            //throw
+            throw new InvalidTimeRangeException(dailyTimeSlot.from(), dailyTimeSlot.to());
         }
     }
 
