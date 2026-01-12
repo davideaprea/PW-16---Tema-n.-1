@@ -5,6 +5,7 @@ import com.business.group.location.dto.request.MedicalCentreCreateRequest;
 import com.business.group.location.dto.response.MedicalCentreCreateResponse;
 import com.business.group.location.dto.response.MedicalCentreGetPageResponse;
 import com.business.group.location.entity.MedicalCentre;
+import com.business.group.location.exception.NonContiguousFloorsException;
 import com.business.group.location.mapper.MedicalCentreRequestMapper;
 import com.business.group.location.mapper.MedicalCentreResponseMapper;
 import lombok.AllArgsConstructor;
@@ -44,8 +45,11 @@ public class MedicalCentreService {
                 .toList();
 
         for (int i = 1; i < sorted.size(); i++) {
-            if(sorted.get(i) - sorted.get(i - 1) != 1) {
-                //throw
+            int curr = sorted.get(i);
+            int prev = sorted.get(i - 1);
+
+            if(curr - prev != 1) {
+                throw new NonContiguousFloorsException(prev, curr);
             }
         }
     }
