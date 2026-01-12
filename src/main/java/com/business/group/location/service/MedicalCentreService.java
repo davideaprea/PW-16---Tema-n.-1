@@ -11,10 +11,8 @@ import com.business.group.location.mapper.MedicalCentreResponseMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -35,7 +33,10 @@ public class MedicalCentreService {
         return medicalCentreDAO
                 .findByIdWithRelations(savedMedicalCentre.getId())
                 .map(medicalCentreResponseMapper::toResponse)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR));
+                .orElseThrow(() -> new IllegalStateException(
+                        "MedicalCentre %d was just saved but cannot be found with relations"
+                                .formatted(savedMedicalCentre.getId())
+                ));
     }
 
     private void areFloorsContiguous(List<MedicalCentreCreateRequest.FloorDTO> floors) {
