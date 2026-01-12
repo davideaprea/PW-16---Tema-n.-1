@@ -5,6 +5,8 @@ import com.business.group.booking.dto.BookingCreateRequest;
 import com.business.group.booking.dto.BookingDTO;
 import com.business.group.booking.entity.Booking;
 import com.business.group.booking.exception.ConflictingBookingException;
+import com.business.group.booking.exception.InvalidCareDurationException;
+import com.business.group.booking.exception.UnavailableDayOfWeekException;
 import com.business.group.booking.mapper.BookingMapper;
 import com.business.group.healthcare.dto.RoomMedicalCareGetResponse;
 import com.business.group.healthcare.service.RoomMedicalCareService;
@@ -42,13 +44,23 @@ public class BookingService {
             );
         }
 
+        if(!expectedStartTime.getDayOfWeek().equals(medicTimeSlot.dayOfWeek())) {
+            throw new UnavailableDayOfWeekException(
+                    expectedStartTime.getDayOfWeek(),
+                    medicTimeSlot.dayOfWeek()
+            );
+        }
 
         if (
-                !expectedStartTime.getDayOfWeek().equals(medicTimeSlot.dayOfWeek()) ||
                 expectedStartTime.toLocalTime().isBefore(medicTimeSlot.from()) ||
                 estimatedEndTime.toLocalTime().isAfter(medicTimeSlot.to())
         ) {
-            //throw
+            throw new InvalidCareDurationException(
+                    medicTimeSlot.from(),
+                    medicTimeSlot.to(),
+                    expectedStartTime.toLocalTime(),
+                    estimatedEndTime.toLocalTime()
+            );
         }
 
         return bookingMapper.toDTO(bookingDAO.save(bookingMapper.toEntity(
