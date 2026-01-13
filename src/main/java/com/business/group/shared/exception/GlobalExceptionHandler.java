@@ -12,4 +12,13 @@ public class GlobalExceptionHandler {
     public InvalidParamsErrorResponse handle(InvalidParamsException exception) {
         return new InvalidParamsErrorResponse(exception.getInvalidParamErrors());
     }
+
+    @ExceptionHandler(ConflictingResourceException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ConflictingResourceErrorResponse handle(ConflictingResourceException exception) {
+        return new ConflictingResourceErrorResponse(
+                exception.getSubmittedResource(),
+                exception.getConflictingResources()
+        );
+    }
 }

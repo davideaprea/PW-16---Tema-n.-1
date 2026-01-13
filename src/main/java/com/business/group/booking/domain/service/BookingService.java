@@ -38,10 +38,7 @@ public class BookingService {
         );
 
         if (!slotBookings.isEmpty()) {
-            throw new ConflictingBookingException(
-                    createRequest,
-                    slotBookings.stream().map(bookingMapper::toDTO).toList()
-            );
+            throw new ConflictingBookingException(createRequest);
         }
 
         if(!expectedStartTime.getDayOfWeek().equals(medicTimeSlot.dayOfWeek())) {
