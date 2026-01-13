@@ -1,23 +1,15 @@
 package com.business.group.schedule.domain.exception;
 
 import com.business.group.schedule.http.dto.DailyTimeSlot;
-import lombok.Getter;
+import com.business.group.shared.exception.ConflictingResourceException;
 
 import java.util.List;
 
-@Getter
-public class ConflictingTimeSlotException extends RuntimeException {
-    private final static String messageTemplate = "The inserted time slot %s is conflicting with these existing schedules: %s";
-
-    private final DailyTimeSlot conflictingTimeSlot;
-    private final List<? extends DailyTimeSlot> existingTimeSlots;
-
+public class ConflictingTimeSlotException extends ConflictingResourceException {
     public ConflictingTimeSlotException(
-            DailyTimeSlot conflictingTimeSlot,
-            List<? extends DailyTimeSlot> existingTimeSlots
+            DailyTimeSlot submittedResource,
+            List<? extends DailyTimeSlot> conflictingResources
     ) {
-        super(messageTemplate.formatted(conflictingTimeSlot, existingTimeSlots));
-        this.conflictingTimeSlot = conflictingTimeSlot;
-        this.existingTimeSlots = List.copyOf(existingTimeSlots);
+        super("This slot is already taken.", submittedResource, conflictingResources);
     }
 }

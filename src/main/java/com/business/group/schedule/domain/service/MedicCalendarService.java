@@ -8,15 +8,16 @@ import com.business.group.schedule.http.dto.MedicTimeSlotDTO;
 import com.business.group.schedule.domain.entity.MedicCalendar;
 import com.business.group.schedule.domain.entity.MedicTimeSlot;
 import com.business.group.schedule.domain.exception.ConflictingTimeSlotException;
-import com.business.group.schedule.domain.exception.MedicTimeSlotNotFoundException;
 import com.business.group.schedule.mapper.MedicCalendarMapper;
 import com.business.group.schedule.mapper.MedicTimeSlotMapper;
 import com.business.group.schedule.domain.validator.TimeSlotValidator;
+import com.business.group.shared.exception.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor
@@ -57,6 +58,6 @@ public class MedicCalendarService {
     public MedicTimeSlotDTO getTimeSlotById(long id) {
         return medicTimeSlotMapper.toResponse(medicTimeSlotDAO
                 .getActiveById(id)
-                .orElseThrow(() -> new MedicTimeSlotNotFoundException(id)));
+                .orElseThrow(() -> new ResourceNotFoundException(Map.of("id", id))));
     }
 }

@@ -9,6 +9,8 @@ import com.business.group.shared.exception.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 @AllArgsConstructor
 @Service
 public class RoomMedicalCareService {
@@ -22,6 +24,9 @@ public class RoomMedicalCareService {
     public RoomMedicalCareGetResponse getByMedicalCareIdAndRoomId(long medicalCareId, long roomId) {
         return roomMedicalCareMapper.toRoomServiceGetResponse(roomMedicalCareDAO
                 .findByMedicalCareIdAndRoomId(medicalCareId, roomId)
-                .orElseThrow(ResourceNotFoundException::new));
+                .orElseThrow(() -> new ResourceNotFoundException(Map.ofEntries(
+                        Map.entry("medicalCareId", medicalCareId),
+                        Map.entry("roomId", roomId)
+                ))));
     }
 }
