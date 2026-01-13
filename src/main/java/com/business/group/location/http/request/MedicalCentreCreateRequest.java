@@ -2,6 +2,7 @@ package com.business.group.location.http.request;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
+import lombok.experimental.FieldNameConstants;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -22,6 +23,7 @@ public record MedicalCentreCreateRequest(
         @NotEmpty
         List<@Valid FloorDTO> floors
 ) {
+    @FieldNameConstants
     public record FloorDTO(
             int number,
 
