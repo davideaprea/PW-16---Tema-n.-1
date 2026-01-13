@@ -1,4 +1,4 @@
-package com.business.group.profile.enumeration;
+package com.business.group.profile.domain.enumeration;
 
 public enum Gender {
     MALE,

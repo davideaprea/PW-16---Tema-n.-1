@@ -1,4 +1,4 @@
-package com.business.group.profile.entity;
+package com.business.group.profile.domain.entity;
 
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;

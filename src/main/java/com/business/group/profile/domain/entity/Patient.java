@@ -1,6 +1,6 @@
-package com.business.group.profile.entity;
+package com.business.group.profile.domain.entity;
 
-import com.business.group.profile.enumeration.Gender;
+import com.business.group.profile.domain.enumeration.Gender;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
