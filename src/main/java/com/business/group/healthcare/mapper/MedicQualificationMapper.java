@@ -1,8 +1,8 @@
 package com.business.group.healthcare.mapper;
 
-import com.business.group.healthcare.dto.MedicQualificationCreateRequest;
-import com.business.group.healthcare.dto.MedicQualificationCreateResponse;
-import com.business.group.healthcare.entity.MedicQualification;
+import com.business.group.healthcare.http.dto.MedicQualificationCreateRequest;
+import com.business.group.healthcare.http.dto.MedicQualificationCreateResponse;
+import com.business.group.healthcare.domain.entity.MedicQualification;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

@@ -1,8 +1,8 @@
 package com.business.group.schedule.mapper;
 
-import com.business.group.schedule.dto.MedicCalendarCreateRequest;
-import com.business.group.schedule.dto.MedicCalendarCreateResponse;
-import com.business.group.schedule.entity.MedicCalendar;
+import com.business.group.schedule.http.dto.MedicCalendarCreateRequest;
+import com.business.group.schedule.http.dto.MedicCalendarCreateResponse;
+import com.business.group.schedule.domain.entity.MedicCalendar;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

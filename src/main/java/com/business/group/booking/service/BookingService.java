@@ -8,10 +8,10 @@ import com.business.group.booking.exception.ConflictingBookingException;
 import com.business.group.booking.exception.InvalidCareDurationException;
 import com.business.group.booking.exception.UnavailableDayOfWeekException;
 import com.business.group.booking.mapper.BookingMapper;
-import com.business.group.healthcare.dto.RoomMedicalCareGetResponse;
-import com.business.group.healthcare.service.RoomMedicalCareService;
-import com.business.group.schedule.dto.MedicTimeSlotDTO;
-import com.business.group.schedule.service.MedicCalendarService;
+import com.business.group.healthcare.http.dto.RoomMedicalCareGetResponse;
+import com.business.group.healthcare.domain.service.RoomMedicalCareService;
+import com.business.group.schedule.http.dto.MedicTimeSlotDTO;
+import com.business.group.schedule.domain.service.MedicCalendarService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

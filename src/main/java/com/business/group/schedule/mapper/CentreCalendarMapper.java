@@ -1,8 +1,8 @@
 package com.business.group.schedule.mapper;
 
-import com.business.group.schedule.dto.CentreCalendarCreateRequest;
-import com.business.group.schedule.dto.CentreCalendarCreateResponse;
-import com.business.group.schedule.entity.CentreCalendar;
+import com.business.group.schedule.http.dto.CentreCalendarCreateRequest;
+import com.business.group.schedule.http.dto.CentreCalendarCreateResponse;
+import com.business.group.schedule.domain.entity.CentreCalendar;
 import org.mapstruct.Mapper;
 
 

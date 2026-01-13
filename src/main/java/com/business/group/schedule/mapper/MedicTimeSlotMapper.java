@@ -1,7 +1,7 @@
 package com.business.group.schedule.mapper;
 
-import com.business.group.schedule.dto.MedicTimeSlotDTO;
-import com.business.group.schedule.entity.MedicTimeSlot;
+import com.business.group.schedule.http.dto.MedicTimeSlotDTO;
+import com.business.group.schedule.domain.entity.MedicTimeSlot;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

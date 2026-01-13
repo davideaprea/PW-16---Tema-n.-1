@@ -1,6 +1,6 @@
 package com.business.group.schedule.dao;
 
-import com.business.group.schedule.entity.CentreCalendar;
+import com.business.group.schedule.domain.entity.CentreCalendar;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MedicalCentreCalendarDAO extends JpaRepository<CentreCalendar, Long> {

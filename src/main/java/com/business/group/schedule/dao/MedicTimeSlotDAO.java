@@ -1,6 +1,6 @@
 package com.business.group.schedule.dao;
 
-import com.business.group.schedule.entity.MedicTimeSlot;
+import com.business.group.schedule.domain.entity.MedicTimeSlot;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
