@@ -1,4 +1,6 @@
-package com.business.group.shared.exception;
+package com.business.group.shared.http;
+
+import com.business.group.shared.exception.InvalidParamError;
 
 import java.util.List;
 

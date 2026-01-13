@@ -1,5 +1,7 @@
-package com.business.group.shared.exception;
+package com.business.group.shared.http;
 
+import com.business.group.shared.exception.ConflictingResourceException;
+import com.business.group.shared.exception.InvalidParamsException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;

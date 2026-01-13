@@ -1,4 +1,4 @@
-package com.business.group.shared.exception;
+package com.business.group.shared.http;
 
 import java.util.List;
 
