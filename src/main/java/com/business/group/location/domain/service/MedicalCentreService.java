@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
 import java.util.List;
 
 @AllArgsConstructor
@@ -40,16 +41,13 @@ public class MedicalCentreService {
     }
 
     private void areFloorsContiguous(List<MedicalCentreCreateRequest.FloorDTO> floors) {
-        List<Integer> sorted = floors.stream()
-                .map(MedicalCentreCreateRequest.FloorDTO::number)
-                .sorted()
-                .toList();
+        floors.sort(Comparator.comparingInt(MedicalCentreCreateRequest.FloorDTO::number));
 
-        for (int i = 1; i < sorted.size(); i++) {
-            int curr = sorted.get(i);
-            int prev = sorted.get(i - 1);
+        for (int i = 1; i < floors.size(); i++) {
+            MedicalCentreCreateRequest.FloorDTO curr = floors.get(i);
+            MedicalCentreCreateRequest.FloorDTO prev = floors.get(i - 1);
 
-            if(curr - prev != 1) {
+            if(curr.number() - prev.number() != 1) {
                 throw new NonContiguousFloorsException(prev, curr);
             }
         }
