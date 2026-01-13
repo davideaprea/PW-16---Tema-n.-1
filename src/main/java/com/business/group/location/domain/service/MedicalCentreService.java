@@ -5,7 +5,6 @@ import com.business.group.location.http.request.MedicalCentreCreateRequest;
 import com.business.group.location.http.response.MedicalCentreCreateResponse;
 import com.business.group.location.http.response.MedicalCentreGetPageResponse;
 import com.business.group.location.domain.entity.MedicalCentre;
-import com.business.group.location.domain.exception.NonContiguousFloorsException;
 import com.business.group.location.mapper.MedicalCentreRequestMapper;
 import com.business.group.location.mapper.MedicalCentreResponseMapper;
 import lombok.AllArgsConstructor;
@@ -13,9 +12,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Comparator;
-import java.util.List;
 
 @AllArgsConstructor
 @Service
@@ -26,8 +22,6 @@ public class MedicalCentreService {
 
     @Transactional
     public MedicalCentreCreateResponse create(MedicalCentreCreateRequest dto) {
-        areFloorsContiguous(dto.floors());
-
         MedicalCentre medicalCentreToSave = medicalCentreRequestMapper.toMedicalCentre(dto);
         MedicalCentre savedMedicalCentre = medicalCentreDAO.save(medicalCentreToSave);
 
@@ -38,19 +32,6 @@ public class MedicalCentreService {
                         "MedicalCentre %d was just saved but cannot be found with relations"
                                 .formatted(savedMedicalCentre.getId())
                 ));
-    }
-
-    private void areFloorsContiguous(List<MedicalCentreCreateRequest.FloorDTO> floors) {
-        floors.sort(Comparator.comparingInt(MedicalCentreCreateRequest.FloorDTO::number));
-
-        for (int i = 1; i < floors.size(); i++) {
-            MedicalCentreCreateRequest.FloorDTO curr = floors.get(i);
-            MedicalCentreCreateRequest.FloorDTO prev = floors.get(i - 1);
-
-            if(curr.number() - prev.number() != 1) {
-                throw new NonContiguousFloorsException(prev, curr);
-            }
-        }
     }
 
     public Page<MedicalCentreGetPageResponse> findByRegionAndCity(

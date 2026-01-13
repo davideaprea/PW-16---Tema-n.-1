@@ -42,10 +42,7 @@ public class BookingService {
         }
 
         if(!expectedStartTime.getDayOfWeek().equals(medicTimeSlot.dayOfWeek())) {
-            throw new UnavailableDayOfWeekException(
-                    expectedStartTime.getDayOfWeek(),
-                    medicTimeSlot.dayOfWeek()
-            );
+            throw new UnavailableDayOfWeekException(medicTimeSlot.dayOfWeek());
         }
 
         if (

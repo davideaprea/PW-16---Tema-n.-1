@@ -6,10 +6,10 @@ import java.time.LocalTime;
 
 @Getter
 public class InvalidCareDurationException extends RuntimeException {
-  private final LocalTime slotStartTime;
-  private final LocalTime slotEndTime;
-  private final LocalTime careStartTime;
-  private final LocalTime careEndTime;
+    private final LocalTime slotStartTime;
+    private final LocalTime slotEndTime;
+    private final LocalTime careStartTime;
+    private final LocalTime careEndTime;
 
     public InvalidCareDurationException(
             LocalTime slotStartTime,

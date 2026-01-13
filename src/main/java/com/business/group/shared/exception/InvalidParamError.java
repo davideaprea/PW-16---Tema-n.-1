@@ -1,10 +1,10 @@
 package com.business.group.shared.exception;
 
-import java.util.Set;
+import java.util.List;
 
 public record InvalidParamError(
-        Set<String> fields,
+        String fieldPath,
         String cause,
-        Object submittedValue
+        List<String> validOptions
 ) {
 }
