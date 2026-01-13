@@ -1,4 +1,4 @@
-package com.business.group.booking.exception;
+package com.business.group.booking.domain.exception;
 
 import lombok.Getter;
 

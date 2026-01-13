@@ -1,8 +1,8 @@
 package com.business.group.booking.mapper;
 
-import com.business.group.booking.dto.BookingCreateRequest;
-import com.business.group.booking.dto.BookingDTO;
-import com.business.group.booking.entity.Booking;
+import com.business.group.booking.http.dto.BookingCreateRequest;
+import com.business.group.booking.http.dto.BookingDTO;
+import com.business.group.booking.domain.entity.Booking;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

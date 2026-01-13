@@ -1,7 +1,7 @@
-package com.business.group.booking.exception;
+package com.business.group.booking.domain.exception;
 
-import com.business.group.booking.dto.BookingCreateRequest;
-import com.business.group.booking.dto.BookingDTO;
+import com.business.group.booking.http.dto.BookingCreateRequest;
+import com.business.group.booking.http.dto.BookingDTO;
 import lombok.Getter;
 
 import java.util.List;

@@ -1,8 +1,8 @@
-package com.business.group.booking.controller;
+package com.business.group.booking.http.controller;
 
-import com.business.group.booking.dto.BookingCreateRequest;
-import com.business.group.booking.dto.BookingDTO;
-import com.business.group.booking.service.BookingService;
+import com.business.group.booking.http.dto.BookingCreateRequest;
+import com.business.group.booking.http.dto.BookingDTO;
+import com.business.group.booking.domain.service.BookingService;
 import com.business.group.shared.enumeration.Routes;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;

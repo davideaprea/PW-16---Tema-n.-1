@@ -1,12 +1,12 @@
-package com.business.group.booking.service;
+package com.business.group.booking.domain.service;
 
 import com.business.group.booking.dao.BookingDAO;
-import com.business.group.booking.dto.BookingCreateRequest;
-import com.business.group.booking.dto.BookingDTO;
-import com.business.group.booking.entity.Booking;
-import com.business.group.booking.exception.ConflictingBookingException;
-import com.business.group.booking.exception.InvalidCareDurationException;
-import com.business.group.booking.exception.UnavailableDayOfWeekException;
+import com.business.group.booking.http.dto.BookingCreateRequest;
+import com.business.group.booking.http.dto.BookingDTO;
+import com.business.group.booking.domain.entity.Booking;
+import com.business.group.booking.domain.exception.ConflictingBookingException;
+import com.business.group.booking.domain.exception.InvalidCareDurationException;
+import com.business.group.booking.domain.exception.UnavailableDayOfWeekException;
 import com.business.group.booking.mapper.BookingMapper;
 import com.business.group.healthcare.http.dto.RoomMedicalCareGetResponse;
 import com.business.group.healthcare.domain.service.RoomMedicalCareService;

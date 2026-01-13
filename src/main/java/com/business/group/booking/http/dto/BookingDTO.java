@@ -1,7 +1,7 @@
-package com.business.group.booking.dto;
+package com.business.group.booking.http.dto;
 
-import com.business.group.booking.enumeration.BookingStatus;
-import com.business.group.booking.enumeration.PaymentStatus;
+import com.business.group.booking.domain.enumeration.BookingStatus;
+import com.business.group.booking.domain.enumeration.PaymentStatus;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
