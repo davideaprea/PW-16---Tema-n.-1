@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(Routes.Bookings.BASE)
 @AllArgsConstructor
-public class BookingController {
+public class BookingController implements BookingControllerDocs {
     private final BookingService bookingService;
 
     @PostMapping
