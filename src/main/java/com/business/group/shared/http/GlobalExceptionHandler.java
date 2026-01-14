@@ -32,4 +32,10 @@ public class GlobalExceptionHandler {
     public String handle(ResourceNotFoundException exception) {
         return exception.getMessage();
     }
+
+    @ExceptionHandler(Throwable.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public void handle(Throwable throwable) {
+
+    }
 }
