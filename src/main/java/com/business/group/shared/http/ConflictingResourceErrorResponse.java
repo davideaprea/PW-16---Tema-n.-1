@@ -3,7 +3,7 @@ package com.business.group.shared.http;
 import java.util.List;
 
 public record ConflictingResourceErrorResponse(
-        Object submittedValue,
+        String cause,
         List<?> conflictingResources
 ) {
 }

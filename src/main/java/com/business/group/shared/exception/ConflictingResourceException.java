@@ -2,21 +2,17 @@ package com.business.group.shared.exception;
 
 import lombok.Getter;
 
-import java.util.List;
-
 @Getter
 public class ConflictingResourceException extends RuntimeException {
-    private final Object submittedResource;
-    private final List<?> conflictingResources;
+    private final ConflictingResourceError error;
 
-    public ConflictingResourceException(
-            String cause,
-            Object submittedResource,
-            List<?> conflictingResources
-    ) {
-        super("Submitted resource %s is in conflict with the following parameters: %s. Cause: %s."
-                .formatted(submittedResource, conflictingResources, cause));
-        this.submittedResource = submittedResource;
-        this.conflictingResources = List.copyOf(conflictingResources);
+    public ConflictingResourceException(ConflictingResourceError error) {
+        super("Submitted resource %s is in conflict with the followings: %s. Cause: %s."
+                .formatted(
+                        error.submittedPayload(),
+                        error.conflictingResources(),
+                        error.cause()
+                ));
+        this.error = error;
     }
 }

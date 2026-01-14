@@ -1,9 +1,6 @@
 package com.business.group.shared.http;
 
-import com.business.group.shared.exception.ConflictingResourceException;
-import com.business.group.shared.exception.InvalidPayloadError;
-import com.business.group.shared.exception.InvalidPayloadException;
-import com.business.group.shared.exception.ResourceNotFoundException;
+import com.business.group.shared.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -22,9 +19,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ConflictingResourceException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
     public ConflictingResourceErrorResponse handle(ConflictingResourceException exception) {
+        ConflictingResourceError error = exception.getError();
+
         return new ConflictingResourceErrorResponse(
-                exception.getSubmittedResource(),
-                exception.getConflictingResources()
+                error.cause(),
+                error.conflictingResources()
         );
     }
 

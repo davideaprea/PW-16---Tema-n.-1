@@ -7,10 +7,11 @@ import com.business.group.schedule.http.dto.MedicCalendarCreateResponse;
 import com.business.group.schedule.http.dto.MedicTimeSlotDTO;
 import com.business.group.schedule.domain.entity.MedicCalendar;
 import com.business.group.schedule.domain.entity.MedicTimeSlot;
-import com.business.group.schedule.domain.exception.ConflictingTimeSlotException;
 import com.business.group.schedule.mapper.MedicCalendarMapper;
 import com.business.group.schedule.mapper.MedicTimeSlotMapper;
 import com.business.group.schedule.domain.validator.TimeSlotValidator;
+import com.business.group.shared.exception.ConflictingResourceError;
+import com.business.group.shared.exception.ConflictingResourceException;
 import com.business.group.shared.exception.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -43,10 +44,11 @@ public class MedicCalendarService {
             );
 
             if (!conflictingSlots.isEmpty()) {
-                throw new ConflictingTimeSlotException(
+                throw new ConflictingResourceException(new ConflictingResourceError(
                         timeSlotDTO,
-                        conflictingSlots.stream().map(medicTimeSlotMapper::toResponse).toList()
-                );
+                        conflictingSlots.stream().map(medicTimeSlotMapper::toResponse).toList(),
+                        "The inserted time slot is overlapping with other time slots."
+                ));
             }
         });
         //TODO: controllare che i centri siano aperti
