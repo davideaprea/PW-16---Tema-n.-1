@@ -41,7 +41,7 @@ public class BookingService {
         if (!slotBookings.isEmpty()) {
             throw new ConflictingResourceException(new ConflictingResourceError(
                     createRequest,
-                    slotBookings.stream().map(bookingMapper::toDTO).toList(),
+                    slotBookings.stream().map(bookingMapper::toResponse).toList(),
                     "This slot is already booked."
             ));
         }
