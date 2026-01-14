@@ -1,10 +1,8 @@
 package com.business.group.shared.exception;
 
-import java.util.List;
-
-public record InvalidParamError(
+public record InvalidPayloadError(
         String fieldPath,
         String cause,
-        List<String> validOptions
+        Object submittedPayload
 ) {
 }

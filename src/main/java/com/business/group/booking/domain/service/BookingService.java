@@ -5,13 +5,13 @@ import com.business.group.booking.http.dto.BookingCreateRequest;
 import com.business.group.booking.http.dto.BookingDTO;
 import com.business.group.booking.domain.entity.Booking;
 import com.business.group.booking.domain.exception.ConflictingBookingException;
-import com.business.group.booking.domain.exception.InvalidCareDurationException;
-import com.business.group.booking.domain.exception.UnavailableDayOfWeekException;
 import com.business.group.booking.mapper.BookingMapper;
 import com.business.group.healthcare.http.dto.RoomMedicalCareGetResponse;
 import com.business.group.healthcare.domain.service.RoomMedicalCareService;
 import com.business.group.schedule.http.dto.MedicTimeSlotDTO;
 import com.business.group.schedule.domain.service.MedicCalendarService;
+import com.business.group.shared.exception.InvalidPayloadError;
+import com.business.group.shared.exception.InvalidPayloadException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -41,20 +41,16 @@ public class BookingService {
             throw new ConflictingBookingException(createRequest);
         }
 
-        if(!expectedStartTime.getDayOfWeek().equals(medicTimeSlot.dayOfWeek())) {
-            throw new UnavailableDayOfWeekException(medicTimeSlot.dayOfWeek());
-        }
-
         if (
+                !expectedStartTime.getDayOfWeek().equals(medicTimeSlot.dayOfWeek()) ||
                 expectedStartTime.toLocalTime().isBefore(medicTimeSlot.from()) ||
                 estimatedEndTime.toLocalTime().isAfter(medicTimeSlot.to())
         ) {
-            throw new InvalidCareDurationException(
-                    medicTimeSlot.from(),
-                    medicTimeSlot.to(),
-                    expectedStartTime.toLocalTime(),
-                    estimatedEndTime.toLocalTime()
-            );
+            throw new InvalidPayloadException(new InvalidPayloadError(
+                    BookingCreateRequest.Fields.expectedStartTime,
+                    "the selected time slot %s is unavailable for this date.".formatted(medicTimeSlot),
+                    createRequest
+            ));
         }
 
         return bookingMapper.toDTO(bookingDAO.save(bookingMapper.toEntity(

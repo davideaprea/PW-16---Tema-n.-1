@@ -1,8 +1,8 @@
 package com.business.group.schedule.domain.validator;
 
 import com.business.group.schedule.http.dto.DailyTimeSlot;
-import com.business.group.schedule.domain.exception.InvalidTimeRangeException;
-import com.business.group.schedule.domain.exception.OverlappingRangesException;
+import com.business.group.shared.exception.InvalidPayloadError;
+import com.business.group.shared.exception.InvalidPayloadException;
 import org.springframework.stereotype.Component;
 
 import java.util.Comparator;
@@ -12,7 +12,11 @@ import java.util.List;
 public class TimeSlotValidator {
     public void checkValidity(DailyTimeSlot dailyTimeSlot) {
         if(dailyTimeSlot.from().isAfter(dailyTimeSlot.to())) {
-            throw new InvalidTimeRangeException(dailyTimeSlot.from(), dailyTimeSlot.to());
+            throw new InvalidPayloadException(new InvalidPayloadError(
+                    "from",
+                    "'From' field must be less than 'to' field.",
+                    dailyTimeSlot
+            ));
         }
     }
 
@@ -30,9 +34,12 @@ public class TimeSlotValidator {
                     curr.dayOfWeek().equals(prev.dayOfWeek()) &&
                     curr.from().isBefore(prev.to())
             ) {
-                throw new OverlappingRangesException(List.of(
-                        curr,
-                        prev
+                throw new InvalidPayloadException(new InvalidPayloadError(
+                        "from",
+                        "Time slot %s is overlapping with %s".formatted(
+                                curr, prev
+                        ),
+                        curr
                 ));
             }
         }

@@ -1,8 +1,8 @@
 package com.business.group.shared.http;
 
 import com.business.group.shared.exception.ConflictingResourceException;
-import com.business.group.shared.exception.InvalidParamError;
-import com.business.group.shared.exception.InvalidParamException;
+import com.business.group.shared.exception.InvalidPayloadError;
+import com.business.group.shared.exception.InvalidPayloadException;
 import com.business.group.shared.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-    @ExceptionHandler(InvalidParamException.class)
+    @ExceptionHandler(InvalidPayloadException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public InvalidParamError handle(InvalidParamException exception) {
-        return exception.getError();
+    public InvalidPayloadErrorResponse handle(InvalidPayloadException exception) {
+        InvalidPayloadError error = exception.getError();
+
+        return new InvalidPayloadErrorResponse(error.fieldPath(), error.cause());
     }
 
     @ExceptionHandler(ConflictingResourceException.class)
