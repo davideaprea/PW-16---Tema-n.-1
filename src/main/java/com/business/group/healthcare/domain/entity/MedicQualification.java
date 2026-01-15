@@ -10,7 +10,15 @@ import org.hibernate.annotations.Immutable;
 @Getter
 @Setter
 @Entity
-@Table(name = "medics_services")
+@Table(
+        name = "medics_services",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "uk_medic_care",
+                        columnNames = {"medic_id", "medical_care_id"}
+                )
+        }
+)
 @Immutable
 public class MedicQualification {
     @Id
