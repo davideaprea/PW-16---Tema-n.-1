@@ -1,11 +1,13 @@
 package com.business.group.shared.http;
 
 import com.business.group.shared.exception.*;
+import io.swagger.v3.oas.annotations.Hidden;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+@Hidden
 @RestControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(InvalidPayloadException.class)
