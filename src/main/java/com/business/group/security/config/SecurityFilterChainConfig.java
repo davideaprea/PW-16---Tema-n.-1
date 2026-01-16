@@ -20,6 +20,7 @@ public class SecurityFilterChainConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(reqMatcher -> reqMatcher
+                        .requestMatchers("/swagger/**").permitAll()
                         .requestMatchers(Routes.Auth.BASE + Routes.Auth.REGISTER).permitAll()
                         .requestMatchers(Routes.Auth.BASE + Routes.Auth.LOGIN).permitAll()
                         .requestMatchers(GET, Routes.Regions.BASE).permitAll()
