@@ -11,5 +11,5 @@ spring:
     hibernate:
       ddl-auto: validate
 jwt:
-  secret: secret
+  secret: G6h7hK9x3Y1a2B4cD5eF6gH7iJ8kL9Mn0OpQrStUvWxY
   exp-time: 864000000

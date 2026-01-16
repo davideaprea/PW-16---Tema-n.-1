@@ -11,7 +11,6 @@ public interface MedicalCentreControllerDocs {
     @ResourceCreatedResponse(MedicalCentreCreateResponse.class)
     ResponseEntity<MedicalCentreCreateResponse> create(MedicalCentreCreateRequest dto);
 
-    @Ret
     ResponseEntity<Page<MedicalCentreGetPageResponse>> findByRegionAndCity(
             long regionId,
             String city,

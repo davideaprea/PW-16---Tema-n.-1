@@ -16,7 +16,7 @@ public interface MedicTimeSlotDAO extends JpaRepository<MedicTimeSlot, Long> {
               AND s.dayOfWeek = :dayOfWeek
               AND s.from < :to
               AND s.to > :from
-              AND s.calendar.validTo IS NULL
+              AND s.medicCalendar.validTo IS NULL
             """)
     List<MedicTimeSlot> findByRoomAndTime(
             long roomId,
@@ -28,7 +28,7 @@ public interface MedicTimeSlotDAO extends JpaRepository<MedicTimeSlot, Long> {
     @Query("""
             SELECT s
             FROM MedicTimeSlot s
-            WHERE s.id = :id AND s.calendar.validTo IS NULL
+            WHERE s.id = :id AND s.medicCalendar.validTo IS NULL
             """)
     Optional<MedicTimeSlot> getActiveById(long id);
 }

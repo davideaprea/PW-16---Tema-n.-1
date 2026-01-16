@@ -20,7 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 public class MedicCalendar extends Calendar {
     @OneToMany(
-            mappedBy = "calendar",
+            mappedBy = "medicCalendar",
             fetch = FetchType.LAZY,
             cascade = CascadeType.PERSIST
     )

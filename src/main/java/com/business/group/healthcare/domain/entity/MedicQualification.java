@@ -11,7 +11,7 @@ import org.hibernate.annotations.Immutable;
 @Setter
 @Entity
 @Table(
-        name = "medics_services",
+        name = "medics_qualification",
         uniqueConstraints = {
                 @UniqueConstraint(
                         name = "uk_medic_care",

@@ -18,7 +18,7 @@ CREATE TABLE bookings (
                 REFERENCES medical_care (id),
     CONSTRAINT fk_booking_medic_time_slot_id
                 FOREIGN KEY (medic_time_slot_id)
-                REFERENCES medics_time_slots (id),
+                REFERENCES medics_time_slots (id)
 );
 
 CREATE INDEX idx_bookings_medic_time_slot_id ON bookings (medic_time_slot_id);
