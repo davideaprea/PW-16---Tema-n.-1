@@ -1,5 +1,6 @@
 package com.business.group.location.mapper;
 
+import com.business.group.location.http.request.FloorCreateRequest;
 import com.business.group.location.http.request.MedicalCentreCreateRequest;
 import com.business.group.location.domain.entity.Floor;
 import com.business.group.location.domain.entity.MedicalCentre;
@@ -19,12 +20,12 @@ public interface MedicalCentreRequestMapper {
     @Mapping(target = "medicalCentre", expression = "java(centre)")
     @Mapping(target = "rooms", expression = "java(createRooms(dto, floor))")
     Floor toFloor(
-            MedicalCentreCreateRequest.FloorDTO dto,
+            FloorCreateRequest dto,
             @Context MedicalCentre centre
     );
 
     default List<Room> createRooms(
-            MedicalCentreCreateRequest.FloorDTO dto,
+            FloorCreateRequest dto,
             Floor floor
     ) {
         List<Room> rooms = new ArrayList<>();

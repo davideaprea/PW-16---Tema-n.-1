@@ -2,9 +2,6 @@ package com.business.group.location.http.request;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
-import lombok.experimental.FieldNameConstants;
-
-import java.math.BigDecimal;
 import java.util.List;
 
 public record MedicalCentreCreateRequest(
@@ -18,42 +15,9 @@ public record MedicalCentreCreateRequest(
 
         @NotNull
         @Valid
-        AddressDTO address,
+        AddressCreateRequest address,
 
         @NotEmpty
-        List<@Valid FloorDTO> floors
+        List<@Valid FloorCreateRequest> floors
 ) {
-    @FieldNameConstants
-    public record FloorDTO(
-            int number,
-
-            @Positive
-            long roomsNumber
-    ) {
-    }
-
-    public record AddressDTO(
-            @NotBlank
-            String name,
-
-            @NotBlank
-            String number,
-
-            @NotNull
-            @DecimalMin(value = "-90.0", inclusive = true)
-            @DecimalMax(value = "90.0", inclusive = true)
-            BigDecimal latitude,
-
-            @NotNull
-            @DecimalMin(value = "-180.0", inclusive = true)
-            @DecimalMax(value = "180.0", inclusive = true)
-            BigDecimal longitude,
-
-            @Size(max = 500)
-            String notes,
-
-            @Positive
-            long cityId
-    ) {
-    }
 }
