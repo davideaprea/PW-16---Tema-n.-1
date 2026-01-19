@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @RestController
 @RequestMapping(Routes.MedicalCentresCalendars.BASE)
-public class MedicalCentreCalendarController {
+public class MedicalCentreCalendarController implements MedicalCentreCalendarControllerDocs {
     private final CentreCalendarService calendarService;
 
     @PostMapping

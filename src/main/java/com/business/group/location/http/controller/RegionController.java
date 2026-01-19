@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping(Routes.Regions.BASE)
-public class RegionController {
+public class RegionController implements RegionControllerDocs {
     private final RegionService regionService;
 
     @GetMapping

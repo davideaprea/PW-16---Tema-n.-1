@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @RestController
 @RequestMapping(Routes.MedicSchedules.BASE)
-public class MedicScheduleController {
+public class MedicScheduleController implements MedicScheduleControllerDocs {
     private final MedicCalendarService medicCalendarService;
 
     @PostMapping
