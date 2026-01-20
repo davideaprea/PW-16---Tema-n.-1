@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 @Mapper(componentModel = "spring")
 public interface MedicalExaminationMapper {
-    @Mapping(target = "medicalExaminationStatus", constant = "CREATED")
+    @Mapping(target = "status", constant = "CREATED")
     MedicalExamination toEntity(
             MedicalExaminationCreateRequest createRequest,
             LocalDateTime estimatedEndTime

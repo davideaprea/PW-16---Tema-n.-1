@@ -36,7 +36,7 @@ public class MedicalExamination {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private MedicalExaminationStatus medicalExaminationStatus;
+    private MedicalExaminationStatus status;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)
