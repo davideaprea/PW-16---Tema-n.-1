@@ -1,7 +1,7 @@
 package com.business.group.booking.http.controller;
 
-import com.business.group.booking.http.dto.BookingCreateRequest;
-import com.business.group.booking.http.dto.BookingDTO;
+import com.business.group.booking.http.dto.MedicalExaminationCreateRequest;
+import com.business.group.booking.http.dto.MedicalExaminationCreateResponse;
 import com.business.group.shared.http.ConflictingResourceErrorResponse;
 import com.business.group.shared.http.InvalidPayloadErrorResponse;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -11,13 +11,13 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 
 @Tag(name = "Bookings")
-public interface BookingControllerDocs {
+public interface MedicalExaminationControllerDocs {
     @ApiResponse(
             responseCode = "201",
             description = "Returns the created booking.",
             content = @Content(
                     schema = @Schema(
-                            implementation = BookingDTO.class
+                            implementation = MedicalExaminationCreateResponse.class
                     )
             )
     )
@@ -39,5 +39,5 @@ public interface BookingControllerDocs {
                     )
             )
     )
-    ResponseEntity<BookingDTO> create(BookingCreateRequest createRequest);
+    ResponseEntity<MedicalExaminationCreateResponse> create(MedicalExaminationCreateRequest createRequest);
 }

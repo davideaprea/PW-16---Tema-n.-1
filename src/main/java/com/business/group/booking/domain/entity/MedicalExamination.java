@@ -1,6 +1,6 @@
 package com.business.group.booking.domain.entity;
 
-import com.business.group.booking.domain.enumeration.BookingStatus;
+import com.business.group.booking.domain.enumeration.MedicalExaminationStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,8 +13,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "bookings")
-public class Booking {
+@Table(name = "medical_examinations")
+public class MedicalExamination {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -36,7 +36,7 @@ public class Booking {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private BookingStatus bookingStatus;
+    private MedicalExaminationStatus medicalExaminationStatus;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)

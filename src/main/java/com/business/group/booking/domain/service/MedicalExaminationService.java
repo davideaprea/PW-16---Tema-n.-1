@@ -1,10 +1,10 @@
 package com.business.group.booking.domain.service;
 
-import com.business.group.booking.dao.BookingDAO;
-import com.business.group.booking.http.dto.BookingCreateRequest;
-import com.business.group.booking.http.dto.BookingDTO;
-import com.business.group.booking.domain.entity.Booking;
-import com.business.group.booking.mapper.BookingMapper;
+import com.business.group.booking.dao.MedicalExaminationDAO;
+import com.business.group.booking.http.dto.MedicalExaminationCreateRequest;
+import com.business.group.booking.http.dto.MedicalExaminationCreateResponse;
+import com.business.group.booking.domain.entity.MedicalExamination;
+import com.business.group.booking.mapper.MedicalExaminationMapper;
 import com.business.group.healthcare.http.dto.RoomMedicalCareGetResponse;
 import com.business.group.healthcare.domain.service.RoomMedicalCareService;
 import com.business.group.schedule.http.dto.MedicTimeSlotDTO;
@@ -21,27 +21,27 @@ import java.util.List;
 
 @AllArgsConstructor
 @Service
-public class BookingService {
-    private final BookingDAO bookingDAO;
+public class MedicalExaminationService {
+    private final MedicalExaminationDAO medicalExaminationDAO;
     private final MedicCalendarService medicCalendarService;
     private final RoomMedicalCareService roomMedicalCareService;
-    private final BookingMapper bookingMapper;
+    private final MedicalExaminationMapper medicalExaminationMapper;
 
-    public BookingDTO create(BookingCreateRequest createRequest) {
+    public MedicalExaminationCreateResponse create(MedicalExaminationCreateRequest createRequest) {
         MedicTimeSlotDTO medicTimeSlot = medicCalendarService.getTimeSlotById(createRequest.medicTimeSlotId());
         RoomMedicalCareGetResponse roomService = roomMedicalCareService.getByMedicalCareIdAndRoomId(createRequest.medicalCareId(), medicTimeSlot.roomId());
         LocalDateTime expectedStartTime = createRequest.expectedStartTime();
         LocalDateTime estimatedEndTime = expectedStartTime.plus(roomService.medicalCare().duration());
-        List<Booking> slotBookings = bookingDAO.findAllBetweenDateRange(
+        List<MedicalExamination> slotMedicalExaminations = medicalExaminationDAO.findAllBetweenDateRange(
                 createRequest.medicTimeSlotId(),
                 expectedStartTime,
                 estimatedEndTime
         );
 
-        if (!slotBookings.isEmpty()) {
+        if (!slotMedicalExaminations.isEmpty()) {
             throw new ConflictingResourceException(new ConflictingResourceError(
                     createRequest,
-                    slotBookings.stream().map(bookingMapper::toResponse).toList(),
+                    slotMedicalExaminations.stream().map(medicalExaminationMapper::toResponse).toList(),
                     "This slot is already booked."
             ));
         }
@@ -52,13 +52,13 @@ public class BookingService {
                 estimatedEndTime.toLocalTime().isAfter(medicTimeSlot.to())
         ) {
             throw new InvalidPayloadException(new InvalidPayloadError(
-                    BookingCreateRequest.Fields.expectedStartTime,
+                    MedicalExaminationCreateRequest.Fields.expectedStartTime,
                     "the selected time slot %s is unavailable for this date.".formatted(medicTimeSlot),
                     createRequest
             ));
         }
 
-        return bookingMapper.toDTO(bookingDAO.save(bookingMapper.toEntity(
+        return medicalExaminationMapper.toDTO(medicalExaminationDAO.save(medicalExaminationMapper.toEntity(
                 createRequest,
                 estimatedEndTime
         )));

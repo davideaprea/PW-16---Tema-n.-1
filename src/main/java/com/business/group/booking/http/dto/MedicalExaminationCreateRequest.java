@@ -7,7 +7,7 @@ import lombok.experimental.FieldNameConstants;
 import java.time.LocalDateTime;
 
 @FieldNameConstants
-public record BookingCreateRequest(
+public record MedicalExaminationCreateRequest(
         @Positive
         long patientId,
 

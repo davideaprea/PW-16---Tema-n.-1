@@ -1,6 +1,6 @@
 package com.business.group.booking.domain.enumeration;
 
-public enum BookingStatus {
+public enum MedicalExaminationStatus {
     CREATED,
     CONFIRMED,
     CANCELLED,

@@ -1,8 +1,8 @@
 package com.business.group.booking.http.controller;
 
-import com.business.group.booking.http.dto.BookingCreateRequest;
-import com.business.group.booking.http.dto.BookingDTO;
-import com.business.group.booking.domain.service.BookingService;
+import com.business.group.booking.http.dto.MedicalExaminationCreateRequest;
+import com.business.group.booking.http.dto.MedicalExaminationCreateResponse;
+import com.business.group.booking.domain.service.MedicalExaminationService;
 import com.business.group.shared.enumeration.Routes;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -16,15 +16,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(Routes.Bookings.BASE)
 @AllArgsConstructor
-public class BookingController implements BookingControllerDocs {
-    private final BookingService bookingService;
+public class MedicalExaminationController implements MedicalExaminationControllerDocs {
+    private final MedicalExaminationService medicalExaminationService;
 
     @PostMapping
-    public ResponseEntity<BookingDTO> create(
+    public ResponseEntity<MedicalExaminationCreateResponse> create(
             @RequestBody
             @Valid
-            BookingCreateRequest createRequest
+            MedicalExaminationCreateRequest createRequest
     ) {
-        return new ResponseEntity<>(bookingService.create(createRequest), HttpStatus.CREATED);
+        return new ResponseEntity<>(medicalExaminationService.create(createRequest), HttpStatus.CREATED);
     }
 }

@@ -1,13 +1,13 @@
 package com.business.group.booking.dao;
 
-import com.business.group.booking.domain.entity.Booking;
+import com.business.group.booking.domain.entity.MedicalExamination;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-public interface BookingDAO extends JpaRepository<Booking, Long> {
+public interface MedicalExaminationDAO extends JpaRepository<MedicalExamination, Long> {
     @Query("""
             SELECT b
             FROM Booking b
@@ -15,7 +15,7 @@ public interface BookingDAO extends JpaRepository<Booking, Long> {
                 b.expectedStartTime < :to AND
                 b.estimatedEndTime > :from
             """)
-    List<Booking> findAllBetweenDateRange(
+    List<MedicalExamination> findAllBetweenDateRange(
             long medicTimeSlotId,
             LocalDateTime from,
             LocalDateTime to
