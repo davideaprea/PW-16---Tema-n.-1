@@ -41,4 +41,7 @@ public class MedicalExamination {
     @CreatedDate
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private MedicalExaminationReport report;
 }
