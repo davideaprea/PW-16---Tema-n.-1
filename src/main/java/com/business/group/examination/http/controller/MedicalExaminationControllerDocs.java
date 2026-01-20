@@ -1,7 +1,7 @@
-package com.business.group.booking.http.controller;
+package com.business.group.examination.http.controller;
 
-import com.business.group.booking.http.dto.MedicalExaminationCreateRequest;
-import com.business.group.booking.http.dto.MedicalExaminationCreateResponse;
+import com.business.group.examination.http.dto.MedicalExaminationCreateRequest;
+import com.business.group.examination.http.dto.MedicalExaminationCreateResponse;
 import com.business.group.shared.http.ConflictingResourceErrorResponse;
 import com.business.group.shared.http.InvalidPayloadErrorResponse;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -14,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 public interface MedicalExaminationControllerDocs {
     @ApiResponse(
             responseCode = "201",
-            description = "Returns the created booking.",
+            description = "Returns the created examination.",
             content = @Content(
                     schema = @Schema(
                             implementation = MedicalExaminationCreateResponse.class
@@ -32,7 +32,7 @@ public interface MedicalExaminationControllerDocs {
     )
     @ApiResponse(
             responseCode = "400",
-            description = "If the booking date doesn't match with the medic time slot.",
+            description = "If the examination date doesn't match with the medic time slot.",
             content = @Content(
                     schema = @Schema(
                             implementation = InvalidPayloadErrorResponse.class

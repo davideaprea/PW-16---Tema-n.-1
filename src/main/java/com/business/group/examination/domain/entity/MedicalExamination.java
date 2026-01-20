@@ -1,6 +1,6 @@
-package com.business.group.booking.domain.entity;
+package com.business.group.examination.domain.entity;
 
-import com.business.group.booking.domain.enumeration.MedicalExaminationStatus;
+import com.business.group.examination.domain.enumeration.MedicalExaminationStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

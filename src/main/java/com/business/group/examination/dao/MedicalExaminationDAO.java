@@ -1,6 +1,6 @@
-package com.business.group.booking.dao;
+package com.business.group.examination.dao;
 
-import com.business.group.booking.domain.entity.MedicalExamination;
+import com.business.group.examination.domain.entity.MedicalExamination;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

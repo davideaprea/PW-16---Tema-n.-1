@@ -1,8 +1,8 @@
-package com.business.group.booking.http.controller;
+package com.business.group.examination.http.controller;
 
-import com.business.group.booking.http.dto.MedicalExaminationCreateRequest;
-import com.business.group.booking.http.dto.MedicalExaminationCreateResponse;
-import com.business.group.booking.domain.service.MedicalExaminationService;
+import com.business.group.examination.http.dto.MedicalExaminationCreateRequest;
+import com.business.group.examination.http.dto.MedicalExaminationCreateResponse;
+import com.business.group.examination.domain.service.MedicalExaminationService;
 import com.business.group.shared.enumeration.Routes;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;

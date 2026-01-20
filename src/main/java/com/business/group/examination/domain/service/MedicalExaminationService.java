@@ -1,10 +1,10 @@
-package com.business.group.booking.domain.service;
+package com.business.group.examination.domain.service;
 
-import com.business.group.booking.dao.MedicalExaminationDAO;
-import com.business.group.booking.http.dto.MedicalExaminationCreateRequest;
-import com.business.group.booking.http.dto.MedicalExaminationCreateResponse;
-import com.business.group.booking.domain.entity.MedicalExamination;
-import com.business.group.booking.mapper.MedicalExaminationMapper;
+import com.business.group.examination.dao.MedicalExaminationDAO;
+import com.business.group.examination.http.dto.MedicalExaminationCreateRequest;
+import com.business.group.examination.http.dto.MedicalExaminationCreateResponse;
+import com.business.group.examination.domain.entity.MedicalExamination;
+import com.business.group.examination.mapper.MedicalExaminationMapper;
 import com.business.group.healthcare.http.dto.RoomMedicalCareGetResponse;
 import com.business.group.healthcare.domain.service.RoomMedicalCareService;
 import com.business.group.schedule.http.dto.MedicTimeSlotDTO;

@@ -1,4 +1,4 @@
-package com.business.group.booking.domain.enumeration;
+package com.business.group.examination.domain.enumeration;
 
 public enum MedicalExaminationStatus {
     CREATED,

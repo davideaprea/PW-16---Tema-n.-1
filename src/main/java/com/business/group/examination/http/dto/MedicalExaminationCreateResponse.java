@@ -1,6 +1,6 @@
-package com.business.group.booking.http.dto;
+package com.business.group.examination.http.dto;
 
-import com.business.group.booking.domain.enumeration.MedicalExaminationStatus;
+import com.business.group.examination.domain.enumeration.MedicalExaminationStatus;
 
 import java.time.LocalDateTime;
 

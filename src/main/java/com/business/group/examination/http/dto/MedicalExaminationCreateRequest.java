@@ -1,4 +1,4 @@
-package com.business.group.booking.http.dto;
+package com.business.group.examination.http.dto;
 
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.Positive;
