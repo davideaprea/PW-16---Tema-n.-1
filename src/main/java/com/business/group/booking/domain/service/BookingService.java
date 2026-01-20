@@ -60,8 +60,7 @@ public class BookingService {
 
         return bookingMapper.toDTO(bookingDAO.save(bookingMapper.toEntity(
                 createRequest,
-                estimatedEndTime,
-                roomService.price()
+                estimatedEndTime
         )));
     }
 }

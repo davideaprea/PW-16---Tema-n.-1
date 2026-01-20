@@ -1,14 +1,12 @@
 package com.business.group.booking.domain.entity;
 
 import com.business.group.booking.domain.enumeration.BookingStatus;
-import com.business.group.booking.domain.enumeration.PaymentStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -43,11 +41,4 @@ public class Booking {
     @CreatedDate
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
-
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private PaymentStatus paymentStatus;
-
-    @Column(nullable = false)
-    private BigDecimal totalPrice;
 }

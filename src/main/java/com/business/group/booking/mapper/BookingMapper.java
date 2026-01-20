@@ -7,17 +7,14 @@ import com.business.group.booking.http.dto.ConflictingBookingResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Mapper(componentModel = "spring")
 public interface BookingMapper {
     @Mapping(target = "bookingStatus", constant = "CREATED")
-    @Mapping(target = "paymentStatus", constant = "PENDING")
     Booking toEntity(
             BookingCreateRequest createRequest,
-            LocalDateTime estimatedEndTime,
-            BigDecimal totalPrice
+            LocalDateTime estimatedEndTime
     );
 
     BookingDTO toDTO(Booking booking);
