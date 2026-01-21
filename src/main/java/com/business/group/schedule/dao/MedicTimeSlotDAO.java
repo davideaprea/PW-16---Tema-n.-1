@@ -28,6 +28,7 @@ public interface MedicTimeSlotDAO extends JpaRepository<MedicTimeSlot, Long> {
     @Query("""
             SELECT s
             FROM MedicTimeSlot s
+            JOIN FETCH s.medicCalendar
             WHERE s.id = :id AND s.medicCalendar.validTo IS NULL
             """)
     Optional<MedicTimeSlot> getActiveById(long id);

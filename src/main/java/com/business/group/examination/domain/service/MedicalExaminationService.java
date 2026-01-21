@@ -1,6 +1,7 @@
 package com.business.group.examination.domain.service;
 
 import com.business.group.examination.dao.MedicalExaminationDAO;
+import com.business.group.examination.domain.dto.MedicalExaminationGetResponse;
 import com.business.group.examination.http.dto.MedicalExaminationCreateRequest;
 import com.business.group.examination.http.dto.MedicalExaminationCreateResponse;
 import com.business.group.examination.domain.entity.MedicalExamination;
@@ -9,15 +10,13 @@ import com.business.group.healthcare.http.dto.RoomMedicalCareGetResponse;
 import com.business.group.healthcare.domain.service.RoomMedicalCareService;
 import com.business.group.schedule.http.dto.MedicTimeSlotDTO;
 import com.business.group.schedule.domain.service.MedicCalendarService;
-import com.business.group.shared.exception.ConflictingResourceError;
-import com.business.group.shared.exception.ConflictingResourceException;
-import com.business.group.shared.exception.InvalidPayloadError;
-import com.business.group.shared.exception.InvalidPayloadException;
+import com.business.group.shared.exception.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @AllArgsConstructor
 @Service
@@ -60,7 +59,14 @@ public class MedicalExaminationService {
 
         return medicalExaminationMapper.toDTO(medicalExaminationDAO.save(medicalExaminationMapper.toEntity(
                 createRequest,
-                estimatedEndTime
+                estimatedEndTime,
+                medicTimeSlot.medicCalendar().ownerId()
         )));
+    }
+
+    public MedicalExaminationGetResponse getById(long id) {
+        return medicalExaminationMapper.toGetResponse(medicalExaminationDAO
+                .findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(Map.of("id", id))));
     }
 }

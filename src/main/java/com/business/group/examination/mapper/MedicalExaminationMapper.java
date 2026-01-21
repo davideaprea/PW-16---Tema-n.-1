@@ -1,5 +1,6 @@
 package com.business.group.examination.mapper;
 
+import com.business.group.examination.domain.dto.MedicalExaminationGetResponse;
 import com.business.group.examination.domain.entity.MedicalExamination;
 import com.business.group.examination.http.dto.MedicalExaminationCreateRequest;
 import com.business.group.examination.http.dto.MedicalExaminationCreateResponse;
@@ -14,10 +15,13 @@ public interface MedicalExaminationMapper {
     @Mapping(target = "status", constant = "CREATED")
     MedicalExamination toEntity(
             MedicalExaminationCreateRequest createRequest,
-            LocalDateTime estimatedEndTime
+            LocalDateTime estimatedEndTime,
+            long medicId
     );
 
     MedicalExaminationCreateResponse toDTO(MedicalExamination medicalExamination);
 
     ConflictingMedicalExaminationResponse toResponse(MedicalExamination medicalExamination);
+
+    MedicalExaminationGetResponse toGetResponse(MedicalExamination medicalExamination);
 }
