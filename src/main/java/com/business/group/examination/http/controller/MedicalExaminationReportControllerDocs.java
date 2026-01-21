@@ -2,6 +2,7 @@ package com.business.group.examination.http.controller;
 
 import com.business.group.examination.http.dto.MedicalExaminationReportCreateRequest;
 import com.business.group.examination.http.dto.MedicalExaminationReportCreateResponse;
+import com.business.group.security.dto.AuthUserDetails;
 import com.business.group.shared.exception.ResourceNotFoundException;
 import io.swagger.v3.oas.annotations.headers.Header;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -32,7 +33,7 @@ public interface MedicalExaminationReportControllerDocs {
                     )
             )
     )
-    ResponseEntity<MedicalExaminationReportCreateResponse> create(MedicalExaminationReportCreateRequest request);
+    ResponseEntity<MedicalExaminationReportCreateResponse> create(MedicalExaminationReportCreateRequest request, AuthUserDetails authenticatedUser);
 
     @ApiResponse(
             responseCode = "200",
@@ -58,5 +59,5 @@ public interface MedicalExaminationReportControllerDocs {
                     )
             )
     )
-    ResponseEntity<StreamingResponseBody> getById(long id);
+    ResponseEntity<StreamingResponseBody> getById(long id, AuthUserDetails authenticatedUser);
 }

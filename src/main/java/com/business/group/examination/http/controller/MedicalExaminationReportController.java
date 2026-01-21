@@ -22,7 +22,7 @@ import java.io.InputStream;
 @RestController
 @RequestMapping("/reports")
 @AllArgsConstructor
-public class MedicalExaminationReportController {
+public class MedicalExaminationReportController implements MedicalExaminationReportControllerDocs {
     private final MedicalExaminationReportService reportService;
 
     @PostMapping
