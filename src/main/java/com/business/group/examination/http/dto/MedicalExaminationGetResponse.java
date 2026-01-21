@@ -1,4 +1,4 @@
-package com.business.group.examination.domain.dto;
+package com.business.group.examination.http.dto;
 
 import com.business.group.examination.domain.enumeration.MedicalExaminationStatus;
 

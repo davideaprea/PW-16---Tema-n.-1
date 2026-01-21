@@ -1,7 +1,7 @@
 package com.business.group.examination.domain.service;
 
 import com.business.group.examination.dao.MedicalExaminationReportDAO;
-import com.business.group.examination.domain.dto.MedicalExaminationGetResponse;
+import com.business.group.examination.http.dto.MedicalExaminationGetResponse;
 import com.business.group.examination.domain.dto.ReportCreateCommand;
 import com.business.group.examination.domain.dto.ReportGetCommand;
 import com.business.group.examination.domain.entity.MedicalExamination;

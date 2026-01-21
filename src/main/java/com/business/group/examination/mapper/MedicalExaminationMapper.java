@@ -1,6 +1,6 @@
 package com.business.group.examination.mapper;
 
-import com.business.group.examination.domain.dto.MedicalExaminationGetResponse;
+import com.business.group.examination.http.dto.MedicalExaminationGetResponse;
 import com.business.group.examination.domain.entity.MedicalExamination;
 import com.business.group.examination.http.dto.MedicalExaminationCreateRequest;
 import com.business.group.examination.http.dto.MedicalExaminationCreateResponse;
