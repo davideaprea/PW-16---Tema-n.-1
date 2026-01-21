@@ -3,6 +3,8 @@ package com.business.group.examination.domain.service;
 import com.business.group.examination.dao.MedicalExaminationReportDAO;
 import com.business.group.examination.domain.dto.MedicalExaminationGetResponse;
 import com.business.group.examination.domain.dto.ReportCreateCommand;
+import com.business.group.examination.domain.entity.MedicalExaminationReport;
+import com.business.group.examination.http.dto.MedicalExaminationReportCreateResponse;
 import com.business.group.examination.mapper.ReportMapper;
 import com.business.group.shared.dto.FileUploadRequest;
 import com.business.group.shared.exception.ResourceNotFoundException;
@@ -23,7 +25,7 @@ public class MedicalExaminationReportService {
     private final ReportMapper reportMapper;
 
     @Transactional
-    public void create(ReportCreateCommand command) {
+    public MedicalExaminationReportCreateResponse create(ReportCreateCommand command) {
         MedicalExaminationGetResponse examination = medicalExaminationService.getById(command.medicalExaminationId());
         String documentLink = "reports/%d".formatted(command.medicalExaminationId());
 
@@ -31,7 +33,7 @@ public class MedicalExaminationReportService {
             throw new ResourceNotFoundException(Map.of("medicId", command.medicId()));
         }
 
-        medicalExaminationReportDAO.save(reportMapper.toEntity(documentLink, command.medicalExaminationId()));
+        MedicalExaminationReport report = medicalExaminationReportDAO.save(reportMapper.toEntity(documentLink, command.medicalExaminationId()));
 
         try {
             fileStorageService.upload(new FileUploadRequest(
@@ -42,5 +44,7 @@ public class MedicalExaminationReportService {
         } catch (IOException e) {
             throw new IllegalStateException(e);
         }
+
+        return reportMapper.toResponse(report);
     }
 }
