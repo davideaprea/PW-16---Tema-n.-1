@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/medical-business
+    url: jdbc:postgresql://localhost:5432/medical-group
     driver-class-name: org.postgresql.Driver
     username: postgres
     password: postgres
@@ -13,3 +13,15 @@ spring:
 jwt:
   secret: G6h7hK9x3Y1a2B4cD5eF6gH7iJ8kL9Mn0OpQrStUvWxY
   exp-time: 864000000
+aws:
+  credentials:
+    access-key: key
+    secret-key: key
+  s3:
+    region: eu-west-1
+    endpoint: http://localhost:9000
+    bucket-name: reports
+  kms:
+    region: eu-west-1
+    endpoint: http://localhost:8081
+    reports-key-id: alias/reports-key

@@ -1,0 +1,29 @@
+services:
+  postgres:
+    image: bitnami/postgresql
+    container_name: medical-group-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: medical-group
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_HOST_AUTH_METHOD: trust
+  minio:
+    image: minio/minio
+    container_name: medical-group-minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    command: server /data --console-address ":9001"
+  local-kms:
+    image: nsmithuk/local-kms
+    container_name: medical-group-local-kms
+    ports:
+      - "8081:8080"
+    environment:
+      KMS_REGION: eu-west-1
+      KMS_ACCOUNT_ID: "111122223333"
