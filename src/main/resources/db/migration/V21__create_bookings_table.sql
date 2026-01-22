@@ -7,7 +7,7 @@ CREATE TABLE medical_examinations (
     medic_time_slot_id BIGINT NOT NULL,
     status VARCHAR(50) NOT NULL,
     created_at TIMESTAMP NOT NULL,
-    medic_id BIGINT NOT NULL
+    medic_id BIGINT NOT NULL,
 
     CONSTRAINT fk_medical_examination_patient_id
             FOREIGN KEY (patient_id)
