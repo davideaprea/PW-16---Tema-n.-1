@@ -7,6 +7,7 @@ import com.business.group.examination.domain.dto.ReportGetCommand;
 import com.business.group.examination.domain.entity.MedicalExamination;
 import com.business.group.examination.domain.entity.MedicalExaminationReport;
 import com.business.group.examination.http.dto.MedicalExaminationReportCreateResponse;
+import com.business.group.examination.http.dto.ReportGetResponse;
 import com.business.group.examination.mapper.ReportMapper;
 import com.business.group.shared.dto.FileGetResponse;
 import com.business.group.shared.dto.FileUploadRequest;
@@ -64,5 +65,16 @@ public class MedicalExaminationReportService {
                 .orElseThrow(() -> new ResourceNotFoundException(Map.of("id", getCommand.reportId())));
 
         return fileStorageService.download(report.getDocumentLink());
+    }
+
+    public List<ReportGetResponse> getReportsByUserId(long userId) {
+        return medicalExaminationReportDAO
+                .findAllByUserId(userId)
+                .stream()
+                .map(r -> new ReportGetResponse(
+                        r.getId(),
+                        r.getMedicalExamination().getId()
+                ))
+                .toList();
     }
 }

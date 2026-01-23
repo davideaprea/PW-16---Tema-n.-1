@@ -5,6 +5,7 @@ import com.business.group.examination.domain.dto.ReportGetCommand;
 import com.business.group.examination.domain.service.MedicalExaminationReportService;
 import com.business.group.examination.http.dto.MedicalExaminationReportCreateRequest;
 import com.business.group.examination.http.dto.MedicalExaminationReportCreateResponse;
+import com.business.group.examination.http.dto.ReportGetResponse;
 import com.business.group.security.dto.AuthUserDetails;
 import com.business.group.shared.dto.FileGetResponse;
 import jakarta.validation.Valid;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 import java.io.InputStream;
+import java.util.List;
 
 @RestController
 @RequestMapping("/reports")
@@ -67,5 +69,13 @@ public class MedicalExaminationReportController implements MedicalExaminationRep
                 .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"report.pdf\"")
                 .contentType(MediaType.APPLICATION_PDF)
                 .body(body);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ReportGetResponse>> getReportsByUserId(
+            @AuthenticationPrincipal
+            AuthUserDetails authenticatedUser
+    ) {
+        return ResponseEntity.ok(reportService.getReportsByUserId(authenticatedUser.getId()));
     }
 }
