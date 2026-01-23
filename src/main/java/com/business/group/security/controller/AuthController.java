@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @AllArgsConstructor
 @RestController
 @RequestMapping(Routes.Auth.BASE)
@@ -42,6 +44,7 @@ public class AuthController implements AuthControllerDocs {
         HttpHeaders headers = new HttpHeaders();
 
         headers.setBearerAuth(token);
+        headers.setAccessControlExposeHeaders(List.of("Authorization"));
 
         return new ResponseEntity<>(headers, HttpStatus.NO_CONTENT);
     }
