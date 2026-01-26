@@ -1,11 +1,9 @@
 package com.business.group.security.dto;
 
-import org.springframework.security.core.GrantedAuthority;
-
-import java.util.Collection;
+import java.util.List;
 
 public record JWTClaims(
         String subject,
-        Collection<? extends GrantedAuthority> roles
+        List<String> roles
 ) {
 }

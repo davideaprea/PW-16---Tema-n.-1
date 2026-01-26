@@ -12,6 +12,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +40,13 @@ public class AuthService {
         );
 
         if ((authentication.getPrincipal() instanceof AuthUserDetails userDetails)) {
-            return jwtCreator.withSubject(new JWTClaims(userDetails.getUsername(), userDetails.getAuthorities()));
+            return jwtCreator.withSubject(new JWTClaims(
+                    userDetails.getUsername(),
+                    userDetails.getAuthorities()
+                            .stream()
+                            .map(SimpleGrantedAuthority::getAuthority)
+                            .toList()
+            ));
         }
 
         throw new AuthenticationServiceException("Unexpected principal type: " + authentication.getPrincipal().getClass().getName());
