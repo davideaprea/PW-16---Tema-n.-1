@@ -23,15 +23,8 @@ public class MedicalCentreService {
     @Transactional
     public MedicalCentreCreateResponse create(MedicalCentreCreateRequest dto) {
         MedicalCentre medicalCentreToSave = medicalCentreRequestMapper.toMedicalCentre(dto);
-        MedicalCentre savedMedicalCentre = medicalCentreDAO.save(medicalCentreToSave);
 
-        return medicalCentreDAO
-                .findByIdWithRelations(savedMedicalCentre.getId())
-                .map(medicalCentreResponseMapper::toResponse)
-                .orElseThrow(() -> new IllegalStateException(
-                        "MedicalCentre %d was just saved but cannot be found with relations"
-                                .formatted(savedMedicalCentre.getId())
-                ));
+        return medicalCentreResponseMapper.toResponse(medicalCentreDAO.save(medicalCentreToSave));
     }
 
     public Page<MedicalCentreGetPageResponse> findByRegionAndCity(

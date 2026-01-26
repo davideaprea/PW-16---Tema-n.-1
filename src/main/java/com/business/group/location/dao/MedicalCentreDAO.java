@@ -10,15 +10,6 @@ import java.util.Optional;
 
 public interface MedicalCentreDAO extends JpaRepository<MedicalCentre, Long> {
     @Query("""
-                select distinct mc from MedicalCentre mc
-                join fetch mc.address
-                join fetch mc.floors f
-                join fetch f.rooms
-                where mc.id = :id
-            """)
-    Optional<MedicalCentre> findByIdWithRelations(Long id);
-
-    @Query("""
                 select mc
                 from MedicalCentre mc
                 join mc.address a

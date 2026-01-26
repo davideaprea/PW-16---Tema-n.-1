@@ -5,6 +5,7 @@ import com.business.group.shared.enumeration.Routes;
 import com.business.group.security.filter.UserAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -20,11 +21,12 @@ public class SecurityFilterChainConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(reqMatcher -> reqMatcher
+                        .requestMatchers(OPTIONS, "/**").permitAll()
                         .requestMatchers("/swagger/**").permitAll()
                         .requestMatchers(Routes.Auth.BASE + Routes.Auth.REGISTER).permitAll()
                         .requestMatchers(Routes.Auth.BASE + Routes.Auth.LOGIN).permitAll()
                         .requestMatchers(GET, Routes.Regions.BASE).permitAll()
-                        .requestMatchers(Routes.MedicalCentres.BASE).hasRole(Roles.ADMIN.toString())
+                        .requestMatchers(Routes.MedicalCentres.BASE).hasAnyRole(Roles.ADMIN.toString(), Roles.OPERATOR.toString())
                         .requestMatchers(GET, Routes.MedicalCentres.BASE).permitAll()
                         .requestMatchers(Routes.MedicalCentresCalendars.BASE).hasRole(Roles.ADMIN.toString())
                         .requestMatchers(Routes.MedicSchedules.BASE).hasRole(Roles.ADMIN.toString())

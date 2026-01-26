@@ -10,30 +10,42 @@ import org.mapstruct.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(
+        componentModel = "spring",
+        uses = {AddressMapper.class}
+)
 public interface MedicalCentreRequestMapper {
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "floors", source = "floors")
-    MedicalCentre toMedicalCentre(MedicalCentreCreateRequest medicalCentre);
+    @Mapping(target = "floors", ignore = true)
+    MedicalCentre toMedicalCentre(MedicalCentreCreateRequest dto);
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "medicalCentre", expression = "java(centre)")
-    @Mapping(target = "rooms", expression = "java(createRooms(dto, floor))")
-    Floor toFloor(
-            FloorCreateRequest dto,
-            @Context MedicalCentre centre
-    );
+    @Mapping(target = "medicalCentre", ignore = true)
+    @Mapping(target = "rooms", ignore = true)
+    Floor toFloor(FloorCreateRequest dto);
 
-    default List<Room> createRooms(
-            FloorCreateRequest dto,
-            Floor floor
+    @AfterMapping
+    default void linkFloorsAndRooms(
+            MedicalCentreCreateRequest dto,
+            @MappingTarget MedicalCentre centre
     ) {
-        List<Room> rooms = new ArrayList<>();
+        List<Floor> floors = new ArrayList<>();
 
-        for (int i = 1; i <= dto.roomsNumber(); i++) {
-            rooms.add(new Room(null, i, floor));
+        for (FloorCreateRequest floorDto : dto.floors()) {
+
+            Floor floor = toFloor(floorDto);
+
+            floor.setMedicalCentre(centre);
+
+            List<Room> rooms = new ArrayList<>();
+            for (int i = 1; i <= floorDto.roomsNumber(); i++) {
+                rooms.add(new Room(null, i, floor));
+            }
+
+            floor.setRooms(rooms);
+            floors.add(floor);
         }
 
-        return rooms;
+        centre.setFloors(floors);
     }
 }
