@@ -1,5 +1,6 @@
 package com.business.group.security.component;
 
+import com.business.group.security.dto.JWTClaims;
 import com.business.group.security.dto.JWTConfigProps;
 import io.jsonwebtoken.Jwts;
 import lombok.AllArgsConstructor;
@@ -12,12 +13,13 @@ import java.util.Date;
 public class JWTCreator {
     private final JWTConfigProps jwtConfigProps;
 
-    public String withSubject(final String subject) {
+    public String withSubject(JWTClaims claims) {
         Date expDate = new Date(new Date().getTime() + jwtConfigProps.expTime());
 
         return Jwts
                 .builder()
-                .subject(subject)
+                .subject(claims.subject())
+                .claim("roles", claims.roles())
                 .expiration(expDate)
                 .signWith(jwtConfigProps.key())
                 .compact();

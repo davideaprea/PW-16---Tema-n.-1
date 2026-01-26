@@ -2,6 +2,7 @@ package com.business.group.security.service;
 
 import com.business.group.security.component.JWTCreator;
 import com.business.group.security.dto.AuthUserDetails;
+import com.business.group.security.dto.JWTClaims;
 import com.business.group.security.entity.User;
 import com.business.group.security.dto.LoginCreateRequest;
 import com.business.group.security.dto.UserCreateRequest;
@@ -38,7 +39,7 @@ public class AuthService {
         );
 
         if ((authentication.getPrincipal() instanceof AuthUserDetails userDetails)) {
-            return jwtCreator.withSubject(userDetails.getUsername());
+            return jwtCreator.withSubject(new JWTClaims(userDetails.getUsername(), userDetails.getAuthorities()));
         }
 
         throw new AuthenticationServiceException("Unexpected principal type: " + authentication.getPrincipal().getClass().getName());
