@@ -39,8 +39,8 @@ public class MedicCalendarService {
             List<MedicTimeSlot> conflictingSlots = medicTimeSlotDAO.findByRoomAndTime(
                     timeSlotDTO.roomId(),
                     timeSlotDTO.dayOfWeek(),
-                    timeSlotDTO.from(),
-                    timeSlotDTO.to()
+                    timeSlotDTO.startTime(),
+                    timeSlotDTO.endTime()
             );
 
             if (!conflictingSlots.isEmpty()) {

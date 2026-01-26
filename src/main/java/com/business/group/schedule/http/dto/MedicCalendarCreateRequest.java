@@ -29,10 +29,10 @@ public record MedicCalendarCreateRequest(
 ) {
     public record TimeSlotDTO(
             @NotNull
-            LocalTime from,
+            LocalTime startTime,
 
             @NotNull
-            LocalTime to,
+            LocalTime endTime,
 
             @NotNull
             DayOfWeek dayOfWeek,

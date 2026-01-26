@@ -14,8 +14,8 @@ public interface MedicTimeSlotDAO extends JpaRepository<MedicTimeSlot, Long> {
             FROM MedicTimeSlot s
             WHERE s.roomId = :roomId
               AND s.dayOfWeek = :dayOfWeek
-              AND s.from < :to
-              AND s.to > :from
+              AND s.startTime < :to
+              AND s.endTime > :from
               AND s.medicCalendar.validTo IS NULL
             """)
     List<MedicTimeSlot> findByRoomAndTime(

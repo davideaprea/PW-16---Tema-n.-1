@@ -16,10 +16,10 @@ public abstract class TimeSlot {
     protected Long id;
 
     @Column(nullable = false)
-    protected LocalTime from;
+    protected LocalTime startTime;
 
     @Column(nullable = false)
-    protected LocalTime to;
+    protected LocalTime endTime;
 
     @Column(nullable = false)
     protected DayOfWeek dayOfWeek;

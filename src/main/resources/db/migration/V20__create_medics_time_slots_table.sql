@@ -1,7 +1,7 @@
 CREATE TABLE medics_time_slots (
     id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    "from" TIME NOT NULL,
-    "to" TIME NOT NULL,
+    start_time TIME NOT NULL,
+    end_time TIME NOT NULL,
     day_of_week INTEGER NOT NULL,
     room_id BIGINT NOT NULL,
     medic_calendar_id BIGINT NOT NULL,

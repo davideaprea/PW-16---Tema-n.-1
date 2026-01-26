@@ -6,8 +6,8 @@ import java.time.LocalTime;
 
 public record MedicTimeSlotDTO(
         long id,
-        LocalTime from,
-        LocalTime to,
+        LocalTime startTime,
+        LocalTime endTime,
         DayOfWeek dayOfWeek,
         long roomId,
         MedicCalendarDTO medicCalendar

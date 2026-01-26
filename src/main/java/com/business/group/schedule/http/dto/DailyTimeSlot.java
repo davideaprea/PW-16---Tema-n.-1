@@ -4,9 +4,9 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 
 public interface DailyTimeSlot {
-    LocalTime from();
+    LocalTime startTime();
 
-    LocalTime to();
+    LocalTime endTime();
 
     DayOfWeek dayOfWeek();
 }

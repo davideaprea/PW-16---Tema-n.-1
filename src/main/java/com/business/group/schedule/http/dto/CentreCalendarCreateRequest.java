@@ -13,7 +13,7 @@ import java.util.List;
 public record CentreCalendarCreateRequest(
         @NotNull
         @FutureOrPresent
-        LocalDateTime validFrom,
+        LocalDate validFrom,
 
         @Positive
         long ownerId,
@@ -27,10 +27,10 @@ public record CentreCalendarCreateRequest(
 ) {
     public record TimeSlotDTO(
             @NotNull
-            LocalTime from,
+            LocalTime startTime,
 
             @NotNull
-            LocalTime to,
+            LocalTime endTime,
 
             @NotNull
             DayOfWeek dayOfWeek

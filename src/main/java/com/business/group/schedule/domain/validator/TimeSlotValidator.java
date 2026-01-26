@@ -11,10 +11,10 @@ import java.util.List;
 @Component
 public class TimeSlotValidator {
     public void checkValidity(DailyTimeSlot dailyTimeSlot) {
-        if(dailyTimeSlot.from().isAfter(dailyTimeSlot.to())) {
+        if(dailyTimeSlot.startTime().isAfter(dailyTimeSlot.endTime())) {
             throw new InvalidPayloadException(new InvalidPayloadError(
-                    "from",
-                    "'From' field must be less than 'to' field.",
+                    "startTime",
+                    "'From' field must be less than 'endTime' field.",
                     dailyTimeSlot
             ));
         }
@@ -23,7 +23,7 @@ public class TimeSlotValidator {
     public void checkForOverlappingSlots(List<? extends DailyTimeSlot> dailyTimeSlots) {
         dailyTimeSlots.sort(Comparator
                 .comparing(DailyTimeSlot::dayOfWeek)
-                .thenComparing(DailyTimeSlot::from)
+                .thenComparing(DailyTimeSlot::startTime)
         );
 
         for (int i = 1; i < dailyTimeSlots.size(); i++) {
@@ -32,10 +32,10 @@ public class TimeSlotValidator {
 
             if (
                     curr.dayOfWeek().equals(prev.dayOfWeek()) &&
-                    curr.from().isBefore(prev.to())
+                    curr.startTime().isBefore(prev.endTime())
             ) {
                 throw new InvalidPayloadException(new InvalidPayloadError(
-                        "from",
+                        "startTime",
                         "Time slot %s is overlapping with %s".formatted(
                                 curr, prev
                         ),

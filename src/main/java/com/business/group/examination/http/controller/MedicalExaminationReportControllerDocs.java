@@ -52,7 +52,7 @@ public interface MedicalExaminationReportControllerDocs {
     )
     @ApiResponse(
             responseCode = "404",
-            description = "If the report couldn't be found or the currently logged user isn't authorized to access it.",
+            description = "If the report couldn't be found or the currently logged user isn't authorized endTime access it.",
             content = @Content(
                     schema = @Schema(
                             implementation = ResourceNotFoundException.class

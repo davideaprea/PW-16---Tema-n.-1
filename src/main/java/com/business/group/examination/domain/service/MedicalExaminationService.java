@@ -47,8 +47,8 @@ public class MedicalExaminationService {
 
         if (
                 !expectedStartTime.getDayOfWeek().equals(medicTimeSlot.dayOfWeek()) ||
-                expectedStartTime.toLocalTime().isBefore(medicTimeSlot.from()) ||
-                estimatedEndTime.toLocalTime().isAfter(medicTimeSlot.to())
+                expectedStartTime.toLocalTime().isBefore(medicTimeSlot.startTime()) ||
+                estimatedEndTime.toLocalTime().isAfter(medicTimeSlot.endTime())
         ) {
             throw new InvalidPayloadException(new InvalidPayloadError(
                     MedicalExaminationCreateRequest.Fields.expectedStartTime,
