@@ -23,7 +23,7 @@ public class Routes {
         public static final String BASE = "/medic-schedules";
     }
 
-    public static final class Bookings {
-        public static final String BASE = "/bookings";
+    public static final class MedicalExaminations {
+        public static final String BASE = "/medical-examinations";
     }
 }

@@ -33,28 +33,36 @@ public class MedicCalendarService {
     public MedicCalendarCreateResponse create(MedicCalendarCreateRequest dto) {
         timeSlotValidator.checkForOverlappingSlots(dto.timeSlots());
 
-        dto.timeSlots().forEach(timeSlotDTO -> {
-            timeSlotValidator.checkValidity(timeSlotDTO);
+        MedicCalendar calendarToSave = calendarMapper.toEntity(dto);
 
-            List<MedicTimeSlot> conflictingSlots = medicTimeSlotDAO.findByRoomAndTime(
-                    timeSlotDTO.roomId(),
-                    timeSlotDTO.dayOfWeek(),
-                    timeSlotDTO.startTime(),
-                    timeSlotDTO.endTime()
-            );
+        List<MedicTimeSlot> timeSlots = dto.timeSlots()
+                .stream()
+                .peek(timeSlotDTO -> {
+                    timeSlotValidator.checkValidity(timeSlotDTO);
 
-            if (!conflictingSlots.isEmpty()) {
-                throw new ConflictingResourceException(new ConflictingResourceError(
-                        timeSlotDTO,
-                        conflictingSlots.stream().map(medicTimeSlotMapper::toResponse).toList(),
-                        "The inserted time slot is overlapping with other time slots."
-                ));
-            }
-        });
-        //TODO: controllare che i centri siano aperti
-        MedicCalendar calendar = medicCalendarDAO.save(calendarMapper.toEntity(dto));
+                    List<MedicTimeSlot> conflictingSlots = medicTimeSlotDAO.findByRoomAndTime(
+                            timeSlotDTO.roomId(),
+                            timeSlotDTO.dayOfWeek(),
+                            timeSlotDTO.startTime(),
+                            timeSlotDTO.endTime()
+                    );
 
-        return calendarMapper.toResponse(calendar);
+                    if (!conflictingSlots.isEmpty()) {
+                        throw new ConflictingResourceException(new ConflictingResourceError(
+                                timeSlotDTO,
+                                conflictingSlots.stream().map(medicTimeSlotMapper::toResponse).toList(),
+                                "The inserted time slot is overlapping with other time slots."
+                        ));
+                    }
+                })
+                .map(timeSlotDTO -> medicTimeSlotMapper.toEntity(timeSlotDTO, calendarToSave))
+                .toList();
+
+        calendarToSave.setTimeSlots(timeSlots);
+
+        MedicCalendar savedCalendar = medicCalendarDAO.save(calendarToSave);
+
+        return calendarMapper.toResponse(savedCalendar);
     }
 
     public MedicTimeSlotDTO getTimeSlotById(long id) {

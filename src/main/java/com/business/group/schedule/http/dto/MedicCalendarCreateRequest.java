@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.Length;
 
 import java.time.DayOfWeek;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -18,7 +18,7 @@ public record MedicCalendarCreateRequest(
 
         @NotNull
         @FutureOrPresent
-        LocalDateTime validFrom,
+        LocalDate validFrom,
 
         @Length(max = 500)
         String notes,

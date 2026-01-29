@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(Routes.Bookings.BASE)
+@RequestMapping(Routes.MedicalExaminations.BASE)
 @AllArgsConstructor
 public class MedicalExaminationController implements MedicalExaminationControllerDocs {
     private final MedicalExaminationService medicalExaminationService;

@@ -5,7 +5,6 @@ import com.business.group.shared.enumeration.Routes;
 import com.business.group.security.filter.UserAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -29,8 +28,8 @@ public class SecurityFilterChainConfig {
                         .requestMatchers(Routes.MedicalCentres.BASE).hasAnyRole(Roles.ADMIN.toString(), Roles.OPERATOR.toString())
                         .requestMatchers(GET, Routes.MedicalCentres.BASE).permitAll()
                         .requestMatchers(Routes.MedicalCentresCalendars.BASE).hasAnyRole(Roles.ADMIN.toString(), Roles.OPERATOR.toString())
-                        .requestMatchers(Routes.MedicSchedules.BASE).hasRole(Roles.ADMIN.toString())
-                        .requestMatchers(Routes.Bookings.BASE).hasAnyRole(Roles.ADMIN.toString(), Roles.OPERATOR.toString())
+                        .requestMatchers(Routes.MedicSchedules.BASE).hasAnyRole(Roles.ADMIN.toString(), Roles.OPERATOR.toString())
+                        .requestMatchers(Routes.MedicalExaminations.BASE).hasAnyRole(Roles.ADMIN.toString(), Roles.OPERATOR.toString())
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
