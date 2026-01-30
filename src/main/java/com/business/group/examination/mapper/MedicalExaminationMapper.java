@@ -1,5 +1,6 @@
 package com.business.group.examination.mapper;
 
+import com.business.group.examination.domain.dto.ExaminationDTO;
 import com.business.group.examination.http.dto.MedicalExaminationGetResponse;
 import com.business.group.examination.domain.entity.MedicalExamination;
 import com.business.group.examination.http.dto.MedicalExaminationCreateRequest;
@@ -24,4 +25,6 @@ public interface MedicalExaminationMapper {
     ConflictingMedicalExaminationResponse toResponse(MedicalExamination medicalExamination);
 
     MedicalExaminationGetResponse toGetResponse(MedicalExamination medicalExamination);
+
+    ExaminationDTO toDetail(MedicalExamination examination);
 }

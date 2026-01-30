@@ -1,6 +1,7 @@
 package com.business.group.examination.domain.service;
 
 import com.business.group.examination.dao.MedicalExaminationDAO;
+import com.business.group.examination.domain.dto.ExaminationDTO;
 import com.business.group.examination.http.dto.MedicalExaminationGetResponse;
 import com.business.group.examination.http.dto.MedicalExaminationCreateRequest;
 import com.business.group.examination.http.dto.MedicalExaminationCreateResponse;
@@ -8,6 +9,8 @@ import com.business.group.examination.domain.entity.MedicalExamination;
 import com.business.group.examination.mapper.MedicalExaminationMapper;
 import com.business.group.healthcare.http.dto.RoomMedicalCareGetResponse;
 import com.business.group.healthcare.domain.service.RoomMedicalCareService;
+import com.business.group.profile.domain.dto.MedicDTO;
+import com.business.group.profile.domain.service.MedicService;
 import com.business.group.schedule.http.dto.MedicTimeSlotDTO;
 import com.business.group.schedule.domain.service.MedicCalendarService;
 import com.business.group.shared.exception.*;
@@ -25,6 +28,7 @@ public class MedicalExaminationService {
     private final MedicCalendarService medicCalendarService;
     private final RoomMedicalCareService roomMedicalCareService;
     private final MedicalExaminationMapper medicalExaminationMapper;
+    private final MedicService medicService;
 
     public MedicalExaminationCreateResponse create(MedicalExaminationCreateRequest createRequest) {
         MedicTimeSlotDTO medicTimeSlot = medicCalendarService.getTimeSlotById(createRequest.medicTimeSlotId());
@@ -68,5 +72,13 @@ public class MedicalExaminationService {
         return medicalExaminationMapper.toGetResponse(medicalExaminationDAO
                 .findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(Map.of("id", id))));
+    }
+
+    public List<ExaminationDTO> findAllByMedicId(long medicId) {
+        MedicDTO medic = medicService.getById(medicId);
+
+        return medicalExaminationDAO.findAllByMedicId(medicId)
+                .stream().map(medicalExaminationMapper::toDetail)
+                .toList();
     }
 }

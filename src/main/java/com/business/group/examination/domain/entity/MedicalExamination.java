@@ -46,4 +46,7 @@ public class MedicalExamination {
 
     @Column(nullable = false)
     private Long medicId;
+
+    @OneToOne(mappedBy = "medicalExamination")
+    private MedicalExaminationReport report;
 }

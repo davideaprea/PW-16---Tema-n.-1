@@ -20,4 +20,6 @@ public interface MedicalExaminationDAO extends JpaRepository<MedicalExamination,
             LocalDateTime from,
             LocalDateTime to
     );
+
+    List<MedicalExamination> findAllByMedicId(long medicId);
 }
