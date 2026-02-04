@@ -1,0 +1,863 @@
+openapi: 3.1.0
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: http://localhost:8080
+  description: Generated server url
+paths:
+  /reports:
+    get:
+      tags:
+      - Medical examination reports
+      operationId: getReportsByUserId
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ReportGetResponse"
+    post:
+      tags:
+      - Medical examination reports
+      operationId: create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalExaminationReportCreateRequest"
+        required: true
+      responses:
+        "201":
+          description: Returns the created report.
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/MedicalExaminationReportCreateResponse"
+        "404":
+          description: If the examination couldn't be found or has not been executed
+            by the currently logged medic.
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+  /medical-examinations:
+    post:
+      tags:
+      - MedicalExaminations
+      operationId: create_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalExaminationCreateRequest"
+        required: true
+      responses:
+        "201":
+          description: Returns the created examination.
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/MedicalExaminationCreateResponse"
+        "409":
+          description: If the selected time slot is already booked.
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ConflictingResourceErrorResponse"
+        "400":
+          description: If the examination date doesn't match with the medic time slot.
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/InvalidPayloadErrorResponse"
+  /medical-centres:
+    get:
+      tags:
+      - Medical centres
+      operationId: findByRegionAndCity
+      parameters:
+      - name: regionId
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: city
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+          maximum: 30
+          minimum: 1
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+          minimum: 0
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PageMedicalCentreGetPageResponse"
+    post:
+      tags:
+      - Medical centres
+      operationId: create_2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicalCentreCreateRequest"
+        required: true
+      responses:
+        "200":
+          description: Returns the created centre.
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/MedicalCentreCreateResponse"
+  /medical-centres-calendars:
+    post:
+      tags:
+      - Medical centre calendars
+      operationId: create_3
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CentreCalendarCreateRequest"
+        required: true
+      responses:
+        "200":
+          description: Returns the created calendar.
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/CentreCalendarCreateRequest"
+        "400":
+          description: If the ranges are not valid.
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/InvalidPayloadError"
+  /medic-schedules:
+    post:
+      tags:
+      - Medic schedules
+      operationId: create_4
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MedicCalendarCreateRequest"
+        required: true
+      responses:
+        "200":
+          description: Returns the created calendar.
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/MedicCalendarCreateResponse"
+        "400":
+          description: If time slot ranges are not valid.
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/InvalidPayloadError"
+        "409":
+          description: If the selected time slot is conflicting with others.
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ConflictingResourceError"
+  /auth/register:
+    post:
+      tags:
+      - Auth
+      operationId: register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserCreateRequest"
+        required: true
+      responses:
+        "201":
+          description: User registered successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserCreateResponse"
+        "409":
+          description: Email already taken.
+        "400":
+          description: Bad Request
+  /auth/login:
+    post:
+      tags:
+      - Auth
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginCreateRequest"
+        required: true
+      responses:
+        "204":
+          description: Successful login.
+          headers:
+            Authorization:
+              description: JWT for authentication
+              required: true
+              style: simple
+        "401":
+          description: Wrong credentials.
+        "400":
+          description: Bad Request
+  /reports/{id}:
+    get:
+      tags:
+      - Medical examination reports
+      operationId: getById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Downloads the selected report.
+          headers:
+            Content-Disposition:
+              required: true
+              style: simple
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/StreamingResponseBody"
+        "404":
+          description: If the report couldn't be found or the currently logged user
+            isn't authorized endTime access it.
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ResourceNotFoundException"
+  /regions:
+    get:
+      tags:
+      - Regions
+      operationId: getAll
+      responses:
+        "200":
+          description: Returns all regions.
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RegionGetResponse"
+components:
+  schemas:
+    MedicalExaminationReportCreateRequest:
+      type: object
+      properties:
+        medicalExaminationId:
+          type: integer
+          format: int64
+        fileContent:
+          type: string
+          format: binary
+      required:
+      - fileContent
+    MedicalExaminationReportCreateResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        documentLink:
+          type: string
+        medicalExaminationId:
+          type: integer
+          format: int64
+    ResourceNotFoundException:
+      type: object
+      properties:
+        cause:
+          type: object
+          properties:
+            stackTrace:
+              type: array
+              items:
+                type: object
+                properties:
+                  classLoaderName:
+                    type: string
+                  moduleName:
+                    type: string
+                  moduleVersion:
+                    type: string
+                  methodName:
+                    type: string
+                  fileName:
+                    type: string
+                  lineNumber:
+                    type: integer
+                    format: int32
+                  className:
+                    type: string
+                  nativeMethod:
+                    type: boolean
+            message:
+              type: string
+            suppressed:
+              type: array
+              items:
+                type: object
+                properties:
+                  stackTrace:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        classLoaderName:
+                          type: string
+                        moduleName:
+                          type: string
+                        moduleVersion:
+                          type: string
+                        methodName:
+                          type: string
+                        fileName:
+                          type: string
+                        lineNumber:
+                          type: integer
+                          format: int32
+                        className:
+                          type: string
+                        nativeMethod:
+                          type: boolean
+                  message:
+                    type: string
+                  localizedMessage:
+                    type: string
+            localizedMessage:
+              type: string
+        stackTrace:
+          type: array
+          items:
+            type: object
+            properties:
+              classLoaderName:
+                type: string
+              moduleName:
+                type: string
+              moduleVersion:
+                type: string
+              methodName:
+                type: string
+              fileName:
+                type: string
+              lineNumber:
+                type: integer
+                format: int32
+              className:
+                type: string
+              nativeMethod:
+                type: boolean
+        message:
+          type: string
+        suppressed:
+          type: array
+          items:
+            type: object
+            properties:
+              stackTrace:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    classLoaderName:
+                      type: string
+                    moduleName:
+                      type: string
+                    moduleVersion:
+                      type: string
+                    methodName:
+                      type: string
+                    fileName:
+                      type: string
+                    lineNumber:
+                      type: integer
+                      format: int32
+                    className:
+                      type: string
+                    nativeMethod:
+                      type: boolean
+              message:
+                type: string
+              localizedMessage:
+                type: string
+        localizedMessage:
+          type: string
+    MedicalExaminationCreateRequest:
+      type: object
+      properties:
+        patientId:
+          type: integer
+          format: int64
+        expectedStartTime:
+          type: string
+          format: date-time
+        medicTimeSlotId:
+          type: integer
+          format: int64
+        medicalCareId:
+          type: integer
+          format: int64
+    MedicalExaminationCreateResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        patientId:
+          type: integer
+          format: int64
+        expectedStartTime:
+          type: string
+          format: date-time
+        estimatedEndTime:
+          type: string
+          format: date-time
+        medicalCareId:
+          type: integer
+          format: int64
+        medicTimeSlotId:
+          type: integer
+          format: int64
+        medicalExaminationStatus:
+          type: string
+          enum:
+          - CREATED
+          - CONFIRMED
+          - CANCELLED
+          - COMPLETED
+          - NO_SHOW
+        createdAt:
+          type: string
+          format: date-time
+        medicId:
+          type: integer
+          format: int64
+    ConflictingResourceErrorResponse:
+      type: object
+      properties:
+        cause:
+          type: string
+        conflictingResources:
+          type: array
+          items: {}
+    InvalidPayloadErrorResponse:
+      type: object
+      properties:
+        fieldPath:
+          type: string
+        cause:
+          type: string
+    AddressDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        number:
+          type: string
+        latitude:
+          type: number
+        longitude:
+          type: number
+    FloorDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        number:
+          type: integer
+          format: int32
+        rooms:
+          type: array
+          items:
+            $ref: "#/components/schemas/RoomDTO"
+    MedicalCentreCreateResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        email:
+          type: string
+        phone:
+          type: string
+        address:
+          $ref: "#/components/schemas/AddressDTO"
+        floors:
+          type: array
+          items:
+            $ref: "#/components/schemas/FloorDTO"
+    RoomDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        number:
+          type: integer
+          format: int32
+    AddressCreateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+        number:
+          type: string
+          minLength: 1
+        latitude:
+          type: number
+          maximum: 90.0
+          minimum: -90.0
+        longitude:
+          type: number
+          maximum: 180.0
+          minimum: -180.0
+        notes:
+          type: string
+          maxLength: 500
+          minLength: 0
+        cityId:
+          type: integer
+          format: int64
+      required:
+      - latitude
+      - longitude
+      - name
+      - number
+    FloorCreateRequest:
+      type: object
+      properties:
+        number:
+          type: integer
+          format: int32
+        roomsNumber:
+          type: integer
+          format: int64
+    MedicalCentreCreateRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          minLength: 1
+        phone:
+          type: string
+          maxLength: 16
+          minLength: 0
+        address:
+          $ref: "#/components/schemas/AddressCreateRequest"
+        floors:
+          type: array
+          items:
+            $ref: "#/components/schemas/FloorCreateRequest"
+          minItems: 1
+      required:
+      - address
+      - email
+      - floors
+      - phone
+    CentreCalendarCreateRequest:
+      type: object
+      properties:
+        validFrom:
+          type: string
+          format: date
+        ownerId:
+          type: integer
+          format: int64
+        notes:
+          type: string
+        timeSlots:
+          type: array
+          items:
+            $ref: "#/components/schemas/TimeSlotDTO"
+          maxItems: 7
+          minItems: 1
+      required:
+      - timeSlots
+      - validFrom
+    TimeSlotDTO:
+      type: object
+      properties:
+        startTime:
+          type: string
+        endTime:
+          type: string
+        dayOfWeek:
+          type: string
+          enum:
+          - MONDAY
+          - TUESDAY
+          - WEDNESDAY
+          - THURSDAY
+          - FRIDAY
+          - SATURDAY
+          - SUNDAY
+      required:
+      - dayOfWeek
+      - endTime
+      - startTime
+    InvalidPayloadError:
+      type: object
+      properties:
+        fieldPath:
+          type: string
+        cause:
+          type: string
+        submittedPayload: {}
+    MedicCalendarCreateResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        ownerId:
+          type: integer
+          format: int64
+        createdAt:
+          type: string
+          format: date-time
+        validFrom:
+          type: string
+          format: date-time
+        notes:
+          type: string
+        timeSlots:
+          type: array
+          items:
+            $ref: "#/components/schemas/MedicTimeSlotDTO"
+    MedicCalendarDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        ownerId:
+          type: integer
+          format: int64
+        createdAt:
+          type: string
+          format: date-time
+        validFrom:
+          type: string
+          format: date-time
+        notes:
+          type: string
+    MedicTimeSlotDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        startTime:
+          type: string
+        endTime:
+          type: string
+        dayOfWeek:
+          type: string
+          enum:
+          - MONDAY
+          - TUESDAY
+          - WEDNESDAY
+          - THURSDAY
+          - FRIDAY
+          - SATURDAY
+          - SUNDAY
+        roomId:
+          type: integer
+          format: int64
+        medicCalendar:
+          $ref: "#/components/schemas/MedicCalendarDTO"
+    ConflictingResourceError:
+      type: object
+      properties:
+        submittedPayload: {}
+        conflictingResources:
+          type: array
+          items: {}
+        cause:
+          type: string
+    MedicCalendarCreateRequest:
+      type: object
+      properties:
+        ownerId:
+          type: integer
+          format: int64
+        validFrom:
+          type: string
+          format: date
+        notes:
+          type: string
+        timeSlots:
+          type: array
+          items:
+            $ref: "#/components/schemas/TimeSlotDTO"
+          maxItems: 2147483647
+          minItems: 1
+      required:
+      - timeSlots
+      - validFrom
+    UserCreateRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          minLength: 1
+        password:
+          type: string
+          minLength: 1
+      required:
+      - email
+      - password
+    UserCreateResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        username:
+          type: string
+    LoginCreateRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          minLength: 1
+        password:
+          type: string
+          minLength: 1
+      required:
+      - email
+      - password
+    ReportGetResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        examinationId:
+          type: integer
+          format: int64
+    StreamingResponseBody: {}
+    RegionGetResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+    MedicalCentreGetPageResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        email:
+          type: string
+        phone:
+          type: string
+        address:
+          $ref: "#/components/schemas/AddressDTO"
+    PageMedicalCentreGetPageResponse:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: "#/components/schemas/MedicalCentreGetPageResponse"
+        number:
+          type: integer
+          format: int32
+        first:
+          type: boolean
+        last:
+          type: boolean
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: "#/components/schemas/PageableObject"
+        sort:
+          $ref: "#/components/schemas/SortObject"
+        empty:
+          type: boolean
+    PageableObject:
+      type: object
+      properties:
+        offset:
+          type: integer
+          format: int64
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        paged:
+          type: boolean
+        sort:
+          $ref: "#/components/schemas/SortObject"
+        unpaged:
+          type: boolean
+    SortObject:
+      type: object
+      properties:
+        empty:
+          type: boolean
+        unsorted:
+          type: boolean
+        sorted:
+          type: boolean
